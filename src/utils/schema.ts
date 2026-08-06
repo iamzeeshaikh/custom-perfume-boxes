@@ -30,6 +30,7 @@ export function organizationSchema() {
       postalCode: '85013',
       addressCountry: 'US',
     },
+    sameAs: [BRAND.facebook, BRAND.linkedin],
   };
 }
 

@@ -10,8 +10,8 @@ export const BRAND = {
   phoneHref: '+15033580443',
   address: '409 N 7th Ave Unit #529 Phoenix, AZ 85013',
   hours: '24/7',
-  facebook: 'https://www.facebook.com/',
-  linkedin: 'https://www.linkedin.com/',
+  facebook: 'https://www.facebook.com/customperfumeboxes/',
+  linkedin: 'https://www.linkedin.com/company/105124982/',
 };
 
 // Primary navigation — maps to real product categories (preserved from original menu).
