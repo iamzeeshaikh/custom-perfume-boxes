@@ -21,7 +21,7 @@ Disallow: /*?add-to-cart=
 Disallow: /*?orderby=
 Disallow: /*?filter=
 
-Sitemap: ${SITE_URL}/sitemap-index.xml
+Sitemap: ${SITE_URL}/sitemap.xml
 `
     : `User-agent: *
 Disallow: /

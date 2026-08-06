@@ -10,7 +10,6 @@
     "check": "astro check"
   },
   "dependencies": {
-    "@astrojs/sitemap": "^3.7.3",
     "@astrojs/vercel": "^11.0.4",
     "astro": "^7.1.6",
     "nodemailer": "^9.0.4",

@@ -68,10 +68,11 @@ const goneRoutes = gonePatterns.map((src) => ({
   headers: { 'x-robots-tag': 'noindex, nofollow', 'cache-control': 'no-store' },
 }));
 
-// 3) 301 old/conventional sitemap paths to the Astro sitemap index.
+// 3) 301 old Yoast/split sitemap paths to the single /sitemap.xml.
 const redirectRoutes = [
-  { src: '^/sitemap_index\\.xml$', headers: { Location: '/sitemap-index.xml' }, status: 301 },
-  { src: '^/sitemap\\.xml$', headers: { Location: '/sitemap-index.xml' }, status: 301 },
+  { src: '^/sitemap_index\\.xml$', headers: { Location: '/sitemap.xml' }, status: 301 },
+  { src: '^/sitemap-index\\.xml$', headers: { Location: '/sitemap.xml' }, status: 301 },
+  { src: '^/sitemap-0\\.xml$', headers: { Location: '/sitemap.xml' }, status: 301 },
 ];
 
 // Insert header route at the very top; insert 410 + redirect just before filesystem handle.
