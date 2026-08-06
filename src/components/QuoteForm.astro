@@ -1,0 +1,129 @@
+---
+export interface Props {
+  productName?: string;
+  productUrl?: string;
+  compact?: boolean;
+}
+const { productName = '', productUrl = '', compact = false } = Astro.props;
+---
+<form class={`quote-form ${compact ? 'compact' : ''}`} method="POST" action="/api/quote"
+      enctype="multipart/form-data" novalidate data-quote-form>
+  <!-- hidden context -->
+  <input type="hidden" name="product_name" value={productName} />
+  <input type="hidden" name="product_url" value={productUrl} />
+  <input type="hidden" name="source_page" value="" data-source-page />
+  <input type="hidden" name="submitted_at" value="" data-submitted-at />
+  <!-- honeypot (hidden from users) -->
+  <div class="hp" aria-hidden="true">
+    <label>Do not fill this <input type="text" name="company_website" tabindex="-1" autocomplete="off" /></label>
+  </div>
+
+  <div class="field">
+    <label for="qf-name">Name <span class="req">*</span></label>
+    <input id="qf-name" name="name" type="text" required autocomplete="name" maxlength="120" />
+  </div>
+  <div class="field">
+    <label for="qf-email">Email <span class="req">*</span></label>
+    <input id="qf-email" name="email" type="email" required autocomplete="email" maxlength="160" />
+  </div>
+  <div class="field">
+    <label for="qf-phone">Phone</label>
+    <input id="qf-phone" name="phone" type="tel" autocomplete="tel" maxlength="40" />
+  </div>
+  {productName && (
+    <div class="field">
+      <label for="qf-product">Product</label>
+      <input id="qf-product" name="product_display" type="text" value={productName} readonly />
+    </div>
+  )}
+  <div class="field">
+    <label for="qf-message">Message / Instructions</label>
+    <textarea id="qf-message" name="message" rows={compact ? 4 : 5} maxlength="4000"></textarea>
+  </div>
+  <div class="field">
+    <label for="qf-file">Upload Artwork <span class="hint">(PDF, PNG, JPG, AI, SVG, ZIP — max 10 MB)</span></label>
+    <input id="qf-file" name="artwork" type="file"
+           accept=".pdf,.png,.jpg,.jpeg,.ai,.svg,.zip,image/png,image/jpeg,application/pdf,application/zip" />
+  </div>
+
+  <button type="submit" class="btn qf-submit">Send</button>
+  <p class="qf-status" role="status" aria-live="polite" data-status></p>
+</form>
+
+<style>
+  .quote-form {
+    background: #fff; border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 20px; box-shadow: var(--shadow);
+  }
+  .field { margin-bottom: 12px; }
+  .field label { display: block; font-size: .82rem; font-weight: 600; color: var(--text-soft); margin-bottom: 5px; }
+  .req { color: var(--pink); }
+  .hint { font-weight: 400; color: var(--muted); }
+  .quote-form input[type=text], .quote-form input[type=email], .quote-form input[type=tel],
+  .quote-form textarea {
+    width: 100%; padding: 11px 14px; border: 1.5px solid var(--pink-100);
+    border-radius: 26px; font: inherit; font-size: .9rem; color: var(--text); background: #fff;
+  }
+  .quote-form textarea { border-radius: 16px; resize: vertical; }
+  .quote-form input:focus, .quote-form textarea:focus { border-color: var(--pink); outline: none; }
+  .quote-form input[readonly] { background: var(--bg-soft); color: var(--text-soft); }
+  .quote-form input[type=file] {
+    width: 100%; padding: 9px; border: 1.5px dashed var(--pink-100); border-radius: 10px;
+    font-size: .85rem; background: #fff;
+  }
+  .qf-submit { margin-top: 6px; }
+  .qf-status { font-size: .85rem; margin: 12px 0 0; min-height: 1em; }
+  .qf-status.ok { color: #1a7f37; }
+  .qf-status.err { color: #b3261e; }
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLFormElement>('[data-quote-form]').forEach((form) => {
+    const sp = form.querySelector<HTMLInputElement>('[data-source-page]');
+    const ts = form.querySelector<HTMLInputElement>('[data-submitted-at]');
+    if (sp) sp.value = location.href;
+    const status = form.querySelector<HTMLElement>('[data-status]');
+    const fileInput = form.querySelector<HTMLInputElement>('input[type=file]');
+    const MAX = 10 * 1024 * 1024;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!status) return;
+      status.className = 'qf-status';
+      status.textContent = '';
+
+      const name = (form.elements.namedItem('name') as HTMLInputElement)?.value.trim();
+      const email = (form.elements.namedItem('email') as HTMLInputElement)?.value.trim();
+      if (!name || !email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        status.className = 'qf-status err';
+        status.textContent = 'Please enter your name and a valid email address.';
+        return;
+      }
+      if (fileInput?.files?.[0] && fileInput.files[0].size > MAX) {
+        status.className = 'qf-status err';
+        status.textContent = 'File is too large (max 10 MB).';
+        return;
+      }
+      if (ts) ts.value = new Date().toISOString();
+
+      const btn = form.querySelector<HTMLButtonElement>('.qf-submit');
+      if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+      try {
+        const res = await fetch('/api/quote', { method: 'POST', body: new FormData(form) });
+        const data = await res.json().catch(() => ({}));
+        if (res.ok && data.ok) {
+          window.location.href = '/thank-you/';
+        } else {
+          status.className = 'qf-status err';
+          status.textContent = data.error || 'Something went wrong. Please email us directly.';
+          if (btn) { btn.disabled = false; btn.textContent = 'Send'; }
+        }
+      } catch {
+        status.className = 'qf-status err';
+        status.textContent = 'Network error. Please try again or email us directly.';
+        if (btn) { btn.disabled = false; btn.textContent = 'Send'; }
+      }
+    });
+  });
+</script>

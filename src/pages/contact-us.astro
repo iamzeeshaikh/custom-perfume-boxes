@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import QuoteForm from '../components/QuoteForm.astro';
+import { BRAND, SITE_URL } from '../utils/site';
+import { organizationSchema, breadcrumbSchema } from '../utils/schema';
+
+const crumbs = [{ name: 'Home', url: '/' }, { name: 'Contact Us' }];
+const jsonld = [
+  organizationSchema(),
+  breadcrumbSchema([{ name: 'Home', url: '/' }, { name: 'Contact Us', url: '/contact-us/' }]),
+];
+---
+<BaseLayout
+  title="Contact Us | Custom Perfume Boxes"
+  description="Contact Custom Perfume Boxes for a free quote on custom perfume packaging. Call, email, or send us your artwork and requirements."
+  canonical="/contact-us/"
+  jsonld={jsonld}
+>
+  <Breadcrumbs items={crumbs} />
+  <section class="section">
+    <div class="container">
+      <header class="ct-head">
+        <p class="eyebrow">We'd Love To Hear From You</p>
+        <h1>Contact Us</h1>
+      </header>
+      <div class="ct-grid">
+        <div class="ct-info">
+          <div class="ct-block">
+            <h2>Find Us Here</h2>
+            <p>{BRAND.address}</p>
+          </div>
+          <div class="ct-block">
+            <h2>Get In Touch</h2>
+            <p><a href={`tel:${BRAND.phoneHref}`}>{BRAND.phone}</a></p>
+            <p><a href={`mailto:${BRAND.email}`}>{BRAND.email}</a></p>
+          </div>
+          <div class="ct-block">
+            <h2>Our Hours</h2>
+            <p>{BRAND.hours}</p>
+          </div>
+        </div>
+        <div class="ct-form">
+          <h2>Request a Free Quote</h2>
+          <QuoteForm productUrl={`${SITE_URL}/contact-us/`} />
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .ct-head { margin-bottom: 26px; }
+  .ct-head h1 { margin: 6px 0 0; }
+  .ct-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 40px; align-items: start; }
+  .ct-block { margin-bottom: 22px; }
+  .ct-block h2 { font-size: 1.05rem; margin: 0 0 6px; }
+  .ct-block p { margin: 2px 0; color: var(--text-soft); }
+  .ct-form h2 { font-size: 1.15rem; margin: 0 0 14px; }
+  @media (max-width: 780px) { .ct-grid { grid-template-columns: 1fr; gap: 26px; } }
+</style>

@@ -1,0 +1,25 @@
+---
+import type { Product } from '../utils/data';
+import ProductCard from './ProductCard.astro';
+export interface Props { products: Product[]; }
+const { products } = Astro.props;
+---
+{products.length > 0 && (
+  <section class="section related">
+    <div class="container">
+      <h2 class="text-center">Related Products</h2>
+      <div class="related-grid">
+        {products.map((p) => <ProductCard product={p} />)}
+      </div>
+    </div>
+  </section>
+)}
+
+<style>
+  .related { background: var(--bg-soft); }
+  .related-grid {
+    display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; margin-top: 24px;
+  }
+  @media (max-width: 900px) { .related-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 460px) { .related-grid { grid-template-columns: 1fr; } }
+</style>

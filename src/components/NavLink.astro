@@ -1,0 +1,14 @@
+---
+// Renders an <a>, except when it points at the current page — then a <span>
+// with aria-current, so no page ever links to itself (0 self-links) and the
+// active item is announced to assistive tech.
+export interface Props { href: string; class?: string; [key: string]: any; }
+const { href, class: cls, ...rest } = Astro.props;
+const norm = (p: string) => (p.endsWith('/') ? p : p + '/');
+const current = norm(Astro.url.pathname) === norm(href);
+---
+{current ? (
+  <span class={cls} aria-current="page" {...rest}><slot /></span>
+) : (
+  <a href={href} class={cls} {...rest}><slot /></a>
+)}

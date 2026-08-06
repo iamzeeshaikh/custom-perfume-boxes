@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import { categories, productsInCategory } from '../../utils/data';
+import { breadcrumbSchema } from '../../utils/schema';
+
+export function getStaticPaths() {
+  return categories.map((category) => ({
+    params: { slug: category.slug },
+    props: { category },
+  }));
+}
+
+const { category } = Astro.props;
+const items = productsInCategory(category.slug);
+const url = `/product-category/${category.slug}/`;
+const crumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Products', url: '/products/' },
+  { name: category.name },
+];
+const jsonld = [breadcrumbSchema(crumbs.map((c) => ({ name: c.name, url: c.url || url })))];
+---
+<BaseLayout
+  title={category.seo_title}
+  description={category.seo_desc}
+  canonical={url}
+  jsonld={jsonld}
+>
+  <Breadcrumbs items={crumbs} />
+  <section class="section">
+    <div class="container">
+      <header class="cat-head">
+        <h1>{category.name}</h1>
+        {category.description && <p class="cat-desc">{category.description}</p>}
+        {!category.description && (
+          <p class="cat-desc">Browse our {category.name.toLowerCase()} for perfume packaging. Every option is made to order with custom sizes, premium materials, and free design support.</p>
+        )}
+      </header>
+      <div class="product-grid">
+        {items.map((p, i) => <ProductCard product={p} eager={i < 3} />)}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .cat-head { max-width: 760px; margin-bottom: 28px; }
+  .cat-head h1 { margin: 0 0 10px; }
+  .cat-desc { color: var(--text-soft); margin: 0; }
+  .product-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+  @media (max-width: 820px) { .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 460px) { .product-grid { grid-template-columns: 1fr; } }
+</style>

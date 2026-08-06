@@ -1,0 +1,119 @@
+[
+  {
+    "term_id": "38",
+    "slug": "subscription-sample-boxes",
+    "name": "Subscription & Sample Boxes",
+    "description": "",
+    "products": [
+      "cheap-perfume-subscription",
+      "perfume-discovery-boxes",
+      "perfume-mystery-boxes",
+      "perfume-sample-boxes",
+      "perfume-sample-subscription",
+      "perfume-subscription-boxes"
+    ],
+    "seo_title": "Subscription & Sample Boxes | Custom Perfume Boxes",
+    "seo_desc": "Explore our range of subscription & sample boxes for perfume packaging. Custom sizes, premium materials, and free design support."
+  },
+  {
+    "term_id": "39",
+    "slug": "gift-collection-boxes",
+    "name": "Gift & Collection Boxes",
+    "description": "",
+    "products": [
+      "perfume-collection-boxes",
+      "perfume-flower-boxes",
+      "perfume-gift-boxes"
+    ],
+    "seo_title": "Gift & Collection Boxes | Custom Perfume Boxes",
+    "seo_desc": "Explore our range of gift & collection boxes for perfume packaging. Custom sizes, premium materials, and free design support."
+  },
+  {
+    "term_id": "40",
+    "slug": "packaging-boxes",
+    "name": "Packaging Boxes",
+    "description": "",
+    "products": [
+      "perfume-oil-packaging",
+      "perfume-shipping-boxes",
+      "perfume-tester-packaging"
+    ],
+    "seo_title": "Packaging Boxes | Custom Perfume Boxes",
+    "seo_desc": "Explore our range of packaging boxes for perfume packaging. Custom sizes, premium materials, and free design support."
+  },
+  {
+    "term_id": "41",
+    "slug": "luxury-specialty-boxes",
+    "name": "Luxury & Specialty Boxes",
+    "description": "",
+    "products": [
+      "baccarat-perfume-boxes",
+      "beautiful-perfume-boxes",
+      "luxury-perfume-boxes",
+      "secret-box-perfume"
+    ],
+    "seo_title": "Luxury & Specialty Boxes | Custom Perfume Boxes",
+    "seo_desc": "Explore our range of luxury & specialty boxes for perfume packaging. Custom sizes, premium materials, and free design support."
+  },
+  {
+    "term_id": "42",
+    "slug": "color-design-specific-boxes",
+    "name": "Color & Design Specific Boxes",
+    "description": "",
+    "products": [
+      "black-perfume-boxes",
+      "blue-perfume-boxes",
+      "green-perfume-boxes",
+      "men-perfume-boxes",
+      "perfume-gold-boxes",
+      "perfume-orange-boxes",
+      "perfume-pink-boxes",
+      "perfume-purple-boxes",
+      "perfume-red-boxes",
+      "perfume-white-boxes",
+      "yellow-perfume-boxes"
+    ],
+    "seo_title": "Color & Design Specific Boxes | Custom Perfume Boxes",
+    "seo_desc": "Explore our range of color & design specific boxes for perfume packaging. Custom sizes, premium materials, and free design support."
+  },
+  {
+    "term_id": "43",
+    "slug": "material-specific-boxes",
+    "name": "Material Specific Boxes",
+    "description": "",
+    "products": [
+      "cardboard-perfume-boxes",
+      "cylinder-perfume-boxes",
+      "perfume-paper-boxes",
+      "perfume-wooden-boxes",
+      "round-perfume-boxes",
+      "small-perfume-boxes",
+      "solid-perfume-boxes"
+    ],
+    "seo_title": "Material Specific Boxes | Custom Perfume Boxes",
+    "seo_desc": "Explore our range of material specific boxes for perfume packaging. Custom sizes, premium materials, and free design support."
+  },
+  {
+    "term_id": "44",
+    "slug": "empty-boxes",
+    "name": "Empty Boxes",
+    "description": "",
+    "products": [
+      "empty-perfume-boxes"
+    ],
+    "seo_title": "Empty Boxes | Custom Perfume Boxes",
+    "seo_desc": "Explore our range of empty boxes for perfume packaging. Custom sizes, premium materials, and free design support."
+  },
+  {
+    "term_id": "45",
+    "slug": "miscellaneous-boxes",
+    "name": "Miscellaneous Boxes",
+    "description": "",
+    "products": [
+      "bird-box-perfume",
+      "perfume-lock-boxes"
+    ],
+    "seo_title": "Miscellaneous Boxes | Custom Perfume Boxes",
+    "seo_desc": "Explore our range of miscellaneous boxes for perfume packaging. Custom sizes, premium materials, and free design support."
+  }
+]

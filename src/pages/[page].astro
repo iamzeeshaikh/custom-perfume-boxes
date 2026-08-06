@@ -1,0 +1,35 @@
+---
+// Static content pages preserved from source: about-us, privacy-policy,
+// refund_returns, shipping-policy, terms-conditions.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { pages } from '../utils/data';
+import { breadcrumbSchema } from '../utils/schema';
+
+export function getStaticPaths() {
+  const CONTENT_SLUGS = ['about-us', 'privacy-policy', 'refund_returns', 'shipping-policy', 'terms-conditions'];
+  return pages
+    .filter((p) => CONTENT_SLUGS.includes(p.slug))
+    .map((page) => ({ params: { page: page.slug }, props: { page } }));
+}
+
+const { page } = Astro.props;
+const url = `/${page.slug}/`;
+const crumbs = [{ name: 'Home', url: '/' }, { name: page.title }];
+const jsonld = [breadcrumbSchema([{ name: 'Home', url: '/' }, { name: page.title, url }])];
+const desc = page.seo_desc || `${page.title} — Custom Perfume Boxes.`;
+---
+<BaseLayout title={page.seo_title} description={desc} canonical={url} jsonld={jsonld}>
+  <Breadcrumbs items={crumbs} />
+  <section class="section">
+    <div class="container narrow">
+      <h1>{page.title}</h1>
+      <div class="prose" set:html={page.content_html} />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .narrow { max-width: 860px; }
+  .narrow h1 { margin-bottom: 20px; }
+</style>

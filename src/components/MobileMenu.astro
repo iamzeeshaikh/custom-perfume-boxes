@@ -1,0 +1,69 @@
+---
+import { NAV } from '../utils/site';
+import NavLink from './NavLink.astro';
+---
+<button class="mm-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+  <span></span><span></span><span></span>
+</button>
+
+<div class="mm-panel" id="mobile-nav" hidden>
+  <nav aria-label="Mobile">
+    <ul>
+      {NAV.map((item) => <li><NavLink href={item.href}>{item.label}</NavLink></li>)}
+      <li><NavLink href="/products/">All Products</NavLink></li>
+      <li><NavLink href="/contact-us/">Get Free Quote</NavLink></li>
+    </ul>
+  </nav>
+</div>
+
+<style>
+  .mm-toggle {
+    display: none; flex-direction: column; gap: 5px; background: none; border: 0;
+    cursor: pointer; padding: 12px; margin-left: auto;
+  }
+  .mm-toggle span { width: 24px; height: 2px; background: #fff; border-radius: 2px; transition: .2s; }
+  .mm-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .mm-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .mm-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .mm-panel { display: none; background: var(--black-2); border-top: 1px solid #333;
+    position: absolute; left: 0; right: 0; top: 100%; max-height: 70vh; overflow-y: auto; }
+  .mm-panel.open { display: block; }
+  .mm-panel ul { list-style: none; margin: 0; padding: 6px 0; }
+  .mm-panel a {
+    display: block; color: #fff; padding: 13px 20px; font-size: .92rem;
+    border-bottom: 1px solid rgba(255,255,255,.06); text-decoration: none;
+  }
+  .mm-panel a:hover { color: var(--pink-bright); background: rgba(255,255,255,.03); }
+
+  @media (max-width: 900px) {
+    .mm-toggle { display: flex; }
+  }
+</style>
+
+<script>
+  const btn = document.querySelector('.mm-toggle');
+  const panel = document.getElementById('mobile-nav');
+  if (btn && panel) {
+    btn.addEventListener('click', () => {
+      const open = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!open));
+      panel.hidden = open;
+      panel.classList.toggle('open', !open);
+    });
+    // close on link click / escape
+    panel.addEventListener('click', (e) => {
+      if ((e.target as HTMLElement).tagName === 'A') {
+        btn.setAttribute('aria-expanded', 'false');
+        panel.hidden = true; panel.classList.remove('open');
+      }
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && btn.getAttribute('aria-expanded') === 'true') {
+        btn.setAttribute('aria-expanded', 'false');
+        panel.hidden = true; panel.classList.remove('open');
+        (btn as HTMLElement).focus();
+      }
+    });
+  }
+</script>

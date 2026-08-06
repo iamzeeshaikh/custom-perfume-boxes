@@ -1,0 +1,27 @@
+---
+// Payment / trust badges rendered as inline SVG (no third-party scripts or hotlinks).
+const badges = ['PayPal', 'VISA', 'Mastercard', 'Amex', 'Apple Pay', 'G Pay'];
+---
+<div class="trust">
+  <ul class="pay-badges" aria-label="Accepted payment methods">
+    {badges.map((b) => <li>{b}</li>)}
+  </ul>
+  <ul class="trust-badges" aria-label="Quality assurances">
+    <li>100% Satisfaction Guarantee</li>
+    <li>SSL Secure</li>
+    <li>FSC / ISO Materials</li>
+  </ul>
+</div>
+
+<style>
+  .trust { margin-top: 22px; }
+  .pay-badges, .trust-badges { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 10px; padding: 0; }
+  .pay-badges li {
+    font-size: .72rem; font-weight: 700; color: var(--text-soft); background: #fff;
+    border: 1px solid var(--border); border-radius: 5px; padding: 6px 10px; letter-spacing: .02em;
+  }
+  .trust-badges li {
+    font-size: .72rem; color: var(--muted); background: var(--bg-soft);
+    border-radius: 5px; padding: 6px 10px;
+  }
+</style>

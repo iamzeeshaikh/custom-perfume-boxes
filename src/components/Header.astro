@@ -1,0 +1,104 @@
+---
+import { NAV, BRAND } from '../utils/site';
+import MobileMenu from './MobileMenu.astro';
+import NavLink from './NavLink.astro';
+const path = Astro.url.pathname;
+const norm = (p: string) => (p.endsWith('/') ? p : p + '/');
+const onHome = norm(path) === '/';
+const isActive = (href: string) =>
+  href === '/' ? path === '/' : path.startsWith(href);
+---
+<header class="site-header">
+  <!-- Logo bar (black) -->
+  <div class="logo-bar">
+    {onHome ? (
+      <span class="logo" aria-label={`${BRAND.name} home`} aria-current="page">
+        <span class="logo-diamond" aria-hidden="true"></span>
+        <span class="logo-text">CUSTOM<br />PERFUME BOXES</span>
+      </span>
+    ) : (
+      <a href="/" class="logo" aria-label={`${BRAND.name} home`}>
+        <span class="logo-diamond" aria-hidden="true"></span>
+        <span class="logo-text">CUSTOM<br />PERFUME BOXES</span>
+      </a>
+    )}
+  </div>
+
+  <!-- Contact bar (white) -->
+  <div class="contact-bar">
+    <div class="container contact-inner">
+      <div class="contact-links">
+        <a href={`mailto:${BRAND.email}`} class="cbar-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 6h18v12H3z" stroke="currentColor" stroke-width="1.6"/><path d="M3 7l9 6 9-6" stroke="currentColor" stroke-width="1.6"/></svg>
+          <span>{BRAND.email}</span>
+        </a>
+        <a href={`tel:${BRAND.phoneHref}`} class="cbar-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 4h4l2 5-3 2a12 12 0 006 6l2-3 5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z" stroke="currentColor" stroke-width="1.6"/></svg>
+          <span>{BRAND.phone}</span>
+        </a>
+      </div>
+      <div class="contact-right">
+        <a href={BRAND.linkedin} class="social" aria-label="LinkedIn" rel="noopener nofollow" target="_blank">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.76-2.05 4 0 4.74 2.64 4.74 6.07V21h-4v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.08 1.4-2.08 2.85V21H9z"/></svg>
+        </a>
+        <a href={BRAND.facebook} class="social" aria-label="Facebook" rel="noopener nofollow" target="_blank">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 10-11.5 9.9v-7H8v-2.9h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6v1.9h2.8l-.4 2.9h-2.4v7A10 10 0 0022 12z"/></svg>
+        </a>
+        <NavLink href="/contact-us/" class="btn quote-btn">Get Free Quote</NavLink>
+      </div>
+    </div>
+  </div>
+
+  <!-- Nav bar (black) -->
+  <nav class="nav-bar" aria-label="Primary">
+    <div class="container nav-inner">
+      <ul class="nav-list">
+        {NAV.map((item) => (
+          <li>
+            <NavLink href={item.href} class={isActive(item.href) ? 'active' : ''}>
+              {item.label}
+            </NavLink>
+          </li>
+        ))}
+      </ul>
+      <MobileMenu />
+    </div>
+  </nav>
+</header>
+
+<style>
+  .site-header { position: sticky; top: 0; z-index: 100; }
+  .logo-bar { background: var(--black); text-align: center; padding: 10px 16px; }
+  .logo { display: inline-flex; align-items: center; gap: 10px; color: #fff; text-decoration: none; }
+  .logo:hover { text-decoration: none; }
+  .logo-diamond { width: 14px; height: 14px; background: var(--pink); transform: rotate(45deg); border-radius: 2px; }
+  .logo-text { font-weight: 700; font-size: .95rem; letter-spacing: .06em; line-height: 1.1; }
+
+  .contact-bar { background: #fff; border-bottom: 1px solid var(--border); }
+  .contact-inner { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 8px; padding-bottom: 8px; flex-wrap: wrap; }
+  .contact-links { display: flex; gap: 22px; flex-wrap: wrap; }
+  .cbar-item { display: inline-flex; align-items: center; gap: 7px; color: var(--text); font-size: .85rem; }
+  .cbar-item:hover { color: var(--pink); text-decoration: none; }
+  .cbar-item svg { color: var(--pink); flex: none; }
+  .contact-right { display: flex; align-items: center; gap: 12px; }
+  .social { color: var(--pink); display: inline-flex; }
+  .social:hover { color: var(--pink-dark); }
+  .quote-btn { padding: 8px 18px; font-size: .82rem; }
+
+  .nav-bar { background: var(--nav-black); }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+  .nav-list { list-style: none; display: flex; gap: 4px; margin: 0; padding: 0; flex-wrap: wrap; }
+  .nav-list a {
+    display: block; color: #fff; padding: 14px 14px; font-size: .82rem; font-weight: 500;
+    text-decoration: none; white-space: nowrap;
+  }
+  .nav-list a:hover, .nav-list a.active { color: var(--pink-bright); text-decoration: none; }
+
+  @media (max-width: 900px) {
+    .nav-list { display: none; }
+  }
+  @media (max-width: 480px) {
+    .contact-links { gap: 12px; }
+    .cbar-item span { font-size: .78rem; }
+  }
+</style>

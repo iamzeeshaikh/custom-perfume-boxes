@@ -1,0 +1,36 @@
+---
+// Rebuilt clean "All Products" listing (replaces the source page which contained
+// stale, unrelated "burger box" template content — see CONTENT_CORRECTIONS.md).
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import { products, categories } from '../../utils/data';
+import { breadcrumbSchema } from '../../utils/schema';
+
+const crumbs = [{ name: 'Home', url: '/' }, { name: 'Products' }];
+const jsonld = [breadcrumbSchema([{ name: 'Home', url: '/' }, { name: 'Products', url: '/products/' }])];
+---
+<BaseLayout
+  title="All Products | Custom Perfume Boxes"
+  description="Browse all custom perfume boxes — subscription, sample, luxury, gift, and color-specific packaging. Custom sizes, premium materials, free design support."
+  canonical="/products/"
+  jsonld={jsonld}
+>
+  <Breadcrumbs items={crumbs} />
+  <section class="section">
+    <div class="container">
+      <h1 class="text-center">All Products</h1>
+      <p class="text-center intro">Explore our full range of {products.length} perfume packaging products across {categories.length} categories.</p>
+      <div class="product-grid">
+        {products.map((p, i) => <ProductCard product={p} eager={i < 3} />)}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .intro { color: var(--text-soft); max-width: 640px; margin: 6px auto 30px; }
+  .product-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+  @media (max-width: 820px) { .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 460px) { .product-grid { grid-template-columns: 1fr; } }
+</style>

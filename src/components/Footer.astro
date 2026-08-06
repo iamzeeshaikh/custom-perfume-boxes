@@ -1,0 +1,75 @@
+---
+import { BRAND, FOOTER_CATEGORIES, FOOTER_COMPANY } from '../utils/site';
+import NavLink from './NavLink.astro';
+const year = 2026;
+---
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <h2 class="footer-h">Box Categories</h2>
+      <ul>
+        {FOOTER_CATEGORIES.map((i) => <li><NavLink href={i.href}>{i.label}</NavLink></li>)}
+      </ul>
+    </div>
+    <div>
+      <h2 class="footer-h">Company</h2>
+      <ul>
+        {FOOTER_COMPANY.map((i) => <li><NavLink href={i.href}>{i.label}</NavLink></li>)}
+      </ul>
+    </div>
+    <div class="footer-contact">
+      <h2 class="footer-h">Get In Touch</h2>
+      <p><strong>Email:</strong><br /><a href={`mailto:${BRAND.email}`}>{BRAND.email}</a></p>
+      <p><strong>Phone:</strong><br /><a href={`tel:${BRAND.phoneHref}`}>{BRAND.phone}</a></p>
+      <p><strong>Address:</strong><br />{BRAND.address}</p>
+      <div class="footer-social">
+        <a href={BRAND.facebook} aria-label="Facebook" rel="noopener nofollow" target="_blank">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 10-11.5 9.9v-7H8v-2.9h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6v1.9h2.8l-.4 2.9h-2.4v7A10 10 0 0022 12z"/></svg>
+        </a>
+        <a href={BRAND.linkedin} aria-label="LinkedIn" rel="noopener nofollow" target="_blank">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.76-2.05 4 0 4.74 2.64 4.74 6.07V21h-4v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.08 1.4-2.08 2.85V21H9z"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container">
+      <p>Copyright © {year} {BRAND.name}. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Floating WhatsApp / quote button (deferred, no third-party script) -->
+<a class="wa-float" href={`https://wa.me/${BRAND.phoneHref}`} target="_blank" rel="noopener nofollow" aria-label="Chat on WhatsApp">
+  <svg width="30" height="30" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M.06 24l1.68-6.13A11.87 11.87 0 010 5.94 11.94 11.94 0 0112 0a11.94 11.94 0 0112 12 11.94 11.94 0 01-17.9 10.36L.06 24zM6.6 20.13l.36.22a9.9 9.9 0 005.03 1.38A9.93 9.93 0 0022 12a9.93 9.93 0 00-16.95-7A9.9 9.9 0 002 12a9.86 9.86 0 001.51 5.26l.24.38-1 3.63 3.85-1.14zM17.47 14.3c-.15-.25-.55-.4-1.15-.7s-1.36-.67-1.56-.75-.35-.12-.5.12-.57.7-.7.85-.26.17-.5.06a8.13 8.13 0 01-2.38-1.47 8.98 8.98 0 01-1.65-2.05c-.17-.3 0-.44.13-.58s.25-.3.38-.44.17-.25.25-.42a.47.47 0 000-.44c-.06-.12-.5-1.2-.68-1.65s-.36-.37-.5-.38h-.43a.83.83 0 00-.6.28 2.5 2.5 0 00-.78 1.86A4.34 4.34 0 007.5 10.5a9.94 9.94 0 003.8 3.36 12.85 12.85 0 001.27.47 3.06 3.06 0 001.4.09 2.3 2.3 0 001.5-1.06 1.86 1.86 0 00.13-1.06z"/></svg>
+</a>
+
+<style>
+  .site-footer { background: var(--black); color: #cfcfcf; padding: 44px 0 0; }
+  .footer-grid { display: grid; grid-template-columns: 1fr 1fr 1.3fr; gap: 32px; }
+  .footer-h { color: #fff; font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; margin: 0 0 16px; }
+  .site-footer ul { list-style: none; margin: 0; padding: 0; }
+  .site-footer li { margin: 9px 0; }
+  .site-footer a { color: #cfcfcf; font-size: .9rem; }
+  .site-footer a:hover { color: var(--pink-bright); text-decoration: none; }
+  .footer-contact p { font-size: .88rem; margin: 0 0 12px; color: #cfcfcf; }
+  .footer-contact strong { color: #fff; }
+  .footer-social { display: flex; gap: 14px; margin-top: 6px; }
+  .footer-social a { color: var(--pink); }
+  .footer-bottom { border-top: 1px solid #333; margin-top: 36px; padding: 16px 0; }
+  .footer-bottom p { margin: 0; font-size: .82rem; color: #9a9a9a; text-align: center; }
+
+  .wa-float {
+    position: fixed; bottom: 20px; right: 20px; width: 56px; height: 56px;
+    background: #25d366; border-radius: 50%; display: flex; align-items: center;
+    justify-content: center; box-shadow: 0 4px 14px rgba(0,0,0,.3); z-index: 90;
+  }
+  .wa-float:hover { text-decoration: none; transform: scale(1.05); }
+
+  @media (max-width: 780px) {
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 480px) {
+    .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+  }
+</style>

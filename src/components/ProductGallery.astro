@@ -1,0 +1,57 @@
+---
+import type { ImageRec } from '../utils/data';
+export interface Props { featured: ImageRec | null; gallery: ImageRec[]; title: string; }
+const { featured, gallery, title } = Astro.props;
+const images = [featured, ...gallery].filter(Boolean) as ImageRec[];
+---
+{images.length > 0 && (
+  <div class="gallery">
+    <div class="gallery-main">
+      <img id="gallery-main-img" src={images[0].src} width={images[0].width}
+           height={images[0].height} alt={images[0].alt} loading="eager"
+           fetchpriority="high" decoding="async" />
+    </div>
+    {images.length > 1 && (
+      <ul class="gallery-thumbs" role="list">
+        {images.map((im, i) => (
+          <li>
+            <button type="button" class={`thumb ${i === 0 ? 'active' : ''}`}
+                    data-src={im.src} data-alt={im.alt}
+                    aria-label={`View image ${i + 1}: ${im.alt}`}>
+              <img src={im.src} width={im.width} height={im.height} alt="" loading="lazy" decoding="async" />
+            </button>
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
+)}
+
+<style>
+  .gallery-main {
+    border: 1px solid var(--border); border-radius: var(--radius); background: #fafafa;
+    padding: 24px; aspect-ratio: 1 / 1; display: flex; align-items: center; justify-content: center;
+  }
+  .gallery-main img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; }
+  .gallery-thumbs { list-style: none; display: flex; gap: 10px; margin: 12px 0 0; padding: 0; flex-wrap: wrap; }
+  .thumb {
+    width: 66px; height: 66px; padding: 4px; border: 2px solid var(--border);
+    border-radius: 8px; background: #fff; cursor: pointer;
+  }
+  .thumb.active { border-color: var(--pink); }
+  .thumb img { width: 100%; height: 100%; object-fit: contain; }
+</style>
+
+<script>
+  const main = document.getElementById('gallery-main-img') as HTMLImageElement | null;
+  const thumbs = document.querySelectorAll<HTMLButtonElement>('.thumb');
+  thumbs.forEach((t) => {
+    t.addEventListener('click', () => {
+      if (!main) return;
+      main.src = t.dataset.src || main.src;
+      main.alt = t.dataset.alt || main.alt;
+      thumbs.forEach((x) => x.classList.remove('active'));
+      t.classList.add('active');
+    });
+  });
+</script>

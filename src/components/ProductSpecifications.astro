@@ -1,0 +1,12 @@
+---
+export interface Props { html: string; }
+const { html } = Astro.props;
+---
+{html && html.trim() && (
+  <div class="prose specs" set:html={html} />
+)}
+
+<style>
+  .specs :global(table) { width: 100%; }
+  .specs :global(th) { background: var(--bg-soft); }
+</style>

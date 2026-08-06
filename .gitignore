@@ -1,0 +1,37 @@
+# dependencies
+node_modules/
+
+# build output
+dist/
+.vercel/
+.astro/
+
+# env / secrets
+.env
+.env.*
+!.env.example
+
+# logs
+*.log
+npm-debug.log*
+
+# OS / editor
+.DS_Store
+._*
+Thumbs.db
+.idea/
+.vscode/
+
+# ---- SOURCE BACKUPS / MIGRATION ARTIFACTS — never deploy ----
+# (defense in depth; these live outside astro-site but guard anyway)
+*.zip
+*.sql
+*.php
+wp-config.php
+public_html/
+wp-admin/
+wp-includes/
+wp-content/
+_migration/
+../*.zip
+../*.sql

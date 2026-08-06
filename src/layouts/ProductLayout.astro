@@ -1,0 +1,124 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import ProductGallery from '../components/ProductGallery.astro';
+import QuoteForm from '../components/QuoteForm.astro';
+import ProductSpecifications from '../components/ProductSpecifications.astro';
+import ProductFAQ from '../components/ProductFAQ.astro';
+import RelatedProducts from '../components/RelatedProducts.astro';
+import TrustBadges from '../components/TrustBadges.astro';
+import { primaryCategory, relatedProducts } from '../utils/data';
+import { SITE_URL } from '../utils/site';
+import { productSchema, faqSchema, breadcrumbSchema } from '../utils/schema';
+import type { Product } from '../utils/data';
+
+export interface Props { product: Product; }
+const { product } = Astro.props;
+const cat = primaryCategory(product);
+const url = `/product/${product.slug}/`;
+const related = relatedProducts(product, 4);
+
+const crumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Products', url: '/products/' },
+  ...(cat ? [{ name: cat.name, url: `/product-category/${cat.slug}/` }] : []),
+  { name: product.title },
+];
+
+const jsonld = [
+  productSchema(product),
+  breadcrumbSchema(crumbs.map((c) => ({ name: c.name, url: c.url || url }))),
+  ...(product.faqs.length ? [faqSchema(product.faqs)] : []),
+];
+---
+<BaseLayout
+  title={product.seo_title}
+  description={product.seo_desc}
+  canonical={url}
+  ogImage={product.featured?.src}
+  jsonld={jsonld}
+>
+  <Breadcrumbs items={crumbs} />
+
+  <section class="section product-top">
+    <div class="container product-grid">
+      <div class="product-media">
+        <ProductGallery featured={product.featured} gallery={product.gallery} title={product.title} />
+        <TrustBadges />
+      </div>
+      <div class="product-info">
+        <h1>{product.title}</h1>
+        {product.excerpt && <p class="product-lead">{product.excerpt}</p>}
+        <a href="#quote" class="btn buy-now">Buy Now</a>
+        <div id="quote" class="quote-wrap">
+          <h2 class="quote-h">Request a Quote</h2>
+          <QuoteForm productName={product.title} productUrl={`${SITE_URL}${url}`} compact />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section product-detail">
+    <div class="container">
+      <div class="tabs" role="tablist" aria-label="Product details">
+        <button class="tab active" role="tab" aria-selected="true" aria-controls="tab-desc" id="t-desc">Description</button>
+        {product.specs_html && <button class="tab" role="tab" aria-selected="false" aria-controls="tab-spec" id="t-spec">Specifications</button>}
+        {product.faqs.length > 0 && <button class="tab" role="tab" aria-selected="false" aria-controls="tab-faq" id="t-faq">FAQs</button>}
+      </div>
+
+      <div class="tab-panel active" id="tab-desc" role="tabpanel" aria-labelledby="t-desc">
+        <div class="prose" set:html={product.content_html} />
+      </div>
+      {product.specs_html && (
+        <div class="tab-panel" id="tab-spec" role="tabpanel" aria-labelledby="t-spec" hidden>
+          <ProductSpecifications html={product.specs_html} />
+        </div>
+      )}
+      {product.faqs.length > 0 && (
+        <div class="tab-panel" id="tab-faq" role="tabpanel" aria-labelledby="t-faq" hidden>
+          <ProductFAQ faqs={product.faqs} />
+        </div>
+      )}
+    </div>
+  </section>
+
+  <RelatedProducts products={related} />
+</BaseLayout>
+
+<style>
+  .product-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; }
+  .product-info h1 { margin: 0 0 14px; }
+  .product-lead { color: var(--text-soft); font-size: 1rem; margin: 0 0 20px; }
+  .buy-now { margin-bottom: 22px; }
+  .quote-wrap { margin-top: 8px; }
+  .quote-h { font-size: 1.15rem; margin: 0 0 12px; }
+
+  .tabs { display: flex; gap: 8px; border-bottom: 2px solid var(--border); flex-wrap: wrap; justify-content: center; }
+  .tab {
+    background: none; border: none; padding: 12px 20px; font: inherit; font-weight: 600;
+    color: var(--text-soft); cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -2px;
+  }
+  .tab.active { color: var(--pink); border-bottom-color: var(--pink); }
+  .tab:hover { color: var(--pink); }
+  .tab-panel { padding-top: 26px; max-width: 900px; margin: 0 auto; }
+  .tab-panel[hidden] { display: none; }
+
+  @media (max-width: 820px) {
+    .product-grid { grid-template-columns: 1fr; gap: 28px; }
+  }
+</style>
+
+<script>
+  const tabs = document.querySelectorAll<HTMLButtonElement>('.tab');
+  const panels = document.querySelectorAll<HTMLElement>('.tab-panel');
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const target = tab.getAttribute('aria-controls');
+      tabs.forEach((t) => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
+      panels.forEach((p) => { p.classList.remove('active'); p.hidden = true; });
+      tab.classList.add('active'); tab.setAttribute('aria-selected', 'true');
+      const panel = document.getElementById(target || '');
+      if (panel) { panel.classList.add('active'); panel.hidden = false; }
+    });
+  });
+</script>

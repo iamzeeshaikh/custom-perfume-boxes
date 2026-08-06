@@ -1,0 +1,82 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_URL, BRAND } from '../utils/site';
+
+export interface Props {
+  title: string;
+  description?: string;
+  canonical?: string;          // path, e.g. "/product/foo/"
+  robots?: string;             // overrides default
+  ogImage?: string;            // absolute or path
+  jsonld?: object[];
+  bodyClass?: string;
+}
+
+const {
+  title,
+  description = 'Custom perfume boxes wholesale — premium materials, custom sizes, free design support and shipping.',
+  canonical,
+  robots,
+  ogImage,
+  jsonld = [],
+  bodyClass = '',
+} = Astro.props;
+
+// Preview deployments must be noindex,nofollow; production index,follow.
+// PUBLIC_INDEXABLE is set to "true" only for the production deployment.
+const indexable = import.meta.env.PUBLIC_INDEXABLE === 'true';
+const robotsContent = robots || (indexable ? 'index, follow' : 'noindex, nofollow');
+
+const canonicalUrl = canonical
+  ? new URL(canonical, SITE_URL).href
+  : new URL(Astro.url.pathname, SITE_URL).href;
+
+const ogImg = ogImage
+  ? (ogImage.startsWith('http') ? ogImage : new URL(ogImage, SITE_URL).href)
+  : new URL('/images/og-default.png', SITE_URL).href;
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta name="robots" content={robotsContent} />
+  <link rel="canonical" href={canonicalUrl} />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content={BRAND.name} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonicalUrl} />
+  <meta property="og:image" content={ogImg} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImg} />
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <meta name="theme-color" content="#111111" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" />
+
+  {jsonld.map((obj) => (
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(obj)} />
+  ))}
+</head>
+<body class={bodyClass}>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <Header />
+  <main id="main">
+    <slot />
+  </main>
+  <Footer />
+</body>
+</html>

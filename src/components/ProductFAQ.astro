@@ -1,0 +1,39 @@
+---
+import type { FAQ } from '../utils/data';
+export interface Props { faqs: FAQ[]; heading?: string; }
+const { faqs, heading } = Astro.props;
+---
+{faqs.length > 0 && (
+  <div class="faq-block">
+    {heading && <h2>{heading}</h2>}
+    <div class="faq-list">
+      {faqs.map((f, i) => (
+        <details class="faq-item" open={i === 0}>
+          <summary>{f.q}</summary>
+          <div class="faq-answer"><p>{f.a}</p></div>
+        </details>
+      ))}
+    </div>
+  </div>
+)}
+
+<style>
+  .faq-list { display: grid; gap: 12px; }
+  .faq-item { border: 1px solid var(--border); border-radius: 8px; background: #fff; overflow: hidden; }
+  .faq-item summary {
+    cursor: pointer; padding: 15px 44px 15px 18px; font-weight: 600; color: var(--black);
+    list-style: none; position: relative; font-size: .95rem;
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::after {
+    content: '+'; position: absolute; right: 18px; top: 50%; transform: translateY(-50%);
+    color: var(--pink); font-size: 1.4rem; font-weight: 400; line-height: 1;
+  }
+  .faq-item[open] summary::after { content: '−'; }
+  .faq-item summary:hover { color: var(--pink); }
+  .faq-answer { padding: 0 18px 16px; color: var(--text-soft); }
+  .faq-answer p { margin: 0; }
+  @media (min-width: 720px) {
+    .faq-list { grid-template-columns: 1fr 1fr; align-items: start; }
+  }
+</style>

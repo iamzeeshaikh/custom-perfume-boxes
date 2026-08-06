@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="Thank You | Custom Perfume Boxes"
+  description="Your request was submitted successfully."
+  canonical="/thank-you/"
+  robots="noindex, follow"
+>
+  <section class="section ty">
+    <div class="container narrow text-center">
+      <div class="ty-check" aria-hidden="true">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" stroke="var(--pink)" stroke-width="1.6"/><path d="M7 12.5l3.2 3.2L17 9" stroke="var(--pink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h1>Thank You</h1>
+      <p class="ty-lead">Your request was successfully submitted. We will get back to you within 10 hours.</p>
+      <div class="ty-actions">
+        <a href="/products/" class="btn">Browse Products</a>
+        <a href="/" class="btn btn-dark">Back to Home</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .ty { padding: 70px 0; }
+  .narrow { max-width: 620px; }
+  .ty-check { margin-bottom: 8px; }
+  .ty-lead { color: var(--text-soft); font-size: 1.05rem; margin: 8px 0 26px; }
+  .ty-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+</style>
