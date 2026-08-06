@@ -35,3 +35,4 @@ wp-content/
 _migration/
 ../*.zip
 ../*.sql
+.vercel
