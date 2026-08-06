@@ -68,11 +68,12 @@ const isActive = (href: string) =>
 
 <style>
   .site-header { position: sticky; top: 0; z-index: 100; }
-  .logo-bar { background: var(--black); text-align: center; padding: 10px 16px; }
-  .logo { display: inline-flex; align-items: center; gap: 10px; color: #fff; text-decoration: none; }
+  .logo-bar { background: var(--black); text-align: center; padding: 14px 16px; }
+  .logo { display: inline-flex; align-items: center; gap: 13px; color: #fff; text-decoration: none; }
   .logo:hover { text-decoration: none; }
-  .logo-diamond { width: 14px; height: 14px; background: var(--pink); transform: rotate(45deg); border-radius: 2px; }
-  .logo-text { font-weight: 700; font-size: .95rem; letter-spacing: .06em; line-height: 1.1; }
+  .logo-diamond { width: 20px; height: 20px; background: var(--pink); transform: rotate(45deg); border-radius: 3px; }
+  .logo-text { font-weight: 800; font-size: 1.35rem; letter-spacing: .07em; line-height: 1.1; }
+  @media (max-width: 480px) { .logo-text { font-size: 1.1rem; } .logo-diamond { width: 16px; height: 16px; } }
 
   .contact-bar { background: #fff; border-bottom: 1px solid var(--border); }
   .contact-inner { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 8px; padding-bottom: 8px; flex-wrap: wrap; }
