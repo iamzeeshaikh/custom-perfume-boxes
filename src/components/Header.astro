@@ -95,14 +95,16 @@ const isActive = (href: string) =>
 
   .nav-bar { background: var(--nav-black); }
   .nav-inner { display: flex; align-items: center; justify-content: space-between; }
-  .nav-list { list-style: none; display: flex; gap: 4px; margin: 0; padding: 0; flex-wrap: wrap; }
-  .nav-list a {
-    display: block; color: #fff; padding: 14px 14px; font-size: .82rem; font-weight: 500;
+  .nav-list { list-style: none; display: flex; gap: 0; margin: 0; padding: 0; flex-wrap: nowrap; }
+  .nav-list a, .nav-list span {
+    display: block; color: #fff; padding: 14px 11px; font-size: .8rem; font-weight: 500;
     text-decoration: none; white-space: nowrap;
   }
-  .nav-list a:hover, .nav-list a.active { color: var(--pink-bright); text-decoration: none; }
+  .nav-list a:hover, .nav-list .active, .nav-list span[aria-current] {
+    color: var(--pink-bright); text-decoration: none;
+  }
 
-  .nav-search { display: flex; align-items: center; gap: 6px; margin-left: auto; }
+  .nav-search { display: flex; align-items: center; gap: 6px; margin-left: auto; flex: none; }
   .ns-btn { background: none; border: 0; color: #fff; cursor: pointer; padding: 10px; line-height: 0; }
   .ns-btn:hover { color: var(--pink-bright); }
   .ns-input {
@@ -112,7 +114,7 @@ const isActive = (href: string) =>
   .ns-input::placeholder { color: #888; }
   .ns-input:focus { outline: none; border-color: var(--pink); }
 
-  @media (max-width: 900px) {
+  @media (max-width: 1080px) {
     .nav-list { display: none; }
     .nav-search { margin-left: 0; margin-right: auto; }
   }
