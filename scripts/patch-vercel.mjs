@@ -68,19 +68,18 @@ const goneRoutes = gonePatterns.map((src) => ({
   headers: { 'x-robots-tag': 'noindex, nofollow', 'cache-control': 'no-store' },
 }));
 
-// 3) 301 the old Yoast sitemap to the Astro one.
-const redirectRoute = {
-  src: '^/sitemap_index\\.xml$',
-  headers: { Location: '/sitemap-index.xml' },
-  status: 301,
-};
+// 3) 301 old/conventional sitemap paths to the Astro sitemap index.
+const redirectRoutes = [
+  { src: '^/sitemap_index\\.xml$', headers: { Location: '/sitemap-index.xml' }, status: 301 },
+  { src: '^/sitemap\\.xml$', headers: { Location: '/sitemap-index.xml' }, status: 301 },
+];
 
 // Insert header route at the very top; insert 410 + redirect just before filesystem handle.
 const fsIdx = cfg.routes.findIndex((r) => r && r.handle === 'filesystem');
 const before = fsIdx >= 0 ? cfg.routes.slice(0, fsIdx) : cfg.routes.slice();
 const after = fsIdx >= 0 ? cfg.routes.slice(fsIdx) : [];
 
-cfg.routes = [headerRoute, ...before, redirectRoute, ...goneRoutes, ...after];
+cfg.routes = [headerRoute, ...before, ...redirectRoutes, ...goneRoutes, ...after];
 cfg[MARK] = true;
 
 fs.writeFileSync(CONFIG, JSON.stringify(cfg, null, 2));
