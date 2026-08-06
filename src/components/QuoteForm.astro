@@ -18,6 +18,16 @@ const { productName = '', productUrl = '', compact = false } = Astro.props;
     <label>Do not fill this <input type="text" name="company_website" tabindex="-1" autocomplete="off" /></label>
   </div>
 
+  <div class="qf-head">
+    <div class="qf-badge" aria-hidden="true">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 6h16v12H4z" stroke="currentColor" stroke-width="1.7"/><path d="M4 8l8 5 8-5" stroke="currentColor" stroke-width="1.7"/></svg>
+    </div>
+    <div>
+      <p class="qf-title">Get a Free Quote</p>
+      <p class="qf-sub">No obligation &bull; Free design support &bull; Reply within 10 hours</p>
+    </div>
+  </div>
+
   <div class="field">
     <label for="qf-name">Name <span class="req">*</span></label>
     <input id="qf-name" name="name" type="text" required autocomplete="name" maxlength="120" />
@@ -46,15 +56,31 @@ const { productName = '', productUrl = '', compact = false } = Astro.props;
            accept=".pdf,.png,.jpg,.jpeg,.ai,.svg,.zip,image/png,image/jpeg,application/pdf,application/zip" />
   </div>
 
-  <button type="submit" class="btn qf-submit">Send</button>
+  <button type="submit" class="btn qf-submit">
+    <span>Send My Request</span>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <p class="qf-trust">&#128274; Your details are safe and never shared.</p>
   <p class="qf-status" role="status" aria-live="polite" data-status></p>
 </form>
 
 <style>
   .quote-form {
-    background: #fff; border: 1px solid var(--border); border-radius: var(--radius);
-    padding: 20px; box-shadow: var(--shadow);
+    background: #fff; border: 1px solid var(--border); border-radius: 14px;
+    padding: 22px; box-shadow: var(--shadow); position: relative; overflow: hidden;
   }
+  .quote-form::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px;
+    background: linear-gradient(90deg, var(--pink), var(--pink-bright));
+  }
+  .qf-head { display: flex; align-items: center; gap: 12px; margin: 4px 0 18px; }
+  .qf-badge {
+    flex: none; width: 42px; height: 42px; border-radius: 50%; color: #fff;
+    background: linear-gradient(135deg, var(--pink), var(--pink-bright));
+    display: flex; align-items: center; justify-content: center;
+  }
+  .qf-title { margin: 0; font-weight: 700; font-size: 1.15rem; color: var(--black); line-height: 1.2; }
+  .qf-sub { margin: 3px 0 0; font-size: .76rem; color: var(--muted); }
   .field { margin-bottom: 12px; }
   .field label { display: block; font-size: .82rem; font-weight: 600; color: var(--text-soft); margin-bottom: 5px; }
   .req { color: var(--pink); }
@@ -71,8 +97,11 @@ const { productName = '', productUrl = '', compact = false } = Astro.props;
     width: 100%; padding: 9px; border: 1.5px dashed var(--pink-100); border-radius: 10px;
     font-size: .85rem; background: #fff;
   }
-  .qf-submit { margin-top: 6px; }
-  .qf-status { font-size: .85rem; margin: 12px 0 0; min-height: 1em; }
+  .qf-submit { margin-top: 6px; width: 100%; font-size: .95rem; padding: 13px; gap: 8px; }
+  .qf-submit svg { transition: transform .18s ease; }
+  .qf-submit:hover svg { transform: translateX(3px); }
+  .qf-trust { font-size: .72rem; color: var(--muted); text-align: center; margin: 10px 0 0; }
+  .qf-status { font-size: .85rem; margin: 8px 0 0; min-height: 1em; text-align: center; }
   .qf-status.ok { color: #1a7f37; }
   .qf-status.err { color: #b3261e; }
   .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }

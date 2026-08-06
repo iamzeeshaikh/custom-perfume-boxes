@@ -12,13 +12,18 @@ if (!fs.existsSync(CONFIG)) {
 const cfg = JSON.parse(fs.readFileSync(CONFIG, 'utf8'));
 cfg.routes = cfg.routes || [];
 
+// Zendesk Chat (zopim) needs several hosts; Astro emits small hydration
+// scripts inline, so 'unsafe-inline' is required for on-page interactivity.
+const ZD = 'https://*.zopim.com https://v2.zopim.com https://*.zdassets.com https://*.zendesk.com';
 const CSP = [
   "default-src 'self'",
-  "img-src 'self' data:",
+  "img-src 'self' data: https:",
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-  "font-src 'self' https://fonts.gstatic.com",
-  "script-src 'self'",
-  "connect-src 'self'",
+  "font-src 'self' data: https://fonts.gstatic.com " + ZD,
+  "script-src 'self' 'unsafe-inline' " + ZD,
+  "connect-src 'self' " + ZD + " wss://*.zopim.com wss://*.zendesk.com",
+  "frame-src " + ZD,
+  "media-src 'self' " + ZD,
   "form-action 'self'",
   "frame-ancestors 'self'",
   "base-uri 'self'",

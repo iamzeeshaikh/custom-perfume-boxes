@@ -1,27 +1,55 @@
 ---
-// Payment / trust badges rendered as inline SVG (no third-party scripts or hotlinks).
-const badges = ['PayPal', 'VISA', 'Mastercard', 'Amex', 'Apple Pay', 'G Pay'];
+// Payment + shipping trust logos as self-contained inline SVG (no hotlinks, CSP-safe).
 ---
 <div class="trust">
-  <ul class="pay-badges" aria-label="Accepted payment methods">
-    {badges.map((b) => <li>{b}</li>)}
+  <p class="trust-label">Secure Payments</p>
+  <ul class="logo-row" aria-label="Accepted payment methods">
+    <li>
+      <svg viewBox="0 0 48 30" role="img" aria-label="Visa"><rect width="48" height="30" rx="4" fill="#fff" stroke="#e6e6e6"/><text x="24" y="20" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-style="italic" font-size="12" fill="#1a1f71">VISA</text></svg>
+    </li>
+    <li>
+      <svg viewBox="0 0 48 30" role="img" aria-label="Mastercard"><rect width="48" height="30" rx="4" fill="#fff" stroke="#e6e6e6"/><circle cx="21" cy="15" r="7.5" fill="#eb001b"/><circle cx="28" cy="15" r="7.5" fill="#f79e1b" fill-opacity="0.9"/></svg>
+    </li>
+    <li>
+      <svg viewBox="0 0 48 30" role="img" aria-label="American Express"><rect width="48" height="30" rx="4" fill="#1f72cd"/><text x="24" y="19" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="9" fill="#fff">AMEX</text></svg>
+    </li>
+    <li>
+      <svg viewBox="0 0 48 30" role="img" aria-label="PayPal"><rect width="48" height="30" rx="4" fill="#fff" stroke="#e6e6e6"/><text x="24" y="19" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-style="italic" font-size="10"><tspan fill="#253b80">Pay</tspan><tspan fill="#179bd7">Pal</tspan></text></svg>
+    </li>
+    <li>
+      <svg viewBox="0 0 48 30" role="img" aria-label="Apple Pay"><rect width="48" height="30" rx="4" fill="#000"/><text x="26" y="19" text-anchor="middle" font-family="Arial, sans-serif" font-weight="600" font-size="9" fill="#fff">&#63743; Pay</text></svg>
+    </li>
+    <li>
+      <svg viewBox="0 0 48 30" role="img" aria-label="Google Pay"><rect width="48" height="30" rx="4" fill="#fff" stroke="#e6e6e6"/><text x="24" y="19" text-anchor="middle" font-family="Arial, sans-serif" font-weight="600" font-size="9"><tspan fill="#4285f4">G</tspan><tspan fill="#5f6368"> Pay</tspan></text></svg>
+    </li>
   </ul>
-  <ul class="trust-badges" aria-label="Quality assurances">
-    <li>100% Satisfaction Guarantee</li>
-    <li>SSL Secure</li>
-    <li>FSC / ISO Materials</li>
+
+  <p class="trust-label">Worldwide Shipping</p>
+  <ul class="logo-row" aria-label="Shipping partners">
+    <li>
+      <svg viewBox="0 0 60 30" role="img" aria-label="DHL"><rect width="60" height="30" rx="4" fill="#ffcc00"/><text x="30" y="21" text-anchor="middle" font-family="Arial, sans-serif" font-weight="800" font-style="italic" font-size="14" fill="#d40511">DHL</text></svg>
+    </li>
+    <li>
+      <svg viewBox="0 0 66 30" role="img" aria-label="FedEx"><rect width="66" height="30" rx="4" fill="#fff" stroke="#e6e6e6"/><text x="33" y="20" text-anchor="middle" font-family="Arial, sans-serif" font-weight="800" font-size="13"><tspan fill="#4d148c">Fed</tspan><tspan fill="#ff6600">Ex</tspan></text></svg>
+    </li>
+    <li>
+      <svg viewBox="0 0 52 30" role="img" aria-label="UPS"><rect width="52" height="30" rx="4" fill="#351c15"/><text x="26" y="20" text-anchor="middle" font-family="Arial, sans-serif" font-weight="800" font-size="12" fill="#ffb500">UPS</text></svg>
+    </li>
+  </ul>
+
+  <ul class="assurances" aria-label="Assurances">
+    <li>&#10003; 100% Satisfaction</li>
+    <li>&#128274; SSL Secure</li>
+    <li>&#9851; FSC / ISO Materials</li>
   </ul>
 </div>
 
 <style>
   .trust { margin-top: 22px; }
-  .pay-badges, .trust-badges { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 10px; padding: 0; }
-  .pay-badges li {
-    font-size: .72rem; font-weight: 700; color: var(--text-soft); background: #fff;
-    border: 1px solid var(--border); border-radius: 5px; padding: 6px 10px; letter-spacing: .02em;
-  }
-  .trust-badges li {
-    font-size: .72rem; color: var(--muted); background: var(--bg-soft);
-    border-radius: 5px; padding: 6px 10px;
-  }
+  .trust-label { font-size: .72rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 14px 0 8px; }
+  .logo-row { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; }
+  .logo-row li { line-height: 0; }
+  .logo-row svg { height: 30px; width: auto; display: block; border-radius: 4px; }
+  .assurances { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; padding: 0; }
+  .assurances li { font-size: .72rem; color: var(--text-soft); background: var(--bg-soft); border-radius: 5px; padding: 6px 10px; }
 </style>
