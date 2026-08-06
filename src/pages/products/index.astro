@@ -21,8 +21,13 @@ const jsonld = [breadcrumbSchema([{ name: 'Home', url: '/' }, { name: 'Products'
     <div class="container">
       <h1 class="text-center">All Products</h1>
       <p class="text-center intro">Explore our full range of {products.length} perfume packaging products across {categories.length} categories.</p>
+      <p class="text-center search-note" data-search-note hidden></p>
       <div class="product-grid">
-        {products.map((p, i) => <ProductCard product={p} eager={i < 3} />)}
+        {products.map((p, i) => (
+          <div class="pg-item" data-name={p.title.toLowerCase()}>
+            <ProductCard product={p} eager={i < 3} />
+          </div>
+        ))}
       </div>
     </div>
   </section>
@@ -33,4 +38,31 @@ const jsonld = [breadcrumbSchema([{ name: 'Home', url: '/' }, { name: 'Products'
   .product-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
   @media (max-width: 820px) { .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (max-width: 460px) { .product-grid { grid-template-columns: 1fr; } }
+  .search-note { color: var(--text-soft); margin: -18px auto 24px; }
+  .pg-item[hidden] { display: none; }
 </style>
+
+<script>
+  // Filter the grid by ?q= from the header search (client-side; full list is in the HTML).
+  const q = new URLSearchParams(location.search).get('q')?.trim().toLowerCase();
+  if (q) {
+    const items = document.querySelectorAll<HTMLElement>('.pg-item');
+    let shown = 0;
+    items.forEach((el) => {
+      const match = (el.dataset.name || '').includes(q);
+      el.hidden = !match;
+      if (match) shown++;
+    });
+    const note = document.querySelector<HTMLElement>('[data-search-note]');
+    if (note) {
+      note.hidden = false;
+      note.textContent = shown
+        ? `${shown} product${shown === 1 ? '' : 's'} matching “${q}” — `
+        : `No products match “${q}” — `;
+      const a = document.createElement('a');
+      a.href = '/products/';
+      a.textContent = 'clear search';
+      note.appendChild(a);
+    }
+  }
+</script>

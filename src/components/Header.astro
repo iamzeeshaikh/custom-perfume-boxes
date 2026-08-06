@@ -44,7 +44,7 @@ const isActive = (href: string) =>
         <a href={BRAND.facebook} class="social" aria-label="Facebook" rel="noopener nofollow" target="_blank">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 10-11.5 9.9v-7H8v-2.9h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6v1.9h2.8l-.4 2.9h-2.4v7A10 10 0 0022 12z"/></svg>
         </a>
-        <NavLink href="/contact-us/" class="btn quote-btn">Get Free Quote</NavLink>
+        <NavLink href="/contact-us/" class="btn quote-btn" data-open-quote>Get Free Quote</NavLink>
       </div>
     </div>
   </div>
@@ -61,6 +61,13 @@ const isActive = (href: string) =>
           </li>
         ))}
       </ul>
+      <form class="nav-search" role="search" action="/products/" method="get" data-nav-search>
+        <input class="ns-input" type="search" name="q" placeholder="Search products…"
+               aria-label="Search products" hidden data-ns-input />
+        <button class="ns-btn" type="submit" aria-label="Search" data-ns-btn>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M16.5 16.5L21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+      </form>
       <MobileMenu />
     </div>
   </nav>
@@ -95,11 +102,43 @@ const isActive = (href: string) =>
   }
   .nav-list a:hover, .nav-list a.active { color: var(--pink-bright); text-decoration: none; }
 
+  .nav-search { display: flex; align-items: center; gap: 6px; margin-left: auto; }
+  .ns-btn { background: none; border: 0; color: #fff; cursor: pointer; padding: 10px; line-height: 0; }
+  .ns-btn:hover { color: var(--pink-bright); }
+  .ns-input {
+    width: 180px; padding: 7px 12px; border: 1px solid #444; border-radius: 18px;
+    background: #1d1d1d; color: #fff; font: inherit; font-size: .82rem;
+  }
+  .ns-input::placeholder { color: #888; }
+  .ns-input:focus { outline: none; border-color: var(--pink); }
+
   @media (max-width: 900px) {
     .nav-list { display: none; }
+    .nav-search { margin-left: 0; margin-right: auto; }
   }
   @media (max-width: 480px) {
     .contact-links { gap: 12px; }
     .cbar-item span { font-size: .78rem; }
   }
 </style>
+
+<script>
+  // Search icon expands the input first; submits once a query is typed.
+  const form = document.querySelector<HTMLFormElement>('[data-nav-search]');
+  const input = form?.querySelector<HTMLInputElement>('[data-ns-input]');
+  if (form && input) {
+    form.addEventListener('submit', (e) => {
+      if (input.hidden) {
+        e.preventDefault();
+        input.hidden = false;
+        input.focus();
+      } else if (!input.value.trim()) {
+        e.preventDefault();
+        input.focus();
+      }
+    });
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') { input.value = ''; input.hidden = true; }
+    });
+  }
+</script>
