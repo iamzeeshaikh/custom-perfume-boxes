@@ -3,16 +3,31 @@ import nodemailer from 'nodemailer';
 
 export const prerender = false;
 
-// --- config from environment (never hard-coded) ---
-const SMTP_HOST = import.meta.env.SMTP_HOST;
-const SMTP_PORT = Number(import.meta.env.SMTP_PORT || 587);
-const SMTP_USER = import.meta.env.SMTP_USER;
-const SMTP_PASS = import.meta.env.SMTP_PASS;
-const MAIL_TO = import.meta.env.QUOTE_TO || SMTP_USER;
-const MAIL_FROM = import.meta.env.QUOTE_FROM || SMTP_USER;
-const ALLOWED_ORIGINS = (import.meta.env.ALLOWED_ORIGINS ||
-  'https://customperfumeboxes.com,https://www.customperfumeboxes.com')
-  .split(',').map((s: string) => s.trim());
+// --- config from environment (read at REQUEST time so Vercel runtime secrets
+// are picked up; import.meta.env would be inlined at build time as undefined) ---
+function env(...keys: string[]): string | undefined {
+  for (const k of keys) {
+    const v = (typeof process !== 'undefined' && process.env && process.env[k]) ||
+      (import.meta.env as Record<string, string | undefined>)[k];
+    if (v) return v;
+  }
+  return undefined;
+}
+function smtpConfig() {
+  const SMTP_USER = env('SMTP_USER');
+  return {
+    SMTP_HOST: env('SMTP_HOST'),
+    SMTP_PORT: Number(env('SMTP_PORT') || 587),
+    SMTP_USER,
+    SMTP_PASS: env('SMTP_PASS'),
+    MAIL_TO: env('SMTP_TO', 'QUOTE_TO') || SMTP_USER,
+    MAIL_FROM: env('SMTP_FROM_EMAIL', 'QUOTE_FROM') || SMTP_USER,
+    MAIL_FROM_NAME: env('SMTP_FROM_NAME') || 'Custom Perfume Boxes',
+    ALLOWED_ORIGINS: (env('ALLOWED_ORIGINS') ||
+      'https://customperfumeboxes.com,https://www.customperfumeboxes.com')
+      .split(',').map((s: string) => s.trim()),
+  };
+}
 
 const MAX_FILE = 10 * 1024 * 1024; // 10 MB
 const ALLOWED_MIME = new Set([
@@ -48,10 +63,11 @@ function safeName(name: string) {
 
 export const POST: APIRoute = async ({ request, clientAddress }) => {
   try {
+    const cfg = smtpConfig();
     // 1. Origin / referer check
     const origin = request.headers.get('origin') || '';
     const referer = request.headers.get('referer') || '';
-    const okOrigin = ALLOWED_ORIGINS.some(
+    const okOrigin = cfg.ALLOWED_ORIGINS.some(
       (o: string) => origin === o || referer.startsWith(o) || origin.endsWith('.vercel.app') || referer.includes('.vercel.app')
     );
     if (origin && !okOrigin) return json({ ok: false, error: 'Invalid origin.' }, 403);
@@ -94,12 +110,12 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
     }
 
     // 6. Build + send email (fail loudly — never report success on failure)
-    if (!SMTP_HOST || !SMTP_USER || !SMTP_PASS) {
+    if (!cfg.SMTP_HOST || !cfg.SMTP_USER || !cfg.SMTP_PASS) {
       return json({ ok: false, error: 'Mail service is not configured.' }, 500);
     }
     const transporter = nodemailer.createTransport({
-      host: SMTP_HOST, port: SMTP_PORT, secure: SMTP_PORT === 465,
-      auth: { user: SMTP_USER, pass: SMTP_PASS },
+      host: cfg.SMTP_HOST, port: cfg.SMTP_PORT, secure: cfg.SMTP_PORT === 465,
+      auth: { user: cfg.SMTP_USER, pass: cfg.SMTP_PASS },
     });
 
     const subject = productName
@@ -120,8 +136,8 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
       <p>${esc(message).replace(/\n/g, '<br>') || '—'}</p>`;
 
     await transporter.sendMail({
-      from: `"Custom Perfume Boxes" <${MAIL_FROM}>`,
-      to: MAIL_TO,
+      from: `"${cfg.MAIL_FROM_NAME}" <${cfg.MAIL_FROM}>`,
+      to: cfg.MAIL_TO,
       replyTo: email,
       subject,
       html,
