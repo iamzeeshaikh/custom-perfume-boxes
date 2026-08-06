@@ -6,7 +6,7 @@ export interface Props {
 }
 const { productName = '', productUrl = '', compact = false } = Astro.props;
 ---
-<form class={`quote-form ${compact ? 'compact' : ''}`} method="POST" action="/api/quote"
+<form class={`quote-form ${compact ? 'compact' : ''}`} method="POST" action="/api/quote/"
       enctype="multipart/form-data" novalidate data-quote-form>
   <!-- hidden context -->
   <input type="hidden" name="product_name" value={productName} />
@@ -110,7 +110,7 @@ const { productName = '', productUrl = '', compact = false } = Astro.props;
       const btn = form.querySelector<HTMLButtonElement>('.qf-submit');
       if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
       try {
-        const res = await fetch('/api/quote', { method: 'POST', body: new FormData(form) });
+        const res = await fetch('/api/quote/', { method: 'POST', body: new FormData(form) });
         const data = await res.json().catch(() => ({}));
         if (res.ok && data.ok) {
           window.location.href = '/thank-you/';
