@@ -1,6 +1,7 @@
 import type { APIRoute } from 'astro';
 import { SITE_URL } from '../utils/site';
 import { products, categories, pages } from '../utils/data';
+import { BLOG_POSTS } from '../utils/blog';
 
 export const prerender = true;
 
@@ -22,6 +23,11 @@ export const GET: APIRoute = () => {
   for (const pg of pages) {
     if (EXCLUDE.has(pg.slug)) continue;
     urls.push({ loc: `${SITE_URL}/${pg.slug}/`, priority: '0.5', changefreq: 'monthly' });
+  }
+
+  urls.push({ loc: `${SITE_URL}/blog/`, priority: '0.6', changefreq: 'weekly' });
+  for (const post of BLOG_POSTS) {
+    urls.push({ loc: `${SITE_URL}${post.url}`, priority: '0.6', changefreq: 'monthly' });
   }
 
   const body =

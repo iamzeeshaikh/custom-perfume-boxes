@@ -21,6 +21,7 @@ export const NAV = [
   { label: 'Material Specific Boxes', href: '/product-category/material-specific-boxes/' },
   { label: 'Subscription & Sample Boxes', href: '/product-category/subscription-sample-boxes/' },
   { label: 'Luxury & Specialty Boxes', href: '/product-category/luxury-specialty-boxes/' },
+  { label: 'Blog', href: '/blog/' },
 ];
 
 // Footer category column (preserved from original footer "BOX CATEGORIES").
@@ -34,6 +35,7 @@ export const FOOTER_CATEGORIES = [
 
 export const FOOTER_COMPANY = [
   { label: 'About Us', href: '/about-us/' },
+  { label: 'Blog', href: '/blog/' },
   { label: 'Contact Us', href: '/contact-us/' },
   { label: 'Privacy Policy', href: '/privacy-policy/' },
   { label: 'Refund and Returns Policy', href: '/refund_returns/' },
