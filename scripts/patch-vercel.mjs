@@ -18,8 +18,9 @@ const ZD = 'https://*.zopim.com https://v2.zopim.com https://*.zdassets.com http
 const CSP = [
   "default-src 'self'",
   "img-src 'self' data: https:",
-  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-  "font-src 'self' data: https://fonts.gstatic.com " + ZD,
+  // Fonts are self-hosted now, so no Google Fonts origins are needed.
+  "style-src 'self' 'unsafe-inline'",
+  "font-src 'self' data: " + ZD,
   "script-src 'self' 'unsafe-inline' " + ZD,
   "connect-src 'self' " + ZD + " wss://*.zopim.com wss://*.zendesk.com",
   "frame-src " + ZD,

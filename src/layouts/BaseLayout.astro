@@ -64,25 +64,57 @@ const ogImg = ogImage
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <meta name="theme-color" content="#111111" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" />
+  {/* Poppins is self-hosted (see global.css). Only the two faces first paint
+      needs are preloaded; 500/600 are picked up from the stylesheet. */}
+  <link rel="preload" href="/fonts/poppins-latin-400.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/poppins-latin-700.woff2" as="font" type="font/woff2" crossorigin />
 
   {jsonld.map((obj) => (
     <script type="application/ld+json" is:inline set:html={JSON.stringify(obj)} />
   ))}
 
-  <!--Start of Zendesk Chat Script-->
-  <script type="text/javascript" is:inline>
-    window.$zopim||(function(d,s){var z=$zopim=function(c){
-    z._.push(c)},$=z.s=
-    d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
-    _.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute('charset','utf-8');
-    $.src='https://v2.zopim.com/?4h3lbyJihoT1mCOqDA0VoQOaVQE9qTOP';z.t=+new Date;$.
-    type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
+  {/* Zendesk web widget. It pulls ~430KB of JS of which ~60% is never executed,
+      so it is held back until the visitor interacts, or 6s after load for
+      visitors who never do. Loading it in <head> as Zendesk ships it was
+      costing ~140ms of blocking time on mobile. */}
+  <script is:inline>
+    (function () {
+      var loaded = false;
+      var events = ['pointerdown', 'keydown', 'touchstart', 'scroll'];
+      function loadZendesk() {
+        if (loaded) return;
+        loaded = true;
+        events.forEach(function (ev) {
+          window.removeEventListener(ev, loadZendesk);
+        });
+        window.$zopim ||
+          (function (d, s) {
+            var z = ($zopim = function (c) {
+                z._.push(c);
+              }),
+              $ = (z.s = d.createElement(s)),
+              e = d.getElementsByTagName(s)[0];
+            z.set = function (o) {
+              z.set._.push(o);
+            };
+            z._ = [];
+            z.set._ = [];
+            $.async = !0;
+            $.setAttribute('charset', 'utf-8');
+            $.src = 'https://v2.zopim.com/?4h3lbyJihoT1mCOqDA0VoQOaVQE9qTOP';
+            z.t = +new Date();
+            $.type = 'text/javascript';
+            e.parentNode.insertBefore($, e);
+          })(document, 'script');
+      }
+      events.forEach(function (ev) {
+        window.addEventListener(ev, loadZendesk, { passive: true, once: true });
+      });
+      addEventListener('load', function () {
+        setTimeout(loadZendesk, 6000);
+      });
+    })();
   </script>
-  <!--End of Zendesk Chat Script-->
 </head>
 <body class={bodyClass}>
   <a href="#main" class="skip-link">Skip to content</a>

@@ -1,4 +1,47 @@
 /* Custom Perfume Boxes — brand design system (black / magenta-pink / white) */
+
+/* Poppins, latin subset, self-hosted. The Google Fonts stylesheet this
+   replaces was render-blocking on a third-party origin and cost ~1.07s of the
+   3.1s FCP; these four faces total 31KB and are preloaded in BaseLayout. */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/poppins-latin-400.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/poppins-latin-500.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/poppins-latin-600.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/poppins-latin-700.woff2') format('woff2');
+}
+
+/* Metric-matched fallback so the swap does not re-wrap headings. */
+@font-face {
+  font-family: 'Poppins Fallback';
+  src: local('Helvetica Neue'), local('Arial'), local('Helvetica');
+  size-adjust: 112.16%;
+  ascent-override: 93.65%;
+  descent-override: 31.22%;
+  line-gap-override: 8.92%;
+}
+
 :root {
   --black: #1a1a1a;
   --black-2: #232323;
@@ -17,7 +60,7 @@
   --bg-soft: #f7f7fb;
   --radius: 10px;
   --maxw: 1200px;
-  --font: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  --font: 'Poppins', 'Poppins Fallback', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
   --shadow: 0 4px 18px rgba(0,0,0,.08);
 }
 

@@ -33,8 +33,12 @@ const jsonld = [
         <a href="#products" class="btn btn-dark hero-cta">Shop Now</a>
       </div>
       <div class="hero-media">
+        {/* Laid out at max-height 380px, so a 760px rendition covers 2x
+            screens; the 900px master stays in the srcset for wider ones. */}
         {heroImg && (
           <img src={heroImg.src} width={heroImg.width} height={heroImg.height}
+               srcset={`${heroImg.src.replace('.webp', '-760.webp')} 760w, ${heroImg.src} 900w`}
+               sizes="380px"
                alt="Custom luxury perfume box with fragrance bottle"
                loading="eager" fetchpriority="high" decoding="async" />
         )}
