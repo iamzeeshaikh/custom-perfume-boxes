@@ -103,7 +103,8 @@ h3 { font-size: clamp(1.1rem, 2vw, 1.35rem); margin: 1.3em 0 .4em; }
 .prose p { margin: 0 0 1em; }
 .prose ul, .prose ol { margin: 0 0 1em 1.3em; }
 .prose li { margin: .3em 0; }
-.prose a { color: var(--pink); font-weight: 600; }
+/* long unbroken strings (emails, URLs) must not overflow narrow phones */
+.prose a { color: var(--pink); font-weight: 600; overflow-wrap: anywhere; }
 .prose strong, .prose b { color: var(--black); }
 .prose table {
   width: 100%; border-collapse: collapse; margin: 1.2em 0; font-size: .92rem;
@@ -131,4 +132,19 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 
 @media (max-width: 640px) {
   .section { padding: 32px 0; }
+}
+
+/* ---------------------------------------------------------------------
+   Mobile form usability: iOS Safari zooms the viewport whenever a focused
+   form control has font-size < 16px, and never zooms back out afterwards.
+   Our quote forms are the conversion path, so force 16px on phones.
+   !important is required to beat Astro component-scoped rules, which
+   carry a [data-astro-cid-*] attribute and so outrank a plain selector.
+   --------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="hidden"]),
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
 }
