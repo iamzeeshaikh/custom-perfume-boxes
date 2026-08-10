@@ -3,12 +3,19 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import QuoteForm from '../components/QuoteForm.astro';
 import { BRAND, SITE_URL } from '../utils/site';
-import { breadcrumbSchema } from '../utils/schema';
+import { breadcrumbSchema, webPageSchema } from '../utils/schema';
 
 const crumbs = [{ name: 'Home', url: '/' }, { name: 'Contact Us' }];
 // Organization comes from BaseLayout on every route.
 const jsonld = [
   breadcrumbSchema([{ name: 'Home', url: '/' }, { name: 'Contact Us', url: '/contact-us/' }]),
+  webPageSchema({
+    path: '/contact-us/',
+    name: 'Contact Us | Custom Perfume Boxes',
+    description:
+      'Contact Custom Perfume Boxes for a free quote on custom perfume packaging.',
+    type: 'ContactPage',
+  }),
 ];
 ---
 <BaseLayout

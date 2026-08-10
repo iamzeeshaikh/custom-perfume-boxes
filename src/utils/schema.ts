@@ -137,6 +137,28 @@ export function productSchema(p: Product) {
 }
 
 /**
+ * Generic page node. Content pages carried only a BreadcrumbList, so nothing
+ * tied the URL to the site or the business. `type` narrows it where
+ * schema.org has a better fit than plain WebPage.
+ */
+export function webPageSchema(input: {
+  path: string;
+  name: string;
+  description: string;
+  type?: 'WebPage' | 'AboutPage' | 'ContactPage';
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': input.type ?? 'WebPage',
+    '@id': `${SITE_URL}${input.path}#webpage`,
+    url: SITE_URL + input.path,
+    name: input.name,
+    description: input.description,
+    inLanguage: 'en-US',
+  };
+}
+
+/**
  * Category pages list products, so the page is a CollectionPage owning an
  * ItemList. Previously they carried only a BreadcrumbList, which told search
  * engines nothing about what the page listed.

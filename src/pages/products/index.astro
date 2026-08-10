@@ -5,10 +5,20 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import ProductCard from '../../components/ProductCard.astro';
 import { products, categories } from '../../utils/data';
-import { breadcrumbSchema } from '../../utils/schema';
+import { breadcrumbSchema, collectionPageSchema } from '../../utils/schema';
 
 const crumbs = [{ name: 'Home', url: '/' }, { name: 'Products' }];
-const jsonld = [breadcrumbSchema([{ name: 'Home', url: '/' }, { name: 'Products', url: '/products/' }])];
+// This page listed every product but described none of it in schema.
+const jsonld = [
+  breadcrumbSchema([{ name: 'Home', url: '/' }, { name: 'Products', url: '/products/' }]),
+  collectionPageSchema({
+    name: 'All Products',
+    url: '/products/',
+    description:
+      'Browse all custom perfume boxes — subscription, sample, luxury, gift, and color-specific packaging.',
+    items: products.map((p) => ({ name: p.title, url: `/product/${p.slug}/` })),
+  }),
+];
 ---
 <BaseLayout
   title="All Products | Custom Perfume Boxes"

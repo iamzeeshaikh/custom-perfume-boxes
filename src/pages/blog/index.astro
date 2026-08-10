@@ -2,10 +2,23 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { BLOG_POSTS } from '../../utils/blog';
+import { breadcrumbSchema, collectionPageSchema } from '../../utils/schema';
 
 const crumbs = [
   { name: 'Home', url: '/' },
   { name: 'Blog' },
+];
+
+// The listing had no JSON-LD of its own at all.
+const jsonld = [
+  breadcrumbSchema([{ name: 'Home', url: '/' }, { name: 'Blog', url: '/blog/' }]),
+  collectionPageSchema({
+    name: 'Custom Perfume Boxes Blog',
+    url: '/blog/',
+    description:
+      'Guides on perfume packaging materials, sizing, printing and wholesale buying.',
+    items: BLOG_POSTS.map((p) => ({ name: p.title, url: p.url })),
+  }),
 ];
 
 const fmt = (iso: string) =>
@@ -20,6 +33,7 @@ const fmt = (iso: string) =>
   title="Blog | Custom Perfume Boxes"
   description="Buyer guides on perfume packaging, from discovery sets and testers to wooden boxes, wholesale cartons and safe shipping."
   canonical="/blog/"
+  jsonld={jsonld}
 >
   <Breadcrumbs items={crumbs} />
 
