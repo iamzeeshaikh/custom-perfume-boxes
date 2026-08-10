@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import ProductCard from '../../components/ProductCard.astro';
 import { categories, productsInCategory } from '../../utils/data';
-import { breadcrumbSchema } from '../../utils/schema';
+import { breadcrumbSchema, collectionPageSchema } from '../../utils/schema';
 
 export function getStaticPaths() {
   return categories.map((category) => ({
@@ -20,7 +20,15 @@ const crumbs = [
   { name: 'Products', url: '/products/' },
   { name: category.name },
 ];
-const jsonld = [breadcrumbSchema(crumbs.map((c) => ({ name: c.name, url: c.url || url })))];
+const jsonld = [
+  breadcrumbSchema(crumbs.map((c) => ({ name: c.name, url: c.url || url }))),
+  collectionPageSchema({
+    name: category.name,
+    url,
+    description: category.seo_desc,
+    items: items.map((p) => ({ name: p.title, url: `/product/${p.slug}/` })),
+  }),
+];
 ---
 <BaseLayout
   title={category.seo_title}

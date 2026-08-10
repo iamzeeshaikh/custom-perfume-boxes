@@ -6,16 +6,13 @@ import ProductFAQ from '../components/ProductFAQ.astro';
 import QuoteForm from '../components/QuoteForm.astro';
 import { products, home } from '../utils/data';
 import { BRAND, SITE_URL } from '../utils/site';
-import { organizationSchema, websiteSchema, faqSchema } from '../utils/schema';
+import { faqSchema } from '../utils/schema';
 
 const heroImg = products.find((p) => p.slug === 'perfume-pink-boxes')?.featured
   || products[0].featured;
 
-const jsonld = [
-  organizationSchema(),
-  websiteSchema(),
-  ...(home.faqs.length ? [faqSchema(home.faqs)] : []),
-];
+// Organization and WebSite come from BaseLayout on every route.
+const jsonld = [...(home.faqs.length ? [faqSchema(home.faqs)] : [])];
 ---
 <BaseLayout
   title={home.seo_title}

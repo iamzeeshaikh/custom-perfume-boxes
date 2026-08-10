@@ -3,11 +3,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import QuoteForm from '../components/QuoteForm.astro';
 import { BRAND, SITE_URL } from '../utils/site';
-import { organizationSchema, breadcrumbSchema } from '../utils/schema';
+import { breadcrumbSchema } from '../utils/schema';
 
 const crumbs = [{ name: 'Home', url: '/' }, { name: 'Contact Us' }];
+// Organization comes from BaseLayout on every route.
 const jsonld = [
-  organizationSchema(),
   breadcrumbSchema([{ name: 'Home', url: '/' }, { name: 'Contact Us', url: '/contact-us/' }]),
 ];
 ---
