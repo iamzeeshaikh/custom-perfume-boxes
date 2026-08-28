@@ -1,0 +1,296 @@
+---
+/**
+ * "Design Your Box" configurator.
+ *
+ * Deliberately quotes nothing. Every price on this site is quoted per job, and
+ * a tool that produced a number here would put a figure in front of a customer
+ * that the rest of the site cannot honor. What it produces instead is a
+ * complete written specification, posted to the same /api/quote/ endpoint as
+ * every other form on the site.
+ *
+ * The preview is inline SVG driven by a few CSS custom properties, so changing
+ * a color or a proportion never triggers a network request and never shifts
+ * layout: the stage keeps a fixed aspect ratio at every breakpoint.
+ */
+import cfg from '../data/configurator.json';
+
+const { styles, materials, finishes, addons, quantities, swatches } = cfg;
+---
+<div class="bd" data-box-designer>
+  <div class="bd-grid">
+    <!-- ---------- live preview ---------- -->
+    <aside class="bd-stage-wrap">
+      <div class="bd-stage" data-stage>
+        <svg class="bd-svg" viewBox="0 0 260 260" role="img" aria-labelledby="bd-svg-title" data-svg>
+          <title id="bd-svg-title" data-svg-title>Preview of a straight tuck carton in deep black</title>
+          <defs>
+            <linearGradient id="bd-sheen" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#fff" stop-opacity="0.34" />
+              <stop offset="45%" stop-color="#fff" stop-opacity="0.05" />
+              <stop offset="100%" stop-color="#fff" stop-opacity="0" />
+            </linearGradient>
+            <linearGradient id="bd-foil" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#f6e6a8" /><stop offset="40%" stop-color="#c2a03f" />
+              <stop offset="70%" stop-color="#f3e2a0" /><stop offset="100%" stop-color="#9b7c28" />
+            </linearGradient>
+          </defs>
+          <ellipse cx="130" cy="232" rx="74" ry="12" fill="#000" opacity="0.16" data-shadow />
+          <g data-box>
+            <!-- front / side / top are recomputed from the chosen proportions -->
+            <polygon data-face="side" points="" />
+            <polygon data-face="top" points="" />
+            <polygon data-face="front" points="" />
+            <polygon data-face="sheen" points="" fill="url(#bd-sheen)" />
+            <rect data-face="body" x="0" y="0" width="0" height="0" opacity="0" />
+            <ellipse data-face="cap" cx="0" cy="0" rx="0" ry="0" opacity="0" />
+            <rect data-face="window" x="0" y="0" width="0" height="0" rx="3" fill="#e8f1f5" opacity="0.85" />
+            <rect data-face="foilband" x="0" y="0" width="0" height="0" fill="url(#bd-foil)" opacity="0" />
+            <rect data-face="ribbon" x="0" y="0" width="0" height="0" fill="#d8d2cb" opacity="0" />
+          </g>
+        </svg>
+        <p class="bd-stage-note" data-stage-note>Straight tuck carton &middot; SBS &middot; matte</p>
+      </div>
+
+      <dl class="bd-summary" data-summary>
+        <div><dt>Style</dt><dd data-sum="style">Straight tuck carton</dd></div>
+        <div><dt>Size</dt><dd data-sum="size">80 &times; 40 &times; 120 mm</dd></div>
+        <div><dt>Material</dt><dd data-sum="material">SBS folding boxboard</dd></div>
+        <div><dt>Finish</dt><dd data-sum="finish">Matte lamination</dd></div>
+        <div><dt>Color</dt><dd data-sum="color">Deep black</dd></div>
+        <div><dt>Add-ons</dt><dd data-sum="addons">None</dd></div>
+        <div><dt>Quantity</dt><dd data-sum="qty">500</dd></div>
+      </dl>
+      <p class="bd-noprice">
+        No price is shown here on purpose. Board, finish and quantity move the
+        figure too much for a slider to be honest about it, so we quote your
+        exact specification instead &mdash; usually within 10 hours.
+      </p>
+    </aside>
+
+    <!-- ---------- steps ---------- -->
+    <div class="bd-steps">
+      <ol class="bd-progress" data-progress>
+        {['Style','Size','Material','Finish','Add-ons','Quantity','Details'].map((s, i) => (
+          <li class={i === 0 ? 'is-active' : ''} data-step-dot={i}><span>{i + 1}</span>{s}</li>
+        ))}
+      </ol>
+
+      <section class="bd-panel is-active" data-panel="0">
+        <h3>Pick a structure</h3>
+        <p class="bd-help">This decides more about cost and feel than anything else you choose.</p>
+        <div class="bd-opts">
+          {styles.map((s, i) => (
+            <label class="bd-opt">
+              <input type="radio" name="bd-style" value={s.id} checked={i === 0}
+                     data-ratio={s.ratio.join(',')} data-label={s.name} />
+              <span class="bd-opt-body"><strong>{s.name}</strong><em>{s.note}</em></span>
+            </label>
+          ))}
+        </div>
+      </section>
+
+      <section class="bd-panel" data-panel="1">
+        <h3>Set the size</h3>
+        <p class="bd-help">Measure the bottle with the cap on, then add 2&ndash;3 mm clearance per side.</p>
+        <div class="bd-dims">
+          <label>Width (mm)<input type="number" min="10" max="600" value="80" data-dim="w" /></label>
+          <label>Depth (mm)<input type="number" min="10" max="600" value="40" data-dim="d" /></label>
+          <label>Height (mm)<input type="number" min="10" max="600" value="120" data-dim="h" /></label>
+        </div>
+        <p class="bd-help bd-warn" data-dim-warn hidden></p>
+      </section>
+
+      <section class="bd-panel" data-panel="2">
+        <h3>Choose a board</h3>
+        <p class="bd-help">Compare boards in microns rather than gsm &mdash; thickness is what you feel.</p>
+        <div class="bd-opts">
+          {materials.map((m, i) => (
+            <label class="bd-opt">
+              <input type="radio" name="bd-material" value={m.id} checked={i === 0} data-label={m.name} />
+              <span class="bd-opt-body"><strong>{m.name}</strong><em>{m.note}</em></span>
+            </label>
+          ))}
+        </div>
+      </section>
+
+      <section class="bd-panel" data-panel="3">
+        <h3>Finish and color</h3>
+        <p class="bd-help">Finish changes the color you end up with, so decide it before you sign off a shade.</p>
+        <div class="bd-opts bd-opts-tight">
+          {finishes.map((f, i) => (
+            <label class="bd-opt">
+              <input type="radio" name="bd-finish" value={f.id} checked={i === 1} data-label={f.name} />
+              <span class="bd-opt-body"><strong>{f.name}</strong><em>{f.note}</em></span>
+            </label>
+          ))}
+        </div>
+        <h4 class="bd-sub">Base color</h4>
+        <div class="bd-swatches">
+          {swatches.map((s, i) => (
+            <label class="bd-swatch" title={s.note}>
+              <input type="radio" name="bd-color" value={s.id} checked={i === 0}
+                     data-hex={s.hex} data-label={s.name} data-note={s.note} />
+              <span class="bd-chip" style={`--chip:${s.hex}`} aria-hidden="true"></span>
+              <span class="bd-chip-name">{s.name}</span>
+            </label>
+          ))}
+        </div>
+        <p class="bd-help bd-note" data-color-note>Print as a rich black build, not 100% K alone.</p>
+      </section>
+
+      <section class="bd-panel" data-panel="4">
+        <h3>Add-ons</h3>
+        <p class="bd-help">Each one is a separate pass on press or in finishing. Pick what earns its place.</p>
+        <div class="bd-opts bd-opts-tight">
+          {addons.map((a) => (
+            <label class="bd-opt">
+              <input type="checkbox" name="bd-addon" value={a.id} data-label={a.name} />
+              <span class="bd-opt-body"><strong>{a.name}</strong><em>{a.note}</em></span>
+            </label>
+          ))}
+        </div>
+      </section>
+
+      <section class="bd-panel" data-panel="5">
+        <h3>How many?</h3>
+        <p class="bd-help">Minimum is 100 boxes per design. Price breaks arrive as the quantity climbs.</p>
+        <div class="bd-qty">
+          {quantities.map((q, i) => (
+            <label class="bd-qty-opt">
+              <input type="radio" name="bd-qty" value={q} checked={i === 2} />
+              <span>{q}</span>
+            </label>
+          ))}
+        </div>
+      </section>
+
+      <section class="bd-panel" data-panel="6">
+        <h3>Where should the quote go?</h3>
+        <p class="bd-help">Your full specification is attached to the message automatically.</p>
+        <form class="bd-form" method="POST" action="/api/quote/"
+              enctype="multipart/form-data" novalidate data-quote-form data-bd-form>
+          <input type="hidden" name="product_name" value="Design Your Box configurator" />
+          <input type="hidden" name="source_page" value="" data-source-page />
+          <input type="hidden" name="submitted_at" value="" data-submitted-at />
+          <input type="hidden" name="message" value="" data-bd-message />
+          <div class="hp" aria-hidden="true">
+            <label>Do not fill this <input type="text" name="company_website" tabindex="-1" autocomplete="off" /></label>
+          </div>
+          <div class="bd-fields">
+            <label>Name <span class="req">*</span><input name="name" type="text" required autocomplete="name" maxlength="120" /></label>
+            <label>Email <span class="req">*</span><input name="email" type="email" required autocomplete="email" maxlength="160" /></label>
+            <label>Phone<input name="phone" type="tel" autocomplete="tel" maxlength="40" /></label>
+          </div>
+          <label class="bd-full">Anything else we should know?
+            <textarea rows="3" maxlength="3000" data-bd-notes placeholder="Deadline, bottle dimensions, brand colors, retailer requirements…"></textarea>
+          </label>
+          <label class="bd-full">Artwork or dieline <span class="hint">(optional, max 10 MB)</span>
+            <input name="artwork" type="file"
+                   accept=".pdf,.png,.jpg,.jpeg,.ai,.svg,.zip,image/png,image/jpeg,application/pdf,application/zip" />
+          </label>
+          <button type="submit" class="btn qf-submit bd-submit">Send My Specification</button>
+          <p class="qf-status" role="status" aria-live="polite" data-status></p>
+        </form>
+      </section>
+
+      <div class="bd-nav">
+        <button type="button" class="bd-btn bd-back" data-back hidden>Back</button>
+        <button type="button" class="bd-btn bd-next" data-next>Next step</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  import '../scripts/quote-form';
+  import '../scripts/box-designer';
+</script>
+
+<style>
+  .bd { --bd-line: #e3e0e4; }
+  .bd-grid { display: grid; grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr); gap: 30px; align-items: start; }
+
+  /* stage */
+  .bd-stage { border: 1px solid var(--bd-line); border-radius: 16px; background: linear-gradient(160deg,#faf8fa,#f0edf1); padding: 14px; }
+  .bd-svg { display: block; width: 100%; height: auto; aspect-ratio: 1 / 1; }
+  .bd-stage-note { margin: 6px 0 0; text-align: center; font-size: .78rem; color: #6b6570; letter-spacing: .02em; }
+  .bd-summary { margin: 16px 0 0; border: 1px solid var(--bd-line); border-radius: 12px; overflow: hidden; background: #fff; }
+  .bd-summary > div { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 10px; padding: 9px 13px; border-bottom: 1px solid #f0eef1; }
+  .bd-summary > div:last-child { border-bottom: 0; }
+  .bd-summary dt { font-size: .74rem; text-transform: uppercase; letter-spacing: .06em; color: #8a8390; }
+  .bd-summary dd { margin: 0; font-size: .86rem; font-weight: 500; }
+  .bd-noprice { margin: 12px 0 0; font-size: .78rem; line-height: 1.6; color: #6b6570; }
+
+  /* steps */
+  .bd-progress { list-style: none; margin: 0 0 18px; padding: 0 0 12px; display: flex; flex-wrap: wrap; gap: 6px; border-bottom: 1px solid var(--bd-line); }
+  .bd-progress li { display: flex; align-items: center; gap: 5px; font-size: .74rem; color: #8a8390; padding: 3px 9px 3px 3px; border-radius: 999px; }
+  .bd-progress li span { width: 19px; height: 19px; border-radius: 50%; background: #ece9ee; color: #6b6570; display: grid; place-items: center; font-size: .68rem; font-weight: 700; }
+  .bd-progress li.is-active { color: #111; background: #f3eef5; }
+  .bd-progress li.is-active span { background: #4b2a5a; color: #fff; }
+  .bd-progress li.is-done span { background: #6d9c6d; color: #fff; }
+
+  .bd-panel { display: none; }
+  .bd-panel.is-active { display: block; }
+  .bd-panel h3 { margin: 0 0 6px; font-size: 1.16rem; }
+  .bd-sub { margin: 20px 0 8px; font-size: .95rem; }
+  .bd-help { margin: 0 0 14px; font-size: .84rem; line-height: 1.6; color: #6b6570; }
+  .bd-note { margin-top: 12px; }
+  .bd-warn { color: #b03a2e; }
+
+  .bd-opts { display: grid; gap: 9px; }
+  .bd-opts-tight { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .bd-opt { position: relative; display: block; cursor: pointer; }
+  .bd-opt input { position: absolute; opacity: 0; width: 0; height: 0; }
+  .bd-opt-body { display: block; border: 1px solid var(--bd-line); border-radius: 10px; padding: 11px 13px; background: #fff; transition: border-color .15s, box-shadow .15s; }
+  .bd-opt-body strong { display: block; font-size: .9rem; }
+  .bd-opt-body em { display: block; font-style: normal; font-size: .78rem; line-height: 1.5; color: #6b6570; margin-top: 3px; }
+  .bd-opt input:checked + .bd-opt-body { border-color: #4b2a5a; box-shadow: 0 0 0 2px rgba(75,42,90,.14); }
+  .bd-opt input:focus-visible + .bd-opt-body { outline: 2px solid #4b2a5a; outline-offset: 2px; }
+
+  .bd-dims { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+  .bd-dims label, .bd-fields label, .bd-full { display: flex; flex-direction: column; font-size: .8rem; font-weight: 600; gap: 5px; }
+  .bd-dims input, .bd-fields input, .bd-full input, .bd-full textarea {
+    font: inherit; font-size: 16px; font-weight: 400; padding: 9px 11px;
+    border: 1px solid var(--bd-line); border-radius: 8px; width: 100%; min-width: 0; background: #fff;
+  }
+  .bd-full textarea { resize: vertical; }
+
+  .bd-swatches { display: flex; flex-wrap: wrap; gap: 8px; }
+  .bd-swatch { position: relative; cursor: pointer; text-align: center; width: 66px; }
+  .bd-swatch input { position: absolute; opacity: 0; width: 0; height: 0; }
+  .bd-chip { display: block; height: 34px; border-radius: 8px; background: var(--chip); border: 1px solid rgba(0,0,0,.14); }
+  .bd-chip-name { display: block; font-size: .66rem; margin-top: 4px; color: #6b6570; line-height: 1.25; }
+  .bd-swatch input:checked + .bd-chip { box-shadow: 0 0 0 2px #fff, 0 0 0 4px #4b2a5a; }
+  .bd-swatch input:focus-visible + .bd-chip { outline: 2px solid #4b2a5a; outline-offset: 3px; }
+
+  .bd-qty { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+  .bd-qty-opt { position: relative; cursor: pointer; }
+  .bd-qty-opt input { position: absolute; opacity: 0; width: 0; height: 0; }
+  .bd-qty-opt span { display: block; text-align: center; border: 1px solid var(--bd-line); border-radius: 9px; padding: 11px 4px; background: #fff; font-size: .88rem; font-weight: 600; }
+  .bd-qty-opt input:checked + span { border-color: #4b2a5a; background: #f3eef5; }
+
+  .bd-fields { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-bottom: 12px; }
+  .bd-full { margin-bottom: 12px; }
+  .bd-full .hint { font-weight: 400; color: #8a8390; }
+  .req { color: #c0392b; }
+  .bd-submit { width: 100%; }
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+  .bd-nav { display: flex; gap: 10px; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--bd-line); }
+  .bd-btn { font: inherit; font-size: .9rem; font-weight: 600; padding: 10px 20px; border-radius: 999px; cursor: pointer; border: 1px solid var(--bd-line); background: #fff; }
+  .bd-next { background: #4b2a5a; border-color: #4b2a5a; color: #fff; margin-left: auto; }
+  .bd-next:hover { background: #5c3670; }
+  .bd-back:hover { border-color: #4b2a5a; }
+
+  @media (max-width: 940px) {
+    .bd-grid { grid-template-columns: minmax(0, 1fr); }
+    .bd-stage-wrap { order: 2; }
+    .bd-steps { order: 1; }
+  }
+  @media (max-width: 560px) {
+    .bd-opts-tight { grid-template-columns: minmax(0, 1fr); }
+    .bd-dims, .bd-fields { grid-template-columns: minmax(0, 1fr); }
+    .bd-qty { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .bd-summary > div { grid-template-columns: 84px minmax(0, 1fr); }
+  }
+</style>

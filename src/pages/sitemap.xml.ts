@@ -2,6 +2,8 @@ import type { APIRoute } from 'astro';
 import { SITE_URL } from '../utils/site';
 import { products, categories, pages } from '../utils/data';
 import { BLOG_POSTS } from '../utils/blog';
+import { RESOURCES } from '../utils/resources';
+import { stateEntries, cityEntries, stateUrl, cityUrl } from '../utils/locations';
 
 export const prerender = true;
 
@@ -23,6 +25,22 @@ export const GET: APIRoute = () => {
   for (const pg of pages) {
     if (EXCLUDE.has(pg.slug)) continue;
     urls.push({ loc: `${SITE_URL}/${pg.slug}/`, priority: '0.5', changefreq: 'monthly' });
+  }
+
+  urls.push({ loc: `${SITE_URL}/design-your-box/`, priority: '0.8', changefreq: 'monthly' });
+
+  // Programmatic location pages: hub, then states, then cities.
+  urls.push({ loc: `${SITE_URL}/perfume-boxes/`, priority: '0.7', changefreq: 'monthly' });
+  for (const s of stateEntries()) {
+    urls.push({ loc: `${SITE_URL}${stateUrl(s.slug)}`, priority: '0.6', changefreq: 'monthly' });
+  }
+  for (const c of cityEntries()) {
+    urls.push({ loc: `${SITE_URL}${cityUrl(c.state, c.slug)}`, priority: '0.55', changefreq: 'monthly' });
+  }
+
+  urls.push({ loc: `${SITE_URL}/resources/`, priority: '0.7', changefreq: 'monthly' });
+  for (const r of RESOURCES) {
+    urls.push({ loc: `${SITE_URL}${r.url}`, priority: '0.6', changefreq: 'monthly' });
   }
 
   urls.push({ loc: `${SITE_URL}/blog/`, priority: '0.6', changefreq: 'weekly' });

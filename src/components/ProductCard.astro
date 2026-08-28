@@ -10,7 +10,7 @@ const price = unitPrice(product.slug);
 <article class="card">
   <a href={href} class="card-img" tabindex="-1" aria-hidden="true">
     {img && (
-      <img src={img.src} width={img.width} height={img.height} alt={img.alt}
+      <img src={img.src} width={img.width} height={img.height} alt={img.alt} title={img.title}
            loading={eager ? 'eager' : 'lazy'} decoding="async" />
     )}
   </a>

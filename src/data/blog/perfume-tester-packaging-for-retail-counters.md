@@ -7,6 +7,15 @@ image: /images/blog/perfume-tester-packaging-retail-counter.webp
 imageAlt: Black tester box with window beside a glass perfume bottle on a counter
 imageWidth: 1280
 imageHeight: 720
+faqs:
+  - q: How should tester packaging differ from retail packaging?
+    a: Most retailers require testers to be visually distinct so they cannot be sold as stock, usually meaning a plain or clearly marked carton. Staff also need to replace the bottle easily, which favors an open tray over a snug sleeve.
+  - q: Which finish survives constant handling on a counter?
+    a: Matte lamination or a coated uncoated board. Soft-touch marks with fingerprints and never fully recovers, and gloss shows every scuff, both of which look worse on a tester than on shelf stock.
+  - q: Do tester requirements vary between retailers?
+    a: Considerably. Each chain publishes its own specification covering marking, dimensions and sometimes barcode treatment. Check it before ordering, because an unusable tester run cannot be repurposed as retail stock.
+  - q: Can I order testers in the same run as retail cartons?
+    a: They are separate designs with separate plates, so each carries its own 100-unit minimum. Running them together does save on setup scheduling, which is worth asking about at quote stage.
 ---
 
 # Perfume Tester Packaging for Retail Counters

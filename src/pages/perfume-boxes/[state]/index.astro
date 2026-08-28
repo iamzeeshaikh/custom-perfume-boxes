@@ -1,0 +1,85 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import ShortQuoteBar from '../../../components/ShortQuoteBar.astro';
+import LocationBody from '../../../components/LocationBody.astro';
+import {
+  STATE_SLUGS, getState, citiesInState, stateUrl, cityUrl, resolvePicks,
+} from '../../../utils/locations';
+import {
+  breadcrumbSchema, faqSchema, locationServiceSchema, itemListSchema, webPageSchema,
+} from '../../../utils/schema';
+
+export function getStaticPaths() {
+  return STATE_SLUGS.map((state) => ({ params: { state } }));
+}
+
+const { state } = Astro.params;
+const loc = getState(state!);
+const cities = citiesInState(state!);
+const url = stateUrl(state!);
+const picks = resolvePicks(loc.picks);
+
+const crumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Locations', url: '/perfume-boxes/' },
+  { name: loc.name },
+];
+
+const jsonld = [
+  breadcrumbSchema(crumbs.map((c) => ({ name: c.name, url: c.url || url }))),
+  webPageSchema({ path: url, name: loc.title, description: loc.meta_desc }),
+  locationServiceSchema({
+    areaName: loc.name, areaType: 'State', url, description: loc.meta_desc,
+  }),
+  itemListSchema(loc.picks.h2, picks.map((p) => ({
+    name: p.product.title, url: `/product/${p.product.slug}/`,
+  }))),
+  faqSchema(loc.faqs),
+];
+---
+<BaseLayout title={loc.meta_title} description={loc.meta_desc} canonical={url} jsonld={jsonld}>
+  <Breadcrumbs items={crumbs} />
+
+  <section class="section loc-head">
+    <div class="container">
+      <h1>{loc.title}</h1>
+    </div>
+  </section>
+
+  <ShortQuoteBar
+    context={`perfume boxes in ${loc.name}`}
+    contextValue={`Location page: ${loc.name}`}
+    id="quote-state"
+  />
+
+  <section class="section">
+    <div class="container">
+      <LocationBody lede={loc.lede} sections={loc.sections} picks={loc.picks} faqs={loc.faqs} />
+
+      {cities.length > 0 && (
+        <section class="loc-section">
+          <h2>Cities we supply across {loc.name}</h2>
+          <ul class="city-list">
+            {cities.map((c) => (
+              <li>
+                <a href={cityUrl(state!, c.slug)}>Perfume boxes in {c.name}</a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .loc-head { padding-bottom: 0; }
+  .loc-head h1 { margin: 0; }
+  .city-list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+  .city-list a {
+    display: inline-block; border: 1px solid var(--border); border-radius: 999px;
+    padding: 8px 15px; font-size: .88rem; background: #fff;
+  }
+  .city-list a:hover { border-color: var(--pink); text-decoration: none; }
+</style>

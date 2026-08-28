@@ -1,0 +1,123 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import BoxDesigner from '../components/BoxDesigner.astro';
+import { breadcrumbSchema, faqSchema, howToSchema, webPageSchema } from '../utils/schema';
+
+const url = '/design-your-box/';
+const crumbs = [{ name: 'Home', url: '/' }, { name: 'Design Your Box' }];
+
+const STEPS = [
+  { name: 'Pick a structure', text: 'Choose between folding cartons, rigid boxes, drawer and magnetic builds, cylinders and corrugated mailers. This decides more about cost and feel than any later choice.' },
+  { name: 'Set the size', text: 'Measure the bottle with the cap on and add two to three millimeters of clearance per side, then enter width, depth and height in millimeters.' },
+  { name: 'Choose a board', text: 'Select SBS, kraft, E-flute corrugated, rigid grayboard or wood. Compare boards in microns rather than gsm, because thickness is what you feel.' },
+  { name: 'Finish and color', text: 'Pick uncoated, matte, gloss or soft-touch, then a base color. Finish changes the color you end up with, so decide it before signing off a shade.' },
+  { name: 'Add-ons', text: 'Add foil, spot UV, embossing, a die-cut window, a paper insert or a ribbon pull. Each is a separate pass on press or in finishing.' },
+  { name: 'Quantity', text: 'Choose a run size from 100 boxes upward. Wholesale price breaks arrive as quantity climbs.' },
+  { name: 'Send the specification', text: 'Add your contact details and any artwork. The full written specification is attached automatically and we reply with a firm quote, usually within 10 hours.' },
+];
+
+const FAQS = [
+  {
+    q: 'Why does the tool not show a price?',
+    a: 'Because a number here would be a guess, and this site quotes every job individually. Board, finish, add-ons and quantity move the figure enough that any live price would either be wrong or padded. You get a firm written quote against the exact specification instead, usually within 10 hours.',
+  },
+  {
+    q: 'Do I have to use the tool to order?',
+    a: 'No. It exists to make the specification complete, which is what speeds up a quote. If you would rather describe what you want in a sentence, the quote form on any product page works just as well.',
+  },
+  {
+    q: 'Is the preview what my box will actually look like?',
+    a: 'It shows proportion, color and finish behavior, not your artwork. It is there so you can see whether the dimensions you typed produce the shape you had in mind. For color-critical work, ask for a printed sample on your actual stock before the run.',
+  },
+  {
+    q: 'What if I do not know my dimensions yet?',
+    a: 'Send the bottle measurements instead, or the bottle itself. Height with the cap on, width at the widest shoulder and depth front to back are enough for us to work out the carton, and we add the clearance for you.',
+  },
+  {
+    q: 'Can I upload a dieline I already have?',
+    a: 'Yes. The last step accepts PDF, AI, SVG, PNG, JPG and ZIP up to 10 MB. If you have an existing dieline we will quote against it directly rather than redrawing it.',
+  },
+  {
+    q: 'Does the 100-box minimum apply here too?',
+    a: 'Yes. The minimum is 100 units per design, and each colorway counts as a design because it needs its own plates.',
+  },
+];
+
+const jsonld = [
+  breadcrumbSchema(crumbs.map((c) => ({ name: c.name, url: c.url || url }))),
+  webPageSchema({
+    path: url,
+    name: 'Design Your Box',
+    description: 'Build a complete perfume box specification step by step and send it straight to our quoting team.',
+  }),
+  howToSchema({
+    name: 'How to specify a custom perfume box',
+    description: 'Seven steps from structure to finished specification, with the trade-offs explained at each stage.',
+    url,
+    steps: STEPS,
+  }),
+  faqSchema(FAQS),
+];
+---
+<BaseLayout
+  title="Design Your Box | Custom Perfume Box Configurator"
+  description="Build your perfume box specification step by step — structure, size, board, finish, color, add-ons and quantity — with a live preview. No pricing games: we quote your exact spec."
+  canonical={url}
+  jsonld={jsonld}
+>
+  <Breadcrumbs items={crumbs} />
+
+  <section class="section dyb-head">
+    <div class="container">
+      <h1>Design Your Box</h1>
+      <p class="dyb-lede">
+        Work through seven decisions and watch the box change as you make them.
+        At the end you get a written specification &mdash; structure, dimensions,
+        board, finish, color, add-ons and quantity &mdash; that goes straight to
+        the people who quote it. Nothing here is a commitment, and there is no
+        price attached, because we quote each job against the real specification
+        rather than against a slider.
+      </p>
+    </div>
+  </section>
+
+  <section class="section dyb-tool">
+    <div class="container">
+      <BoxDesigner />
+    </div>
+  </section>
+
+  <section class="section dyb-faq">
+    <div class="container">
+      <h2>About this tool</h2>
+      <dl class="faq-list">
+        {FAQS.map((f) => (
+          <div class="faq-item">
+            <dt>{f.q}</dt>
+            <dd>{f.a}</dd>
+          </div>
+        ))}
+      </dl>
+      <p class="dyb-more">
+        If you would rather start from something that already exists, the
+        <a href="/products/">full product range</a> lists every structure we
+        build with specifications and FAQs on each one.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .dyb-head { padding-bottom: 0; }
+  .dyb-head h1 { margin: 0 0 12px; }
+  .dyb-lede { max-width: 78ch; line-height: 1.72; color: var(--text-soft); margin: 0; }
+  .dyb-tool { padding-top: 26px; }
+  .dyb-faq { padding-top: 0; }
+  .dyb-faq h2 { font-size: 1.3rem; margin: 0 0 10px; }
+  .faq-list { margin: 0 0 22px; }
+  .faq-item { border-top: 1px solid var(--border); padding: 14px 0; }
+  .faq-item dt { font-weight: 600; margin: 0 0 6px; }
+  .faq-item dd { margin: 0; color: var(--text-soft); line-height: 1.65; max-width: 80ch; }
+  .dyb-more { line-height: 1.7; max-width: 74ch; margin: 0; }
+</style>

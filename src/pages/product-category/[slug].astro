@@ -2,8 +2,12 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import ProductCard from '../../components/ProductCard.astro';
+import ShortQuoteBar from '../../components/ShortQuoteBar.astro';
 import { categories, productsInCategory } from '../../utils/data';
-import { breadcrumbSchema, collectionPageSchema } from '../../utils/schema';
+import { getCategoryContent } from '../../utils/category-content';
+import {
+  breadcrumbSchema, collectionPageSchema, faqSchema, webPageSchema,
+} from '../../utils/schema';
 
 export function getStaticPaths() {
   return categories.map((category) => ({
@@ -15,11 +19,15 @@ export function getStaticPaths() {
 const { category } = Astro.props;
 const items = productsInCategory(category.slug);
 const url = `/product-category/${category.slug}/`;
+// Hand-written per category: heading, lede, sections and FAQs all differ.
+const content = getCategoryContent(category.slug);
+
 const crumbs = [
   { name: 'Home', url: '/' },
   { name: 'Products', url: '/products/' },
   { name: category.name },
 ];
+
 const jsonld = [
   breadcrumbSchema(crumbs.map((c) => ({ name: c.name, url: c.url || url }))),
   collectionPageSchema({
@@ -28,6 +36,8 @@ const jsonld = [
     description: category.seo_desc,
     items: items.map((p) => ({ name: p.title, url: `/product/${p.slug}/` })),
   }),
+  webPageSchema({ path: url, name: category.name, description: category.seo_desc }),
+  ...(content ? [faqSchema(content.faqs)] : []),
 ];
 ---
 <BaseLayout
@@ -37,27 +47,69 @@ const jsonld = [
   jsonld={jsonld}
 >
   <Breadcrumbs items={crumbs} />
+
+  <section class="section cat-head">
+    <div class="container">
+      <h1 set:html={content ? content.h1 : category.name} />
+      {content
+        ? <p class="cat-lede" set:html={content.lede} />
+        : <p class="cat-lede">{category.seo_desc}</p>}
+    </div>
+  </section>
+
+  <ShortQuoteBar
+    context={category.name.replace(/&amp;/g, '&')}
+    contextValue={`Category: ${category.name}`}
+    id="quote-cat"
+  />
+
   <section class="section">
     <div class="container">
-      <header class="cat-head">
-        <h1>{category.name}</h1>
-        {category.description && <p class="cat-desc">{category.description}</p>}
-        {!category.description && (
-          <p class="cat-desc">Browse our {category.name.toLowerCase()} for perfume packaging. Every option is made to order with custom sizes, premium materials, and free design support.</p>
-        )}
-      </header>
       <div class="product-grid">
         {items.map((p, i) => <ProductCard product={p} eager={i < 3} />)}
       </div>
     </div>
   </section>
+
+  {content && (
+    <section class="section cat-body">
+      <div class="container">
+        {content.sections.map((s) => (
+          <section class="cat-section">
+            <h2>{s.h2}</h2>
+            <div class="prose" set:html={s.html} />
+          </section>
+        ))}
+
+        <section class="cat-section">
+          <h2>{category.name.replace(/&amp;/g, '&')} questions</h2>
+          <dl class="faq-list">
+            {content.faqs.map((f) => (
+              <div class="faq-item">
+                <dt set:html={f.q} />
+                <dd set:html={f.a} />
+              </div>
+            ))}
+          </dl>
+        </section>
+      </div>
+    </section>
+  )}
 </BaseLayout>
 
 <style>
-  .cat-head { max-width: 760px; margin-bottom: 28px; }
-  .cat-head h1 { margin: 0 0 10px; }
-  .cat-desc { color: var(--text-soft); margin: 0; }
+  .cat-head { padding-bottom: 0; }
+  .cat-head h1 { margin: 0 0 12px; }
+  .cat-lede { max-width: 76ch; line-height: 1.72; color: var(--text-soft); margin: 0; }
   .product-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+  .cat-body { padding-top: 0; }
+  .cat-section { margin-bottom: 34px; }
+  .cat-section h2 { font-size: 1.32rem; margin: 0 0 12px; }
+  .cat-section :global(p) { line-height: 1.72; margin: 0 0 14px; max-width: 74ch; }
+  .faq-list { margin: 0; }
+  .faq-item { border-top: 1px solid var(--border); padding: 14px 0; }
+  .faq-item dt { font-weight: 600; margin: 0 0 6px; }
+  .faq-item dd { margin: 0; color: var(--text-soft); line-height: 1.65; max-width: 80ch; }
   @media (max-width: 820px) { .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-  @media (max-width: 460px) { .product-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 460px) { .product-grid { grid-template-columns: minmax(0, 1fr); } }
 </style>

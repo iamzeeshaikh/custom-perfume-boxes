@@ -4,7 +4,12 @@ import categoriesRaw from '../data/categories.json';
 import pagesRaw from '../data/pages.json';
 import homeRaw from '../data/home.json';
 
-export interface ImageRec { src: string; width: number; height: number; alt: string; }
+export interface ImageRec {
+  src: string; width: number; height: number;
+  alt: string;
+  /** Human-readable tooltip label; distinct from alt, which describes the image. */
+  title?: string;
+}
 export interface FAQ { q: string; a: string; }
 export interface CatRef { name: string; slug: string; }
 export interface Product {

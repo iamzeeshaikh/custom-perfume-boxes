@@ -1,0 +1,142 @@
+{
+ "about-us": [
+  {
+   "q": "Who actually makes the boxes?",
+   "a": "We are a packaging supplier: we take your specification, prepare the proof, run the print and finishing, and ship the finished boxes to you. Manufacturing happens at our production facilities, not at the Phoenix mailing address on our contact page."
+  },
+  {
+   "q": "Is there a showroom I can visit?",
+   "a": "No. 409 N 7th Ave Unit #529 in Phoenix is a correspondence address rather than a production site or showroom. Everything is handled by phone, email and physical samples sent to you."
+  },
+  {
+   "q": "How long have you been doing this?",
+   "a": "Long enough to have opinions about board caliper. More usefully, the reference guides on this site set out exactly how we work and what we recommend, so you can judge the advice rather than the biography."
+  },
+  {
+   "q": "What happens after I request a quote?",
+   "a": "We reply with a firm written quote, usually within 10 hours. If you proceed, we prepare a free digital proof, and nothing is printed until you approve it. You can cancel at no charge up to that point."
+  }
+ ],
+ "contact-us": [
+  {
+   "q": "What is the fastest way to get a price?",
+   "a": "Send size, quantity, board and finish in one message. A specification with those four things gets a firm quote back in one reply instead of three. The box configurator produces all four automatically."
+  },
+  {
+   "q": "How quickly do you reply?",
+   "a": "Within 10 hours on quote requests. If your deadline is tight, say so in the message and we will treat the proof as urgent when it reaches you."
+  },
+  {
+   "q": "Can I call rather than fill in a form?",
+   "a": "Yes, on (503) 358-0443. A form is usually faster for a quote because it captures the specification, but a call is better when you are still working out what you need."
+  },
+  {
+   "q": "Do you take payment through this website?",
+   "a": "No. There is no checkout here. We quote, you approve a free digital proof, and we invoice you directly — payment is by credit card or PayPal against that invoice."
+  },
+  {
+   "q": "Can I send you a physical bottle sample?",
+   "a": "Yes, and for faceted or sculpted bottles it is the most reliable route. Ask us for the shipping address before sending anything, since the correspondence address is not always the right destination."
+  }
+ ],
+ "privacy-policy": [
+  {
+   "q": "What do you do with my artwork files?",
+   "a": "We use them to quote and produce your order. We do not share them, publish them, or use them as examples without your written permission."
+  },
+  {
+   "q": "Do you share my details with anyone?",
+   "a": "Only with the courier who delivers your order, and only the details needed to deliver it. We do not sell contact data."
+  },
+  {
+   "q": "How long do you keep quote requests?",
+   "a": "Long enough to service the enquiry and any reorder that follows from it. Ask us to delete your details and we will."
+  }
+ ],
+ "refund_returns": [
+  {
+   "q": "Can I return custom-printed boxes if I change my mind?",
+   "a": "No. Every box is printed to your own artwork after you approve a proof, so it cannot be resold or restocked. Change-of-mind returns are not available on made-to-order work."
+  },
+  {
+   "q": "What happens if my order arrives defective?",
+   "a": "We reprint it or refund it in full, your choice. Email us within 48 hours of delivery with your order number and clear photographs, and we handle it from there."
+  },
+  {
+   "q": "Do I have to pay to send faulty goods back?",
+   "a": "No. Where we need the goods returned for inspection, we arrange and pay for the collection."
+  },
+  {
+   "q": "Can I cancel an order?",
+   "a": "Yes, in full and at no charge, at any point before you approve the digital proof. Once you approve the proof and printing begins, the order cannot be cancelled."
+  }
+ ],
+ "shipping-policy": [
+  {
+   "q": "How much does shipping cost?",
+   "a": "Nothing. Shipping is free on all orders with no minimum order value, to the US, UK, Canada, Australia and New Zealand."
+  },
+  {
+   "q": "How long will my order take to arrive?",
+   "a": "2 to 3 business days handling after you approve the proof, then 3 to 6 business days in transit. Nine business days from approval is the honest worst case."
+  },
+  {
+   "q": "Will I get tracking?",
+   "a": "Yes. You receive shipping confirmation and tracking details once the order is dispatched."
+  },
+  {
+   "q": "Do boxes arrive flat or assembled?",
+   "a": "Folding cartons arrive flat and creased for assembly; rigid boxes arrive assembled. Flat delivery takes far less storage space at your end."
+  }
+ ],
+ "terms-conditions": [
+  {
+   "q": "When does an order become binding?",
+   "a": "When you approve the digital proof. Before that point you can change or cancel anything at no charge; after it, printing has begun and the order stands."
+  },
+  {
+   "q": "Who is responsible for errors in supplied artwork?",
+   "a": "You are, for anything present in the files you approved on the proof. That is what the proof stage is for, which is why we recommend a second person checks it."
+  },
+  {
+   "q": "What if the delivered boxes do not match the proof?",
+   "a": "That is our error and we correct it at our cost, by reprint or full refund. Raise it within 48 hours of delivery with photographs."
+  }
+ ],
+ "products": [
+  {
+   "q": "What is the minimum order?",
+   "a": "100 units per design. Each colorway counts as a design, because it needs its own plates."
+  },
+  {
+   "q": "Is the price shown per box?",
+   "a": "Yes. Prices shown are wholesale per-unit rates against the 100-box minimum. The final figure depends on size, board, finish and quantity, so we quote each specification individually."
+  },
+  {
+   "q": "Can I order a product not listed here?",
+   "a": "Yes. The listing covers the structures we build most often, not the limit of what we make. Describe what you need and we will quote it."
+  },
+  {
+   "q": "Do you make samples before the full run?",
+   "a": "Yes, on request. A printed sample on your actual stock with your actual finish adds a few days and is the only way to check final color before committing."
+  },
+  {
+   "q": "How do I actually order?",
+   "a": "Request a quote on any product page. We reply with a price, prepare a free digital proof, and invoice you once you approve it — there is no checkout on this site."
+  }
+ ],
+ "blog": [
+  {
+   "q": "How often do you publish?",
+   "a": "When we have something specific to say. These are working notes on packaging decisions rather than a content schedule, so the archive grows slowly and stays useful."
+  },
+  {
+   "q": "Is this advice specific to perfume packaging?",
+   "a": "Yes. The clearance figures, insert tolerances, oil barrier requirements and dangerous-goods notes all reflect fragrance work rather than general carton printing."
+  },
+  {
+   "q": "Where should I start if I am new to this?",
+   "a": "The reference guides rather than the blog. They cover sizing, board, finishes, artwork setup and lead times in a deliberate order; the blog goes deeper on individual decisions."
+  }
+ ]
+}

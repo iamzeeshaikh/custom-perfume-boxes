@@ -7,6 +7,15 @@ image: /images/blog/wooden-perfume-box-with-insert.webp
 imageAlt: Open wooden presentation box with a perfume bottle in a fitted insert
 imageWidth: 1280
 imageHeight: 720
+faqs:
+  - q: How is branding applied to a wooden perfume box?
+    a: By laser engraving, screen printing or a fixed metal plate. Offset-style gradients and photographic images are not available on wood, so designs have to work as line work and solid marks.
+  - q: Do wooden boxes take longer to produce?
+    a: Yes. They are a joinery process rather than a printing one, with a different and longer schedule than folding cartons or even rigid boxes. Start the conversation earlier than you would for a standard carton.
+  - q: Will the grain look the same on every box?
+    a: No, and it should not be expected to. Grain varies between units, which customers read as character provided you have told them to expect it, and as a defect if you have not.
+  - q: Are wooden perfume boxes recyclable?
+    a: Not through household paper streams. They are reusable and long-lived, which is a different environmental argument, but they do not belong in a curbside recycling claim.
 ---
 
 # Wooden Perfume Boxes and When They Make Sense

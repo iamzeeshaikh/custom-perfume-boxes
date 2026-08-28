@@ -7,6 +7,15 @@ image: /images/blog/perfume-bottle-shipping-packaging-layers.webp
 imageAlt: Perfume shipping layers with bottle, carton, insert and outer box
 imageWidth: 1280
 imageHeight: 720
+faqs:
+  - q: What actually breaks perfume bottles in transit?
+    a: Rarely a single dramatic impact. Usually repeated small shocks that loosen an atomizer, or compressive load when parcels stack in a trailer overnight. The two need different defenses.
+  - q: Which board should I use for shipping perfume?
+    a: E-flute corrugated for anything containing glass. It roughly triples crush resistance at about 1.5 mm thickness, and a parcel travels alone through automated sortation with no outer case protecting it.
+  - q: Are there restrictions on shipping alcohol-based perfume?
+    a: Yes. It is flammable and treated as a limited-quantity dangerous good in most air networks, with carrier-specific rules on top. Confirm requirements with your carrier before fixing a box size, since outer dimensions can affect allowances.
+  - q: Does a half-empty box still get crushed?
+    a: Yes. Compression is resisted by the box being full enough that its walls are supported. A strong board with empty space inside still collapses, because nothing is holding the panels apart.
 ---
 
 # Perfume Bottle Shipping Packaging That Survives Transit

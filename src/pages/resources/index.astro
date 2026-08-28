@@ -1,0 +1,107 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { RESOURCES } from '../../utils/resources';
+import { breadcrumbSchema, faqSchema, itemListSchema, webPageSchema } from '../../utils/schema';
+
+const url = '/resources/';
+const crumbs = [{ name: 'Home', url: '/' }, { name: 'Resources' }];
+
+const FAQS = [
+  {
+    q: 'Do I need to read any of this before ordering?',
+    a: 'No. Send us the bottle measurements and a rough idea of what you want and we will do the rest. These guides exist for people who would rather understand the decisions than delegate them.',
+  },
+  {
+    q: 'Which guide should I start with?',
+    a: 'The size guide, because every other decision follows from the dimensions. Board choice comes next, then finish, then artwork preparation once the specification is settled.',
+  },
+  {
+    q: 'Is this advice specific to perfume packaging?',
+    a: 'Yes. The clearance figures, common formats, oil barrier requirements and dangerous-goods notes all reflect fragrance work specifically rather than general carton printing.',
+  },
+  {
+    q: 'Will following these guides guarantee a perfect first run?',
+    a: 'It removes the errors we see most often, which is not the same thing. For anything color-critical, ask for a printed sample on your actual stock before the run — that is the only check a digital proof cannot replace.',
+  },
+];
+
+const jsonld = [
+  breadcrumbSchema(crumbs.map((c) => ({ name: c.name, url: c.url || url }))),
+  webPageSchema({
+    path: url,
+    name: 'Packaging Resources',
+    description: 'Reference guides on sizing, board, print finishes, artwork setup and lead times for custom perfume packaging.',
+  }),
+  itemListSchema('Packaging reference guides', RESOURCES.map((r) => ({ name: r.title, url: r.url }))),
+  faqSchema(FAQS),
+];
+---
+<BaseLayout
+  title="Packaging Resources | Custom Perfume Boxes"
+  description="Reference guides for custom perfume packaging: bottle measurement and sizing, board and material choice, print finishes, artwork setup and realistic lead times."
+  canonical={url}
+  jsonld={jsonld}
+>
+  <Breadcrumbs items={crumbs} />
+
+  <section class="section res-head">
+    <div class="container">
+      <h1>Packaging Resources</h1>
+      <p class="res-lede">
+        Five reference guides covering the decisions that actually change what
+        arrives on your pallet. They are written to be useful whether or not you
+        buy from us: the clearance figures, board comparisons and file
+        requirements are the same wherever a carton is printed. Nothing here is
+        a sales page.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <ol class="res-grid">
+        {RESOURCES.map((r) => (
+          <li class="res-card">
+            <span class="res-num">{String(r.order).padStart(2, '0')}</span>
+            <h2 class="res-title"><a href={r.url}>{r.title}</a></h2>
+            <p class="res-sum">{r.summary}</p>
+            <p class="res-time">About {r.readingMinutes} min &middot; updated {r.updated}</p>
+          </li>
+        ))}
+      </ol>
+
+      <section class="res-faq">
+        <h2>Before you start</h2>
+        <dl class="faq-list">
+          {FAQS.map((f) => (
+            <div class="faq-item">
+              <dt>{f.q}</dt>
+              <dd>{f.a}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .res-head { padding-bottom: 0; }
+  .res-head h1 { margin: 0 0 12px; }
+  .res-lede { max-width: 78ch; line-height: 1.72; color: var(--text-soft); margin: 0; }
+  .res-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+  .res-card { border: 1px solid var(--border); border-radius: 12px; padding: 20px; background: #fff; }
+  .res-num { display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .08em; color: #8a8390; margin-bottom: 8px; }
+  .res-title { font-size: 1.06rem; margin: 0 0 8px; }
+  .res-sum { font-size: .86rem; line-height: 1.6; color: var(--text-soft); margin: 0 0 10px; }
+  .res-time { font-size: .74rem; color: var(--muted); margin: 0; text-transform: uppercase; letter-spacing: .05em; }
+  .res-faq { margin-top: 44px; }
+  .res-faq h2 { font-size: 1.3rem; margin: 0 0 10px; }
+  .faq-list { margin: 0; }
+  .faq-item { border-top: 1px solid var(--border); padding: 14px 0; }
+  .faq-item dt { font-weight: 600; margin: 0 0 6px; }
+  .faq-item dd { margin: 0; color: var(--text-soft); line-height: 1.65; max-width: 80ch; }
+  @media (max-width: 900px) { .res-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 560px) { .res-grid { grid-template-columns: minmax(0, 1fr); } }
+</style>

@@ -7,6 +7,15 @@ image: /images/blog/perfume-discovery-set-packaging-insert.webp
 imageAlt: Open black box holding five fragrance sample vials in a fitted insert
 imageWidth: 1280
 imageHeight: 720
+faqs:
+  - q: How many vials should a discovery set hold?
+    a: Five is the most common count, because it fits a single row insert comfortably and gives customers enough range to choose from without overwhelming them. Three and eight both work but change the insert layout entirely.
+  - q: What holds sample vials securely in a discovery box?
+    a: A die-cut paperboard platform with apertures sized about half a millimeter under the vial diameter, so each one needs a gentle push and stays put. Vials that can shift will loosen or break in transit.
+  - q: Do discovery sets need different packaging from full bottles?
+    a: Yes. They are almost always shipped direct rather than sold from a shelf, so the box is its own transit packaging and needs crush resistance and immobilization more than shelf presence.
+  - q: What is the minimum order for discovery set packaging?
+    a: 100 units per design, the same as every other product we make. Price breaks apply as quantity increases.
 ---
 
 # How to Plan Perfume Discovery Set Packaging

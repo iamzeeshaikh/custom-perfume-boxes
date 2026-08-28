@@ -3,9 +3,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import QuoteForm from '../components/QuoteForm.astro';
 import { BRAND, SITE_URL } from '../utils/site';
-import { breadcrumbSchema, webPageSchema } from '../utils/schema';
+import PageFAQ from '../components/PageFAQ.astro';
+import { pageFaqs } from '../utils/page-faqs';
+import { breadcrumbSchema, faqSchema, webPageSchema } from '../utils/schema';
 
 const crumbs = [{ name: 'Home', url: '/' }, { name: 'Contact Us' }];
+const faqs = pageFaqs('contact-us');
 // Organization comes from BaseLayout on every route.
 const jsonld = [
   breadcrumbSchema([{ name: 'Home', url: '/' }, { name: 'Contact Us', url: '/contact-us/' }]),
@@ -16,6 +19,7 @@ const jsonld = [
       'Contact Custom Perfume Boxes for a free quote on custom perfume packaging.',
     type: 'ContactPage',
   }),
+  faqSchema(faqs),
 ];
 ---
 <BaseLayout
@@ -54,9 +58,17 @@ const jsonld = [
       </div>
     </div>
   </section>
+
+  <section class="section contact-faq">
+    <div class="container narrow">
+      <PageFAQ faqs={faqs} />
+    </div>
+  </section>
 </BaseLayout>
 
 <style>
+  .contact-faq { padding-top: 0; }
+  .contact-faq .narrow { max-width: 860px; }
   .ct-head { margin-bottom: 26px; }
   .ct-head h1 { margin: 6px 0 0; }
   .ct-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 40px; align-items: start; }

@@ -7,6 +7,15 @@ image: /images/blog/empty-perfume-boxes-wholesale-stacks.webp
 imageAlt: Stacked empty perfume cartons beside an open box and glass bottle
 imageWidth: 1280
 imageHeight: 720
+faqs:
+  - q: Do empty perfume boxes arrive assembled?
+    a: Folding cartons arrive flat and creased for you to assemble; rigid boxes arrive assembled. Flat delivery is far more storage-efficient, since a thousand flat cartons occupy roughly the volume of a couple of banker's boxes.
+  - q: How much clearance should I allow around the bottle?
+    a: Two to three millimeters per side. Tighter and filling staff fight every unit; looser and the bottle drums against the walls in transit. Measure from the widest shoulder, not the base.
+  - q: Can I buy plain boxes and add my own labels?
+    a: Yes, and it is the most economical route for brands running many fragrances at modest volumes. A partly printed box, with brand furniture printed and the product name left for a sticker, is often the best middle ground.
+  - q: What is the minimum order for empty perfume boxes?
+    a: 100 units per design. Wholesale price breaks apply as the quantity increases, and each colorway counts as a design because it needs its own plates.
 ---
 
 # Buying Empty Perfume Boxes Wholesale

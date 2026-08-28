@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { BLOG_POSTS } from '../../utils/blog';
-import { blogPostingSchema, breadcrumbSchema } from '../../utils/schema';
+import { blogPostingSchema, breadcrumbSchema, faqSchema } from '../../utils/schema';
 
 export function getStaticPaths() {
   return BLOG_POSTS.map((post) => ({ params: { slug: post.slug }, props: { post } }));
@@ -42,6 +42,7 @@ const published = new Date(post.date + 'T12:00:00Z').toLocaleDateString('en-US',
       { name: 'Blog', url: '/blog/' },
       { name: post.title, url: post.url },
     ]),
+    ...(post.faqs?.length ? [faqSchema(post.faqs)] : []),
   ]}
 >
   <Breadcrumbs items={crumbs} />
@@ -52,6 +53,7 @@ const published = new Date(post.date + 'T12:00:00Z').toLocaleDateString('en-US',
       class="post-hero"
       src={post.image}
       alt={post.imageAlt}
+      title={post.title}
       width={post.imageWidth}
       height={post.imageHeight}
       loading="eager"
@@ -61,6 +63,20 @@ const published = new Date(post.date + 'T12:00:00Z').toLocaleDateString('en-US',
     <div class="post-body">
       <Content />
     </div>
+
+    {post.faqs?.length > 0 && (
+      <section class="post-faq">
+        <h2>Frequently asked</h2>
+        <dl class="faq-list">
+          {post.faqs.map((f) => (
+            <div class="faq-item">
+              <dt>{f.q}</dt>
+              <dd>{f.a}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+    )}
   </article>
 </BaseLayout>
 
@@ -76,4 +92,11 @@ const published = new Date(post.date + 'T12:00:00Z').toLocaleDateString('en-US',
   .post-body :global(ul), .post-body :global(ol) { margin: 0 0 14px; padding-left: 22px; }
   .post-body :global(li) { margin-bottom: 6px; line-height: 1.65; }
   .post-body :global(a) { color: var(--accent, #b04a68); text-decoration: underline; }
+  .post-faq { margin-top: 44px; border-top: 1px solid var(--border); padding-top: 22px; }
+  .post-faq h2 { font-size: 1.3rem; margin: 0 0 10px; }
+  .faq-list { margin: 0; }
+  .faq-item { border-top: 1px solid var(--border); padding: 14px 0; }
+  .faq-item:first-child { border-top: 0; }
+  .faq-item dt { font-weight: 600; margin: 0 0 6px; }
+  .faq-item dd { margin: 0; color: var(--text-soft); line-height: 1.65; }
 </style>

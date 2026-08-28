@@ -4,7 +4,9 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import { pages } from '../utils/data';
-import { breadcrumbSchema, webPageSchema } from '../utils/schema';
+import PageFAQ from '../components/PageFAQ.astro';
+import { pageFaqs } from '../utils/page-faqs';
+import { breadcrumbSchema, faqSchema, webPageSchema } from '../utils/schema';
 
 export function getStaticPaths() {
   const CONTENT_SLUGS = ['about-us', 'privacy-policy', 'refund_returns', 'shipping-policy', 'terms-conditions'];
@@ -17,6 +19,7 @@ const { page } = Astro.props;
 const url = `/${page.slug}/`;
 const crumbs = [{ name: 'Home', url: '/' }, { name: page.title }];
 const desc = page.seo_desc || `${page.title} — Custom Perfume Boxes.`;
+const faqs = pageFaqs(page.slug);
 const jsonld = [
   breadcrumbSchema([{ name: 'Home', url: '/' }, { name: page.title, url }]),
   webPageSchema({
@@ -25,6 +28,7 @@ const jsonld = [
     description: desc,
     ...(page.slug === 'about-us' ? { type: 'AboutPage' as const } : {}),
   }),
+  ...(faqs.length ? [faqSchema(faqs)] : []),
 ];
 ---
 <BaseLayout title={page.seo_title} description={desc} canonical={url} jsonld={jsonld}>
@@ -33,6 +37,7 @@ const jsonld = [
     <div class="container narrow">
       <h1>{page.title}</h1>
       <div class="prose" set:html={page.content_html} />
+      <PageFAQ faqs={faqs} />
     </div>
   </section>
 </BaseLayout>

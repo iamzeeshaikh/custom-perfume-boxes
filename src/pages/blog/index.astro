@@ -2,7 +2,9 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { BLOG_POSTS } from '../../utils/blog';
-import { breadcrumbSchema, collectionPageSchema } from '../../utils/schema';
+import PageFAQ from '../../components/PageFAQ.astro';
+import { pageFaqs } from '../../utils/page-faqs';
+import { breadcrumbSchema, collectionPageSchema, faqSchema } from '../../utils/schema';
 
 const crumbs = [
   { name: 'Home', url: '/' },
@@ -10,6 +12,7 @@ const crumbs = [
 ];
 
 // The listing had no JSON-LD of its own at all.
+const faqs = pageFaqs('blog');
 const jsonld = [
   breadcrumbSchema([{ name: 'Home', url: '/' }, { name: 'Blog', url: '/blog/' }]),
   collectionPageSchema({
@@ -19,6 +22,7 @@ const jsonld = [
       'Guides on perfume packaging materials, sizing, printing and wholesale buying.',
     items: BLOG_POSTS.map((p) => ({ name: p.title, url: p.url })),
   }),
+  faqSchema(faqs),
 ];
 
 const fmt = (iso: string) =>
@@ -66,9 +70,17 @@ const fmt = (iso: string) =>
       }
     </div>
   </section>
+
+  <section class="section blog-faq">
+    <div class="container narrow">
+      <PageFAQ faqs={faqs} heading="About this blog" />
+    </div>
+  </section>
 </BaseLayout>
 
 <style>
+  .blog-faq { padding-top: 0; }
+  .blog-faq .narrow { max-width: 860px; margin: 0 auto; }
   .blog-wrap { padding: 32px 0 56px; }
   .blog-lead { color: var(--muted); max-width: 640px; margin: 8px 0 28px; }
   .blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 26px; }

@@ -230,3 +230,90 @@ export function faqSchema(faqs: FAQ[]) {
     })),
   };
 }
+
+/**
+ * Service graph for the state and city pages.
+ *
+ * Deliberately NOT LocalBusiness: we have no premises, staff or opening hours
+ * in these places, and claiming otherwise is the kind of thing that gets a
+ * merchant account suspended. Service with areaServed says the true thing —
+ * we supply into that area from elsewhere.
+ */
+export function locationServiceSchema(input: {
+  areaName: string;
+  areaType: 'State' | 'City';
+  containedInState?: string;
+  url: string;
+  description: string;
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: `Custom perfume box printing for ${input.areaName}`,
+    serviceType: 'Custom perfume packaging manufacturing',
+    description: input.description,
+    url: SITE_URL + input.url,
+    provider: {
+      '@type': 'Organization',
+      name: BRAND.name,
+      url: SITE_URL + '/',
+      telephone: BRAND.phone,
+      email: BRAND.email,
+    },
+    areaServed: {
+      '@type': input.areaType,
+      name: input.areaName,
+      ...(input.containedInState
+        ? { containedInPlace: { '@type': 'State', name: input.containedInState } }
+        : {}),
+    },
+    offers: {
+      '@type': 'Offer',
+      priceCurrency: 'USD',
+      price: '0.30',
+      priceSpecification: {
+        '@type': 'UnitPriceSpecification',
+        price: '0.30',
+        priceCurrency: 'USD',
+        unitText: 'box',
+        eligibleQuantity: { '@type': 'QuantitativeValue', minValue: 100, unitText: 'box' },
+      },
+    },
+  };
+}
+
+/** ItemList for the hand-picked products on a location page. */
+export function itemListSchema(name: string, items: { name: string; url: string }[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name,
+    numberOfItems: items.length,
+    itemListElement: items.map((it, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: it.name,
+      url: SITE_URL + it.url,
+    })),
+  };
+}
+
+/** HowTo graph for the box specification tool. */
+export function howToSchema(input: {
+  name: string; description: string; url: string;
+  steps: { name: string; text: string }[];
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: input.name,
+    description: input.description,
+    url: SITE_URL + input.url,
+    step: input.steps.map((s, i) => ({
+      '@type': 'HowToStep',
+      position: i + 1,
+      name: s.name,
+      text: s.text,
+    })),
+  };
+}

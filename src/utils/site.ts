@@ -21,6 +21,8 @@ export const NAV = [
   { label: 'Material Specific Boxes', href: '/product-category/material-specific-boxes/' },
   { label: 'Subscription & Sample Boxes', href: '/product-category/subscription-sample-boxes/' },
   { label: 'Luxury & Specialty Boxes', href: '/product-category/luxury-specialty-boxes/' },
+  { label: 'Design Your Box', href: '/design-your-box/' },
+  { label: 'Resources', href: '/resources/' },
   { label: 'Blog', href: '/blog/' },
 ];
 
@@ -35,6 +37,9 @@ export const FOOTER_CATEGORIES = [
 
 export const FOOTER_COMPANY = [
   { label: 'About Us', href: '/about-us/' },
+  { label: 'Design Your Box', href: '/design-your-box/' },
+  { label: 'Packaging Resources', href: '/resources/' },
+  { label: 'Where We Supply', href: '/perfume-boxes/' },
   { label: 'Blog', href: '/blog/' },
   { label: 'Contact Us', href: '/contact-us/' },
   { label: 'Privacy Policy', href: '/privacy-policy/' },

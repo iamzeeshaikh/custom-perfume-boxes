@@ -1,0 +1,132 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ShortQuoteBar from '../../components/ShortQuoteBar.astro';
+import { stateEntries, citiesInState, stateUrl, cityUrl } from '../../utils/locations';
+import { breadcrumbSchema, faqSchema, webPageSchema, itemListSchema } from '../../utils/schema';
+
+const states = stateEntries();
+const url = '/perfume-boxes/';
+const totalCities = states.reduce((n, s) => n + citiesInState(s.slug).length, 0);
+
+const crumbs = [{ name: 'Home', url: '/' }, { name: 'Locations' }];
+
+const FAQS = [
+  {
+    q: 'Do you have a factory in every state you list?',
+    a: 'No, and we will not pretend otherwise. We print in one place and ship everywhere. These pages exist because climate, freight and local retail practice genuinely change what we specify, not because we have premises in each city.',
+  },
+  {
+    q: 'Does the price change depending on where I am?',
+    a: 'No. The unit price and the 100-box minimum are the same nationwide, and shipping is free everywhere with no minimum order value. Only transit time varies, and only within our published 3 to 6 business day window.',
+  },
+  {
+    q: 'What if my city is not listed here?',
+    a: 'We ship to every US address regardless. The listed cities are simply the ones where we have enough repeat work to say something specific and useful. Ask us and we will tell you what applies to your location.',
+  },
+  {
+    q: 'Why does location affect the box specification at all?',
+    a: 'Board is hygroscopic, so humid states soften creases and dry states make them crack. Heat softens adhesives in transit. Coastal air marks uncoated surfaces. Retail expectations and courier access also differ by region, and all of it changes what we recommend.',
+  },
+];
+
+const jsonld = [
+  breadcrumbSchema(crumbs.map((c) => ({ name: c.name, url: c.url || url }))),
+  webPageSchema({
+    path: url,
+    name: 'Where We Supply Custom Perfume Boxes',
+    description: 'State and city packaging guides covering climate, freight and retail practice across the United States.',
+  }),
+  itemListSchema('States we supply', states.map((s) => ({ name: s.name, url: stateUrl(s.slug) }))),
+  faqSchema(FAQS),
+];
+---
+<BaseLayout
+  title="Custom Perfume Boxes by State & City | Custom Perfume Boxes"
+  description={`Packaging guides for ${states.length} states and ${totalCities} cities: how climate, freight and local retail practice change what we specify. Free shipping nationwide, 100-box minimum.`}
+  canonical={url}
+  jsonld={jsonld}
+>
+  <Breadcrumbs items={crumbs} />
+
+  <section class="section hub-head">
+    <div class="container">
+      <h1>Where We Supply Custom Perfume Boxes</h1>
+      <p class="hub-lede">
+        We print in one place and ship to every US address, so there is no factory
+        behind any of these pages. What there is, in each of them, is the part of
+        the job that actually changes with geography: board that softens in Gulf
+        humidity and cracks in desert air, adhesives that let go in a Texas
+        trailer, retail buyers who write their own carton specs, and cities where
+        the hard part is the last hundred feet rather than the freight.
+      </p>
+    </div>
+  </section>
+
+  <ShortQuoteBar
+    heading="Tell us where it is going"
+    sub="Send your size, quantity and delivery city. We will quote the box and flag anything about your location that changes the specification."
+    contextValue="Locations hub"
+    id="quote-hub"
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="state-grid">
+        {states.map((s) => {
+          const cities = citiesInState(s.slug);
+          return (
+            <article class="state-card">
+              <h2 class="state-name">
+                <a href={stateUrl(s.slug)}>{s.name}</a>
+                <span class="state-abbr">{s.abbr}</span>
+              </h2>
+              <p class="state-desc">{s.lede.split('. ')[0]}.</p>
+              {cities.length > 0 && (
+                <ul class="state-cities">
+                  {cities.map((c) => (
+                    <li><a href={cityUrl(s.slug, c.slug)}>Perfume boxes in {c.name}</a></li>
+                  ))}
+                </ul>
+              )}
+            </article>
+          );
+        })}
+      </div>
+
+      <section class="hub-faq">
+        <h2>About these pages</h2>
+        <dl class="faq-list">
+          {FAQS.map((f) => (
+            <div class="faq-item">
+              <dt>{f.q}</dt>
+              <dd>{f.a}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hub-head { padding-bottom: 0; }
+  .hub-head h1 { margin: 0 0 12px; }
+  .hub-lede { max-width: 76ch; line-height: 1.72; color: var(--text-soft); margin: 0; }
+  .state-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+  .state-card { border: 1px solid var(--border); border-radius: 12px; padding: 18px; background: #fff; }
+  .state-name { font-size: 1.08rem; margin: 0 0 8px; display: flex; align-items: baseline; gap: 8px; }
+  .state-abbr { font-size: .72rem; letter-spacing: .08em; color: var(--text-soft); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; }
+  .state-desc { font-size: .85rem; line-height: 1.55; color: var(--text-soft); margin: 0 0 12px; }
+  .state-cities { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 7px; }
+  .state-cities a { font-size: .8rem; border: 1px solid var(--border); border-radius: 999px; padding: 4px 10px; display: inline-block; }
+  .state-cities a:hover { border-color: var(--pink); text-decoration: none; }
+  .hub-faq { margin-top: 42px; }
+  .hub-faq h2 { font-size: 1.3rem; margin: 0 0 10px; }
+  .faq-list { margin: 0; }
+  .faq-item { border-top: 1px solid var(--border); padding: 14px 0; }
+  .faq-item dt { font-weight: 600; margin: 0 0 6px; }
+  .faq-item dd { margin: 0; color: var(--text-soft); line-height: 1.65; max-width: 80ch; }
+  @media (max-width: 900px) { .state-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 560px) { .state-grid { grid-template-columns: minmax(0, 1fr); } }
+</style>

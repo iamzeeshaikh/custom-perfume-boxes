@@ -1,0 +1,129 @@
+---
+/**
+ * Compact lead form that sits at the top of every listing and product page,
+ * above the fold, so a visitor can ask for a price without scrolling or
+ * hunting for a contact link.
+ *
+ * Posts to the same /api/quote/ endpoint as the full form and is bound by the
+ * shared handler in src/scripts/quote-form.ts via [data-quote-form].
+ */
+export interface Props {
+  /** Shown in the heading, e.g. "Luxury & Specialty Boxes" or a city name. */
+  context?: string;
+  /** Sent with the submission so the email says what the visitor was looking at. */
+  contextValue?: string;
+  /** Overrides the default heading entirely. */
+  heading?: string;
+  /** Overrides the default supporting line. */
+  sub?: string;
+  id?: string;
+}
+const {
+  context = '',
+  contextValue = '',
+  heading,
+  sub,
+  id = 'quick-quote',
+} = Astro.props;
+
+const title = heading ?? (context ? `Get a price for ${context}` : 'Get a price in one message');
+const subtitle = sub ?? 'Tell us size, quantity and finish. A written quote comes back within 10 hours — no obligation, and design support is free.';
+---
+<section class="sqb" id={id} aria-labelledby={`${id}-h`}>
+  <div class="container sqb-inner">
+    <div class="sqb-copy">
+      <h2 class="sqb-h" id={`${id}-h`}>{title}</h2>
+      <p class="sqb-sub">{subtitle}</p>
+      <ul class="sqb-points">
+        <li>100 boxes minimum</li>
+        <li>Free design support</li>
+        <li>Free shipping</li>
+      </ul>
+    </div>
+
+    <form class="sqb-form" method="POST" action="/api/quote/"
+          enctype="multipart/form-data" novalidate data-quote-form>
+      <input type="hidden" name="product_name" value={contextValue || context} />
+      <input type="hidden" name="source_page" value="" data-source-page />
+      <input type="hidden" name="submitted_at" value="" data-submitted-at />
+      <div class="hp" aria-hidden="true">
+        <label>Do not fill this <input type="text" name="company_website" tabindex="-1" autocomplete="off" /></label>
+      </div>
+
+      <div class="sqb-row">
+        <div class="sqb-field">
+          <label for={`${id}-name`}>Name <span class="req">*</span></label>
+          <input id={`${id}-name`} name="name" type="text" required autocomplete="name" maxlength="120" />
+        </div>
+        <div class="sqb-field">
+          <label for={`${id}-email`}>Email <span class="req">*</span></label>
+          <input id={`${id}-email`} name="email" type="email" required autocomplete="email" maxlength="160" />
+        </div>
+        <div class="sqb-field">
+          <label for={`${id}-phone`}>Phone</label>
+          <input id={`${id}-phone`} name="phone" type="tel" autocomplete="tel" maxlength="40" />
+        </div>
+      </div>
+
+      <div class="sqb-field">
+        <label for={`${id}-message`}>What do you need?</label>
+        <textarea id={`${id}-message`} name="message" rows="2" maxlength="4000"
+                  placeholder="e.g. 500 rigid boxes, 90 x 90 x 120 mm, matte with gold foil"></textarea>
+      </div>
+
+      <div class="sqb-row sqb-bottom">
+        <div class="sqb-field sqb-file">
+          <label for={`${id}-file`}>Artwork <span class="hint">(optional, max 10 MB)</span></label>
+          <input id={`${id}-file`} name="artwork" type="file"
+                 accept=".pdf,.png,.jpg,.jpeg,.ai,.svg,.zip,image/png,image/jpeg,application/pdf,application/zip" />
+        </div>
+        <button type="submit" class="btn qf-submit sqb-submit">Get My Price</button>
+      </div>
+      <p class="qf-status sqb-status" role="status" aria-live="polite" data-status></p>
+    </form>
+  </div>
+</section>
+
+<script>
+  import '../scripts/quote-form';
+</script>
+
+<style>
+  .sqb { background: linear-gradient(135deg, #1b1b1b 0%, #2e2630 100%); color: #fff; padding: 30px 0; }
+  .sqb-inner { display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); gap: 30px; align-items: start; }
+  .sqb-h { margin: 0 0 8px; font-size: 1.4rem; color: #fff; line-height: 1.25; }
+  .sqb-sub { margin: 0 0 14px; font-size: .9rem; line-height: 1.55; color: #d6d0d6; }
+  .sqb-points { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .sqb-points li { font-size: .74rem; letter-spacing: .04em; text-transform: uppercase; border: 1px solid rgba(255,255,255,.28); border-radius: 999px; padding: 5px 11px; }
+
+  .sqb-form { background: #fff; border-radius: 14px; padding: 18px; }
+  .sqb-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+  .sqb-bottom { grid-template-columns: minmax(0, 1fr) auto; align-items: end; margin-top: 12px; }
+  .sqb-field { display: flex; flex-direction: column; margin-bottom: 12px; }
+  .sqb-bottom .sqb-field { margin-bottom: 0; }
+  .sqb-field label { font-size: .78rem; font-weight: 600; color: #333; margin-bottom: 5px; }
+  .sqb-field .req { color: #c0392b; }
+  .sqb-field .hint { font-weight: 400; color: #777; }
+  /* 16px minimum stops iOS zooming the page when a field takes focus. */
+  .sqb-field input, .sqb-field textarea {
+    font: inherit; font-size: 16px; padding: 9px 11px; border: 1px solid #d8d8d8;
+    border-radius: 8px; background: #fff; color: #111; width: 100%; min-width: 0;
+  }
+  .sqb-field textarea { resize: vertical; }
+  .sqb-field input:focus, .sqb-field textarea:focus { outline: 2px solid #7a4b8a; outline-offset: 1px; border-color: #7a4b8a; }
+  .sqb-submit { white-space: nowrap; padding: 11px 22px; }
+  .sqb-status { margin: 10px 0 0; font-size: .84rem; color: #333; }
+  .sqb-status.err { color: #c0392b; }
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+  @media (max-width: 900px) {
+    .sqb-inner { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  }
+  @media (max-width: 560px) {
+    .sqb { padding: 22px 0; }
+    .sqb-h { font-size: 1.2rem; }
+    .sqb-row { grid-template-columns: minmax(0, 1fr); }
+    .sqb-bottom { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+    .sqb-submit { width: 100%; }
+  }
+</style>

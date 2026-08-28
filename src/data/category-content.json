@@ -1,0 +1,362 @@
+{
+ "luxury-specialty-boxes": {
+  "layout": "spec-led",
+  "h1": "Luxury &amp; Specialty Perfume Boxes",
+  "lede": "Luxury is a manufacturing decision before it is a design one. A box reads as expensive because of board caliper, wrap accuracy and the way light moves across a finish &mdash; not because of the logo printed on it. The four structures in this category are the ones we build when a fragrance has to justify a premium shelf price.",
+  "sections": [
+   {
+    "h2": "What actually makes a box feel expensive",
+    "html": "<p>Weight is the first signal a customer receives, and it arrives before they have looked at anything. A folding carton in 350gsm SBS feels like packaging. A rigid box built on 1200&ndash;1500 micron grayboard feels like an object. That difference is roughly two millimeters of chipboard, and it changes the entire unboxing.</p><p>The second signal is the wrap. On a rigid box the printed paper is wrapped around the board and turned in at the edges by hand or by machine. Where that turn-in is even and the corners are mitered cleanly, the box looks made. Where it is not, no amount of foil rescues it. This is why our <a href=\"/product/luxury-perfume-boxes/\">rigid luxury perfume box builds</a> are quoted with a wrap tolerance rather than a generic finish list.</p>"
+   },
+   {
+    "h2": "Finish stacking, and where it goes wrong",
+    "html": "<p>Most premium boxes use more than one finish. A typical stack is soft-touch lamination as the base, spot UV on the wordmark, and hot foil on a rule or crest. Each layer has to be planned in the artwork, because they are separate passes on separate plates.</p><p>The common failure is foiling over soft-touch without a keyline. Soft-touch film has low surface energy, and foil laid straight onto it lifts at the edges within weeks in a warm stockroom. The fix is a small unlaminated keyline under the foil area, which has to exist in the file before we plate. Our team flags this on every proof, and the <a href=\"/product/baccarat-perfume-boxes/\">faceted Baccarat-style carton</a> is the build where it comes up most, because those designs are almost always foiled.</p>"
+   },
+   {
+    "h2": "Rigid or folding: a cost decision, not a taste one",
+    "html": "<p>Rigid boxes cost more per unit and ship assembled, which means you pay to move air. Folding cartons ship flat and cost a fraction, but they cannot hold a magnetic lid or a deep foam bay. The honest dividing line is retail price: below roughly forty dollars a bottle, a well-finished folding carton usually out-performs a cheap rigid box, because the money goes into print quality instead of chipboard.</p><p>Above that, the rigid structure starts earning its cost in perceived value and in protection for heavy glass. If you are undecided, order both as samples on the same artwork &mdash; the comparison takes ten seconds in the hand and settles the argument permanently. You can request both on one job through the <a href=\"/design-your-box/\">box specification tool</a>.</p>"
+   },
+   {
+    "h2": "Concealment and reveal structures",
+    "html": "<p>Some fragrance launches want the bottle hidden until the last moment. That is a structural brief rather than a print one: a hinged lid with a magnet, a sliding drawer with a pull ribbon, or a two-part shoulder box that lifts with a slow air release.</p><p>The slow lift is the one clients ask for by feel and cannot name. It comes from a close-tolerance shoulder and a small vent, and it only works if the insert holds the bottle firmly enough that it does not rise with the lid. We build it into the <a href=\"/product/secret-box-perfume/\">concealed reveal perfume box</a>, and it is worth specifying early because it constrains the insert design.</p>"
+   }
+  ],
+  "faqs": [
+   {
+    "q": "What board thickness counts as a rigid luxury box?",
+    "a": "Anything from 1200 micron grayboard upward reads as rigid in the hand. Below that the panel flexes when you pick it up, which undoes the effect. Most of our luxury builds sit between 1200 and 1500 micron."
+   },
+   {
+    "q": "Can I combine foil, spot UV and soft-touch on one box?",
+    "a": "Yes, and it is common on premium work. The one constraint is that foil needs an unlaminated keyline underneath it, otherwise it lifts off soft-touch film over time. We mark that area on your proof before plating."
+   },
+   {
+    "q": "Do rigid boxes cost more to ship?",
+    "a": "Usually yes, because they arrive assembled rather than flat, so you pay freight on the enclosed air. Collapsible rigid structures reduce that but add a small unit cost. Shipping itself is free on all our orders."
+   },
+   {
+    "q": "Is there a minimum order quantity for luxury boxes?",
+    "a": "Our minimum order quantity is 100 units per design. Wholesale price breaks apply as the quantity increases &mdash; send us your specification and we will quote your exact price."
+   },
+   {
+    "q": "How long does a rigid box take to produce?",
+    "a": "Handling is 2 to 3 business days once you approve the digital proof, then 3 to 6 business days in transit. Rigid wrapping is the slowest stage, so complex builds sit at the upper end of that window."
+   }
+  ]
+ },
+ "color-design-specific-boxes": {
+  "layout": "color-led",
+  "h1": "Color &amp; Design Specific Perfume Boxes",
+  "lede": "A color that looks right on your monitor is a set of light values. A color on a box is ink sitting on a coated or uncoated surface, and the two do not automatically agree. This category covers the eleven colorways we print most, and what each one demands from the press.",
+  "sections": [
+   {
+    "h2": "Why your screen color and your box color disagree",
+    "html": "<p>Screens emit light and mix red, green and blue. Presses lay ink and mix cyan, magenta, yellow and black. There are colors a screen can show that four-color process simply cannot reach, and the most common casualties in fragrance packaging are vivid oranges, deep purples and any saturated turquoise.</p><p>When a color has to match exactly &mdash; a brand color that also appears on your bottle label &mdash; the answer is a Pantone spot ink rather than a process build. A spot ink is mixed to a formula and printed from its own unit, so it lands the same on every run. It costs more per plate and pays for itself the first time a reorder matches the original.</p>"
+   },
+   {
+    "h2": "The colors that fight the press",
+    "html": "<p><strong>Deep blacks</strong> print flat and gray if you send 100% K alone. A rich black build adds cyan under the black to give it depth, which is why our <a href=\"/product/black-perfume-boxes/\">matte black perfume cartons</a> are set up with a four-color black rather than a single plate.</p><p><strong>Large solid areas</strong> of any color show every imperfection: roller marks, slight density drift across the sheet, and any speck of dust on the plate. On a full-bleed colored box this is the quality difference you are paying for, and it is why we proof solids on the actual stock rather than on a generic proofing paper.</p><p><strong>Pastels</strong> have the opposite problem. A pale pink is a light tint, and light tints drift visibly when press density moves even slightly. Our <a href=\"/product/perfume-pink-boxes/\">soft pink fragrance cartons</a> are run with tighter density tolerances for exactly this reason.</p>"
+   },
+   {
+    "h2": "How finish changes the color you get",
+    "html": "<p>The same ink under three finishes gives three different colors. Gloss lamination deepens and saturates, so a mid blue goes richer. Matte lamination scatters light and lifts the color slightly while flattening contrast. Soft-touch does what matte does and mutes it further.</p><p>This matters most when a design pairs a laminated panel with an unlaminated one, or when a box has to sit beside a bottle label printed by a different supplier. If your bottle label is glossy and your box is soft-touch, the identical brand color will look like two colors on the shelf. Deciding the finish before the color is signed off avoids the whole problem, and metallic effects like our <a href=\"/product/perfume-gold-boxes/\">gold foil perfume packaging</a> change the calculation again, because foil is reflective rather than absorptive.</p>"
+   },
+   {
+    "h2": "Designing for a colorway rather than a color",
+    "html": "<p>Brands that run several fragrances usually want a family: one structure, one layout, different colors per scent. Done well this reads as a collection at shelf. Done carelessly it reads as inconsistency, because each color needs a slightly different treatment to carry the same weight.</p><p>The practical rule is to hold the ink coverage roughly constant across the family. A design that is 90% coverage in deep <a href=\"/product/perfume-purple-boxes/\">purple fragrance cartons</a> and 20% coverage in the yellow of the same family will not look like siblings, however identical the layout is. Adjust the artwork per color rather than recoloring one file.</p>"
+   },
+   {
+    "h2": "Getting the color signed off before you commit",
+    "html": "<p>A digital proof shows layout, text and position. It does not show final color, because your monitor and our press are different devices. For color-critical work, ask for a printed sample on your actual stock and finish before the run.</p><p>We produce these on request and they add a few days to the schedule. Given that a colorway error is unrecoverable once 5,000 boxes are printed, it is the cheapest insurance available on the job. Send your specification through the <a href=\"/contact-us/\">quote request form</a> and note that you want a printed sample.</p>"
+   }
+  ],
+  "faqs": [
+   {
+    "q": "What is the difference between CMYK and PMS for my boxes?",
+    "a": "CMYK builds a color from four process inks and suits photographic and multi-color artwork. PMS is a pre-mixed spot ink printed from its own unit, so it repeats exactly across reorders. Use PMS when the color is a brand asset that must match your bottle label."
+   },
+   {
+    "q": "Why does my box color look different from my screen?",
+    "a": "Screens emit light in RGB; presses lay ink in CMYK. Saturated oranges, purples and turquoises are the most common colors that exist on screen but fall outside the printable range. A Pantone spot ink solves it when the color is critical."
+   },
+   {
+    "q": "Does lamination change the printed color?",
+    "a": "Yes. Gloss deepens and saturates, matte lifts and flattens, and soft-touch mutes further. Decide the finish before you sign off the color, especially if the box has to sit beside a differently finished bottle label."
+   },
+   {
+    "q": "Can I order one structure in several colors?",
+    "a": "Yes, and it is a common brief for fragrance families. The minimum of 100 units applies per design, and each colorway counts as a design because it needs its own plates."
+   },
+   {
+    "q": "Can I get a printed sample before the full run?",
+    "a": "Yes, on request. It is printed on your actual stock with your actual finish, which a digital proof cannot show. It adds a few days but removes the one error that cannot be corrected after production."
+   }
+  ]
+ },
+ "material-specific-boxes": {
+  "layout": "substrate-led",
+  "h1": "Material Specific Perfume Boxes",
+  "lede": "Substrate decides more than any other choice on a packaging job. It sets what the print can look like, how much weight the box carries, whether it can be recycled curbside, and what it costs per thousand. This category is organized by material rather than by appearance.",
+  "sections": [
+   {
+    "h2": "The four substrates we run most",
+    "html": "<p><strong>SBS folding boxboard</strong> is bleached, smooth on both sides and the default for retail fragrance. It takes fine detail and photographic images cleanly. Typical weights for perfume run 300&ndash;400gsm.</p><p><strong>Kraft board</strong> is unbleached and brown, with visible fiber. It takes solid ink and line work well but muddies photographs, because the brown base shifts every color laid over it. White ink can be printed underneath to correct this, at extra cost.</p><p><strong>E-flute corrugated</strong> adds a fluted layer between two liners. It roughly triples crush resistance at about 1.5mm thickness, which is why it appears in our <a href=\"/product/perfume-shipping-boxes/\">fragrance transit cartons</a> rather than in shelf packaging.</p><p><strong>Wood and wood veneer</strong> is a different manufacturing process entirely, closer to joinery than printing, and is covered separately below.</p>"
+   },
+   {
+    "h2": "Reading a board specification",
+    "html": "<p>Two numbers describe a board and they are not interchangeable. GSM is weight per square meter. Microns (or points) is thickness. Two boards at the same gsm can differ in thickness, because bulkier boards trap more air.</p><p>For perfume cartons, thickness is what you feel and what resists crushing, so it is the more useful figure. When you compare quotes between suppliers, compare microns rather than gsm, or you will pick the lighter box without realizing it. Our <a href=\"/product/cardboard-perfume-boxes/\">standard cardboard perfume cartons</a> are quoted with both figures for that reason.</p>"
+   },
+   {
+    "h2": "Curved structures and why they cost differently",
+    "html": "<p>Cylinders and round boxes are not folding cartons with curved creases. They are wound or rolled tubes with separate lid and base components, made on different equipment and priced on a different basis.</p><p>The practical consequence is that quantity breaks arrive later. A folding carton gets meaningfully cheaper at 1,000 units; a <a href=\"/product/cylinder-perfume-boxes/\">wound cylinder perfume tube</a> often does not move much until 2,500, because the tooling and the winding setup dominate the cost at low volumes. If your budget is tight and the structure is negotiable, that is worth knowing before you commit to the round shape.</p>"
+   },
+   {
+    "h2": "Wood: beautiful, slow, and worth checking twice",
+    "html": "<p>Wooden presentation boxes are made rather than printed. Branding goes on by laser engraving, screen printing or a fixed metal plate, and none of those behave like offset litho. Fine gradients and photographs are effectively unavailable.</p><p>Lead times are longer, minimums behave differently, and grain varies between units in a way that customers read as character rather than defect &mdash; provided you have told them to expect it. Our <a href=\"/product/perfume-wooden-boxes/\">engraved wooden perfume cases</a> are the right answer for limited editions and gift sets, and the wrong answer for a fast seasonal run.</p>"
+   },
+   {
+    "h2": "Recyclability, honestly stated",
+    "html": "<p>Plain SBS, kraft and corrugated are widely recycled through household streams. What removes a box from that stream is what you add to it: plastic lamination, foil blocking over a large area, glued-in foam, and ribbon.</p><p>If a recyclable claim matters to your brand, the practical route is uncoated or water-based-coated board, soy or vegetable inks, a paper-based insert instead of foam, and no lamination. That combination is fully recyclable and looks deliberately understated, which suits some fragrance positioning very well and others not at all. We will tell you plainly which of your choices break the claim rather than let it be assumed.</p>"
+   }
+  ],
+  "faqs": [
+   {
+    "q": "What is the difference between gsm and microns on a board spec?",
+    "a": "GSM is weight per square meter and microns is thickness. Two boards at the same gsm can differ in thickness because bulkier boards trap more air. For perfume cartons, compare microns, since thickness is what resists crushing."
+   },
+   {
+    "q": "Can I print full-color photographs on kraft board?",
+    "a": "You can, but the brown base shifts every color laid over it and photographs go muddy. Printing a white underbase first corrects this at additional cost. Kraft is at its best with solid ink and line work."
+   },
+   {
+    "q": "Why are cylinder boxes priced differently from folding cartons?",
+    "a": "They are wound tubes with separate lid and base components, made on different equipment. Tooling and setup dominate the cost at low volume, so meaningful price breaks arrive later than they do on flat cartons."
+   },
+   {
+    "q": "Are your perfume boxes recyclable?",
+    "a": "Plain SBS, kraft and corrugated are widely recycled. Plastic lamination, large foil areas, glued-in foam and ribbon are what remove a box from the household stream. We will tell you which of your chosen options break a recyclable claim."
+   },
+   {
+    "q": "How is branding applied to wooden boxes?",
+    "a": "By laser engraving, screen printing or a fixed metal plate. Offset-style gradients and photographic images are not available on wood, and grain varies between units, which reads as character provided customers are told to expect it."
+   }
+  ]
+ },
+ "subscription-sample-boxes": {
+  "layout": "ops-led",
+  "h1": "Perfume Subscription &amp; Sample Boxes",
+  "lede": "Subscription packaging is judged on economics as much as on appearance. The same box ships every month, absorbs courier handling without a retail shelf to protect it, and its unit cost multiplies by your entire subscriber base twelve times a year. Small decisions compound fast.",
+  "sections": [
+   {
+    "h2": "Unit cost is the whole design brief",
+    "html": "<p>On a retail carton, ten cents is noise. On a subscription box at 3,000 members shipping monthly, ten cents is $3,600 a year. That single fact should drive every choice you make in this category.</p><p>The savings that actually matter are structural: dropping from a rigid box to a strong folding mailer, printing one or two colors instead of four, losing the lamination, and sizing the box so it stays inside a cheaper courier band. Cutting board weight is usually the wrong saving, because a crushed box costs a replacement plus a support conversation. Our <a href=\"/product/perfume-subscription-boxes/\">recurring subscription mailers</a> are specified around that trade-off.</p>"
+   },
+   {
+    "h2": "The box has to survive the courier network alone",
+    "html": "<p>Retail packaging travels on a pallet inside an outer case. A subscription box travels as a single parcel through automated sortation, gets thrown onto a conveyor, sits under other parcels, and lands on a doorstep. It is its own transit packaging.</p><p>That means E-flute rather than plain board for anything containing glass, a closure that survives handling without tape across the artwork, and an insert that immobilizes vials rather than merely presenting them. A vial that moves in transit will either break or arrive with a loosened atomizer, and the customer blames the fragrance, not the box.</p>"
+   },
+   {
+    "h2": "Designing the opening, because it gets filmed",
+    "html": "<p>Subscription boxes are opened on camera more than any other packaging format. The sequence you design is the sequence that appears in a customer video, so it is worth planning deliberately rather than leaving to chance.</p><p>What works is a clean tear strip or a lid that lifts without a struggle, then something printed on the inside of the lid, then the products revealed in a held position rather than loose. What fails is packing tape across the print, a box that needs scissors, and vials rolling out when the lid comes off. The interior print is cheap and it is the part people photograph, which is why our <a href=\"/product/perfume-discovery-boxes/\">discovery set presentation boxes</a> put the budget there.</p>"
+   },
+   {
+    "h2": "Planning for the months you will not reprint",
+    "html": "<p>Most subscription brands cannot afford new plates every month, so the sustainable model is a fixed printed outer that runs in bulk, plus a cheap variable element inside: a digitally printed card, a sticker, or a printed sleeve.</p><p>This gives monthly freshness at a fraction of the cost, and it lets you order the outer in quantities that actually reach a useful price break. Order six months of outers and twelve weeks of cards, and your cost per box drops while the box still looks new every month. Sample-led programs work the same way &mdash; see the <a href=\"/product/perfume-sample-boxes/\">multi-vial sample carton</a> for the format we build most often for this model.</p>"
+   }
+  ],
+  "faqs": [
+   {
+    "q": "What board should a perfume subscription box use?",
+    "a": "E-flute corrugated for anything containing glass. It roughly triples crush resistance at about 1.5mm thickness, and a subscription box travels alone through courier sortation with no outer case protecting it."
+   },
+   {
+    "q": "How do I keep unit cost down without a fragile box?",
+    "a": "Save structurally rather than on board weight: a folding mailer instead of a rigid box, one or two colors instead of four, no lamination, and a size that stays inside a cheaper courier band. Thinning the board costs more in replacements than it saves."
+   },
+   {
+    "q": "Can I change the design every month?",
+    "a": "Affordably, yes, if you print a fixed outer in bulk and vary a cheap insert &mdash; a digitally printed card, a sticker or a sleeve. New plates every month rarely makes financial sense at subscription volumes."
+   },
+   {
+    "q": "How should vials be held inside the box?",
+    "a": "In an insert that immobilizes them rather than simply presents them. A vial that moves in transit either breaks or arrives with a loosened atomizer, and customers attribute that to the fragrance rather than the packaging."
+   },
+   {
+    "q": "What is the minimum order for subscription boxes?",
+    "a": "Our minimum order quantity is 100 units per design. Wholesale price breaks apply as the quantity increases &mdash; send us your specification and we will quote your exact price."
+   }
+  ]
+ },
+ "gift-collection-boxes": {
+  "layout": "seasonal-led",
+  "h1": "Perfume Gift &amp; Collection Boxes",
+  "lede": "Gift packaging carries a workload ordinary retail packaging does not. It has to survive a peak-season warehouse, present more than one item at once, and look complete enough that the buyer does not feel the need to wrap it again.",
+  "sections": [
+   {
+    "h2": "Multi-bay inserts are the hard part",
+    "html": "<p>A single-bottle carton has one job. A collection box has to hold three or five items of different heights and diameters, keep them from touching each other, and present them all at the same moment when the lid comes off.</p><p>Vacuum-formed plastic trays do this cheaply and are increasingly rejected on environmental grounds. Die-cut paperboard platforms achieve the same immobilization with a recyclable material, but they need more design work and they need real bottle samples to develop against. Send us the actual bottles rather than drawings, and the <a href=\"/product/perfume-collection-boxes/\">multi-bottle collection boxes</a> come back right the first time.</p>"
+   },
+   {
+    "h2": "Peak season is a production constraint, not a marketing one",
+    "html": "<p>Gift packaging demand concentrates into a few weeks. Everyone in the supply chain knows this, which means board mills, laminators and finishers are all at capacity in September and October for the same reason you are.</p><p>The practical implication is unglamorous: order gift packaging two months earlier than feels necessary. A job that takes eight business days in March can take three weeks in October, and the constraint is rarely printing &mdash; it is finishing and ribbon supply. Our handling time of 2 to 3 business days holds year-round because we plan capacity against it, but courier networks slow regardless.</p>"
+   },
+   {
+    "h2": "Closures that read as a gift",
+    "html": "<p>The closure is what tells a buyer the box is a present rather than a shipper. Magnetic flaps give the satisfying snap; ribbon pulls give a deliberate, slower reveal; a simple tuck with a printed seal costs almost nothing and still reads as considered.</p><p>Magnets are the most requested and the most often mis-specified. They need a recess in the board and enough lever arm to hold a heavy lid, and if the box is oversized the magnet holds while the panel bows. On wide gift boxes we use two smaller magnets rather than one strong pair, which keeps the lid flat across its span.</p>"
+   },
+   {
+    "h2": "Floral and presentation formats",
+    "html": "<p>Boxes that combine a fragrance with preserved flowers have their own constraints. The floral bed has to be built into a bay that does not crush during transit, and the box usually needs a small amount of ventilation so preserved stems do not sweat against a laminated interior.</p><p>These are made-to-order structures rather than stock items, and they are the format most improved by a physical sample before the run. The <a href=\"/product/perfume-flower-boxes/\">floral presentation perfume boxes</a> we build are usually developed over two sample rounds, which is worth budgeting time for.</p>"
+   }
+  ],
+  "faqs": [
+   {
+    "q": "How far ahead should I order gift packaging?",
+    "a": "Two months earlier than feels necessary. Board mills, laminators and finishers all hit capacity in September and October, and the bottleneck is usually finishing and ribbon supply rather than printing."
+   },
+   {
+    "q": "What holds multiple bottles securely inside one box?",
+    "a": "A die-cut paperboard platform sized to your actual bottles. Vacuum-formed plastic trays are cheaper but are increasingly rejected on environmental grounds. Send real bottles rather than drawings so the bays fit first time."
+   },
+   {
+    "q": "Are magnetic closures a good idea on large gift boxes?",
+    "a": "Yes, but specify two smaller magnet pairs rather than one strong pair. A single pair holds the closure while a wide lid panel bows across its span, which looks worse than no magnet at all."
+   },
+   {
+    "q": "Can you make boxes that hold both a bottle and preserved flowers?",
+    "a": "Yes. The floral bed needs its own bay that resists crushing, plus a little ventilation so preserved stems do not sweat against a laminated interior. Expect two sample rounds on this format."
+   },
+   {
+    "q": "Do gift boxes ship assembled or flat?",
+    "a": "Folding gift cartons ship flat and are assembled by you or your fulfilment partner. Rigid gift boxes ship assembled. Shipping is free either way, but flat-packed cartons need less storage space at your end."
+   }
+  ]
+ },
+ "packaging-boxes": {
+  "layout": "transit-led",
+  "h1": "Functional Perfume Packaging Boxes",
+  "lede": "This category covers the boxes that do a job rather than make an impression: transit cartons, oil packaging and counter testers. They are judged on whether the product arrives intact and whether they satisfy the rules that apply to shipping fragrance.",
+  "sections": [
+   {
+    "h2": "Fragrance is a regulated shipment",
+    "html": "<p>Alcohol-based perfume is flammable, and that makes it a limited-quantity dangerous good in most air networks. Carriers apply their own rules on top of the regulations, and those rules govern outer packaging, labelling and sometimes the route your parcel takes.</p><p>We build cartons to the dimensions and construction your carrier requires, but we cannot certify a shipment on your behalf and we will not claim to. Confirm the current requirements with your carrier before you commit to a size, because the wrong outer dimension can put an otherwise fine box outside a limited-quantity allowance.</p>"
+   },
+   {
+    "h2": "What actually breaks a bottle in transit",
+    "html": "<p>Bottles rarely break from a single dramatic impact. They break from repeated small shocks that loosen an atomizer, or from a compressive load when parcels stack in a trailer overnight.</p><p>The two defenses are different. Shock is absorbed by clearance and a cushioning insert that suspends the bottle away from the walls. Compression is resisted by board grade and by the box being full enough that its walls are supported. A half-empty carton with a strong board still crushes, because there is nothing inside holding the panels apart. Our <a href=\"/product/perfume-shipping-boxes/\">e-flute perfume shipping cartons</a> are sized to the contents for that reason rather than offered in generic sizes.</p>"
+   },
+   {
+    "h2": "Perfume oils leak differently",
+    "html": "<p>Oil-based fragrance behaves nothing like alcohol spray in packaging terms. It creeps, it stains paper permanently, and it degrades some adhesives. A leak that would evaporate harmlessly from an alcohol product leaves a visible mark on an oil shipment and ruins the box it sits in.</p><p>The countermeasures are a sealed inner barrier, an insert material that will not wick, and enough headspace that thermal expansion during transit does not force product past the closure. Roll-on and dab applicators are the most common leak points. We specify <a href=\"/product/perfume-oil-packaging/\">attar and perfume oil packaging</a> with a moisture and oil barrier as standard rather than as an upgrade.</p>"
+   },
+   {
+    "h2": "Tester packaging has its own rules",
+    "html": "<p>Counter testers exist to be handled hundreds of times by strangers. They are not retail packaging with a different label; they are a different product with a different brief.</p><p>Retailers commonly require testers to be visually distinct from sale stock so they cannot be sold by mistake, which usually means a plain or clearly marked carton. The box must also let staff put the bottle back easily, which argues for an open tray rather than a snug sleeve. Check your retailer’s specification before ordering, because these requirements vary by chain and an unusable tester run cannot be repurposed as retail stock.</p>"
+   }
+  ],
+  "faqs": [
+   {
+    "q": "Are there shipping restrictions on alcohol-based perfume?",
+    "a": "Yes. Alcohol-based fragrance is flammable and is treated as a limited-quantity dangerous good in most air networks, with carrier-specific rules on top. Confirm current requirements with your carrier before fixing a box size, since outer dimensions can affect allowances."
+   },
+   {
+    "q": "What actually causes bottles to break in transit?",
+    "a": "Repeated small shocks that loosen atomizers, and compressive load when parcels stack overnight. Clearance and a suspending insert handle shock; board grade and a properly filled box handle compression. A half-empty carton crushes regardless of board strength."
+   },
+   {
+    "q": "Does perfume oil need different packaging from spray?",
+    "a": "Yes. Oil creeps, stains paper permanently and degrades some adhesives. It needs a sealed inner barrier, a non-wicking insert and enough headspace for thermal expansion. Roll-on and dab applicators are the usual leak points."
+   },
+   {
+    "q": "How should tester packaging differ from retail?",
+    "a": "Most retailers require testers to be visually distinct so they cannot be sold as stock, and staff need to replace the bottle easily, which favors an open tray over a snug sleeve. Check your retailer specification first, as it varies by chain."
+   },
+   {
+    "q": "Can you certify my shipment as compliant?",
+    "a": "No. We build cartons to the dimensions and construction your carrier requires, but certifying a dangerous-goods shipment is between you and your carrier. We will not claim otherwise."
+   }
+  ]
+ },
+ "empty-boxes": {
+  "layout": "workflow-led",
+  "h1": "Empty &amp; Unprinted Perfume Boxes",
+  "lede": "Empty boxes are bought by brands that fill in-house. The buying questions are different from retail packaging: how the boxes arrive, how much room they take in your stockroom, and how fast someone can assemble and fill one by hand.",
+  "sections": [
+   {
+    "h2": "Assembly time is a real cost",
+    "html": "<p>If one person assembles and fills a box, the seconds matter. A straight tuck-end carton takes a few seconds. A crash-lock base pops open and locks in one movement. A rigid box needs no assembly but arrives bulky.</p><p>At 100 units the difference is irrelevant. At 5,000 units a five-second penalty is seven hours of labor, which usually exceeds whatever the cheaper structure saved. If you are hand-filling at any volume, ask for a crash-lock base and time yourself assembling a sample before you commit to the run.</p>"
+   },
+   {
+    "h2": "Flat-packed storage, and the space it really needs",
+    "html": "<p>Folding cartons arrive flat and creased, stacked in bundles. A thousand flat perfume cartons occupy roughly the volume of a couple of banker’s boxes. The same thousand assembled would fill a small room.</p><p>Store them flat, off the floor, away from radiators and out of direct sun. Board is hygroscopic: it takes up moisture from damp air, which softens creases and makes assembly sloppy, and it dries out in overheated storage, which makes creases crack when folded. A stable, dry room is all that is required, and it is worth checking before a large delivery arrives.</p>"
+   },
+   {
+    "h2": "Printed, plain or partly printed",
+    "html": "<p>Not every empty box needs full artwork. Three routes are common, and the right one depends on how many SKUs you run.</p><p>A fully printed carton per fragrance looks best and costs most in plates. A plain box plus a printed label lets one box serve many scents, which suits small-batch and artisan brands. A partly printed box &mdash; brand furniture printed, product name left blank for a sticker &mdash; sits between the two and is usually the best economics for a brand running six or more fragrances at modest volumes. All three are available on our <a href=\"/product/empty-perfume-boxes/\">unfilled perfume cartons</a>.</p>"
+   }
+  ],
+  "faqs": [
+   {
+    "q": "Do empty perfume boxes arrive assembled?",
+    "a": "Folding cartons arrive flat and creased for you to assemble; rigid boxes arrive assembled. Flat delivery is far more storage-efficient: a thousand flat cartons occupy roughly the volume of a couple of banker’s boxes."
+   },
+   {
+    "q": "How should I store flat-packed boxes?",
+    "a": "Flat, off the floor, away from radiators and direct sun. Board takes up moisture from damp air, which softens creases, and dries out in overheated storage, which makes creases crack when folded."
+   },
+   {
+    "q": "What is a crash-lock base and do I need one?",
+    "a": "A base that pops open and locks in one movement instead of needing tucked flaps. At 100 units it does not matter; at 5,000 units a five-second assembly penalty is around seven hours of labor, which usually outweighs the cheaper structure."
+   },
+   {
+    "q": "Can I buy plain boxes and add my own labels?",
+    "a": "Yes, and it is the most economical route for brands running many fragrances at modest volumes. A partly printed box, with brand furniture printed and the product name left for a sticker, is often the best middle ground."
+   },
+   {
+    "q": "What is the minimum order for empty boxes?",
+    "a": "Our minimum order quantity is 100 units per design. Wholesale price breaks apply as the quantity increases &mdash; send us your specification and we will quote your exact price."
+   }
+  ]
+ },
+ "miscellaneous-boxes": {
+  "layout": "novelty-led",
+  "h1": "Specialty &amp; Novelty Perfume Boxes",
+  "lede": "Some briefs do not fit a standard carton. A box that locks, a box shaped like something else, a structure built around a mechanism rather than around a bottle. These are engineered jobs, and they are quoted and scheduled differently from ordinary packaging.",
+  "sections": [
+   {
+    "h2": "Why unusual structures are quoted differently",
+    "html": "<p>A standard carton uses an existing cutting die or a simple modification of one. A novel structure needs a new dieline drawn, a physical die made, and usually a hand-built mock-up before anything is committed to.</p><p>That tooling is a one-off cost that sits on the first order and disappears on reorders. It also adds calendar time before printing can begin. Neither is a reason to avoid an unusual box &mdash; it is a reason to start the conversation earlier than you would for a straight tuck carton, and to expect the first quote to include a line you have not seen before.</p>"
+   },
+   {
+    "h2": "Locking and secured presentation boxes",
+    "html": "<p>Locks on packaging serve two quite different purposes and the right mechanism differs completely between them. A ceremonial lock exists for the reveal: a small clasp, a key on a ribbon, a slow deliberate opening. It does not need to resist anything.</p><p>A security lock exists to deter theft in a retail environment, and that is a different engineering problem involving board strength, hinge construction and tamper evidence. Confusing the two produces a box that is fiddly for the customer and trivial for a thief. Tell us which one you actually need when you specify a <a href=\"/product/perfume-lock-boxes/\">locking perfume presentation box</a>, and the build will follow from that.</p>"
+   },
+   {
+    "h2": "Shaped and themed structures",
+    "html": "<p>Boxes built to resemble something else &mdash; a bird house, a book, an ornament &mdash; live or die on whether the shape survives contact with reality. A shape that reads beautifully in a render can be impossible to glue at speed, refuse to stack on a shelf, or collapse under a second box placed on top.</p><p>We work these through a physical mock-up before quoting production, because it is the only way to find those problems while they are still cheap. The <a href=\"/product/bird-box-perfume/\">themed bird box structure</a> went through three mock-ups before it stacked reliably, which is fairly typical for a shaped build.</p>"
+   }
+  ],
+  "faqs": [
+   {
+    "q": "Why does a custom-shaped box cost more on the first order?",
+    "a": "It needs a new dieline drawn and a physical cutting die made, plus a hand-built mock-up. That tooling is a one-off sitting on the first order and it disappears on reorders, but it also adds calendar time before printing starts."
+   },
+   {
+    "q": "What is the difference between a ceremonial and a security lock?",
+    "a": "A ceremonial lock exists for the reveal and resists nothing. A security lock deters retail theft and involves board strength, hinge construction and tamper evidence. Specifying the wrong one gives you a box that is fiddly for customers and trivial for thieves."
+   },
+   {
+    "q": "Will an unusually shaped box stack on a retail shelf?",
+    "a": "Only if it is designed to. Shapes that render beautifully can refuse to stack or collapse under a second box. We build a physical mock-up before quoting production, which is the only cheap way to find those problems."
+   },
+   {
+    "q": "How much longer do specialty boxes take?",
+    "a": "Add time for dieline drawing, die manufacture and mock-up approval before the normal 2 to 3 business day handling begins. Start the conversation earlier than you would for a standard tuck carton."
+   },
+   {
+    "q": "Can I reorder a specialty box without paying tooling again?",
+    "a": "Yes. The die is kept and reused, so reorders are priced without the tooling line that appeared on your first invoice."
+   }
+  ]
+ }
+}

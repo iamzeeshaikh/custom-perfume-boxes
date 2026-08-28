@@ -5,9 +5,13 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import ProductCard from '../../components/ProductCard.astro';
 import { products, categories } from '../../utils/data';
-import { breadcrumbSchema, collectionPageSchema } from '../../utils/schema';
+import ShortQuoteBar from '../../components/ShortQuoteBar.astro';
+import PageFAQ from '../../components/PageFAQ.astro';
+import { pageFaqs } from '../../utils/page-faqs';
+import { breadcrumbSchema, collectionPageSchema, faqSchema } from '../../utils/schema';
 
 const crumbs = [{ name: 'Home', url: '/' }, { name: 'Products' }];
+const faqs = pageFaqs('products');
 // This page listed every product but described none of it in schema.
 const jsonld = [
   breadcrumbSchema([{ name: 'Home', url: '/' }, { name: 'Products', url: '/products/' }]),
@@ -18,6 +22,7 @@ const jsonld = [
       'Browse all custom perfume boxes — subscription, sample, luxury, gift, and color-specific packaging.',
     items: products.map((p) => ({ name: p.title, url: `/product/${p.slug}/` })),
   }),
+  faqSchema(faqs),
 ];
 ---
 <BaseLayout
@@ -27,10 +32,22 @@ const jsonld = [
   jsonld={jsonld}
 >
   <Breadcrumbs items={crumbs} />
-  <section class="section">
+  <section class="section products-head">
     <div class="container">
       <h1 class="text-center">All Products</h1>
       <p class="text-center intro">Explore our full range of {products.length} perfume packaging products across {categories.length} categories.</p>
+    </div>
+  </section>
+
+  <ShortQuoteBar
+    heading="Not sure which structure you need?"
+    sub="Send your bottle size, quantity and finish. We will recommend a structure and quote it in the same reply — usually within 10 hours."
+    contextValue="All products listing"
+    id="quote-products"
+  />
+
+  <section class="section">
+    <div class="container">
       <p class="text-center search-note" data-search-note hidden></p>
       <div class="product-grid">
         {products.map((p, i) => (
@@ -39,11 +56,13 @@ const jsonld = [
           </div>
         ))}
       </div>
+      <PageFAQ faqs={faqs} heading="Ordering questions" />
     </div>
   </section>
 </BaseLayout>
 
 <style>
+  .products-head { padding-bottom: 0; }
   .intro { color: var(--text-soft); max-width: 640px; margin: 6px auto 30px; }
   .product-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
   @media (max-width: 820px) { .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }

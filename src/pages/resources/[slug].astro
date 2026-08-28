@@ -1,0 +1,98 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { RESOURCES } from '../../utils/resources';
+import { breadcrumbSchema, faqSchema, webPageSchema } from '../../utils/schema';
+
+export function getStaticPaths() {
+  return RESOURCES.map((r) => ({ params: { slug: r.slug }, props: { resource: r } }));
+}
+
+const { resource } = Astro.props;
+const { Content } = resource;
+const others = RESOURCES.filter((r) => r.slug !== resource.slug).slice(0, 3);
+
+const crumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Resources', url: '/resources/' },
+  { name: resource.title },
+];
+
+const jsonld = [
+  breadcrumbSchema(crumbs.map((c) => ({ name: c.name, url: c.url || resource.url }))),
+  webPageSchema({
+    path: resource.url,
+    name: resource.title,
+    description: resource.metaDescription,
+  }),
+  faqSchema(resource.faqs),
+];
+---
+<BaseLayout
+  title={resource.metaTitle}
+  description={resource.metaDescription}
+  canonical={resource.url}
+  jsonld={jsonld}
+>
+  <Breadcrumbs items={crumbs} />
+
+  <article class="container res-wrap">
+    <p class="res-meta">
+      Reference &middot; about {resource.readingMinutes} min &middot; updated {resource.updated}
+    </p>
+    <div class="res-body">
+      <Content />
+    </div>
+
+    <section class="res-faq">
+      <h2>Quick answers</h2>
+      <dl class="faq-list">
+        {resource.faqs.map((f) => (
+          <div class="faq-item">
+            <dt>{f.q}</dt>
+            <dd>{f.a}</dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+
+    {others.length > 0 && (
+      <nav class="res-next" aria-label="More reference guides">
+        <h2>More reference guides</h2>
+        <ul>
+          {others.map((r) => (
+            <li>
+              <a href={r.url}>{r.title}</a>
+              <span>{r.summary}</span>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    )}
+  </article>
+</BaseLayout>
+
+<style>
+  .res-wrap { max-width: 860px; padding: 26px 0 56px; }
+  .res-meta { font-size: .8rem; color: var(--muted); margin: 0 0 18px; text-transform: uppercase; letter-spacing: .05em; }
+  .res-body :global(h1) { font-size: 1.9rem; line-height: 1.24; margin: 0 0 14px; }
+  .res-body :global(h2) { font-size: 1.3rem; margin: 32px 0 10px; }
+  .res-body :global(h3) { font-size: 1.06rem; margin: 22px 0 8px; }
+  .res-body :global(p) { margin: 0 0 14px; line-height: 1.75; }
+  .res-body :global(ul), .res-body :global(ol) { margin: 0 0 14px; padding-left: 22px; }
+  .res-body :global(li) { margin-bottom: 6px; line-height: 1.65; }
+  .res-body :global(a) { color: var(--accent, #b04a68); text-decoration: underline; }
+  .res-body :global(table) { border-collapse: collapse; width: 100%; font-size: .88rem; display: block; overflow-x: auto; }
+  .res-body :global(th), .res-body :global(td) { border: 1px solid var(--border); padding: 8px 10px; text-align: left; vertical-align: top; }
+  .res-body :global(th) { background: #faf8fa; font-weight: 600; white-space: nowrap; }
+  .res-faq { margin-top: 42px; }
+  .res-faq h2 { font-size: 1.3rem; margin: 0 0 10px; }
+  .faq-item { border-top: 1px solid var(--border); padding: 14px 0; }
+  .faq-item dt { font-weight: 600; margin: 0 0 6px; }
+  .faq-item dd { margin: 0; color: var(--text-soft); line-height: 1.65; }
+  .res-next { margin-top: 42px; border-top: 1px solid var(--border); padding-top: 20px; }
+  .res-next h2 { font-size: 1.1rem; margin: 0 0 12px; }
+  .res-next ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+  .res-next a { font-weight: 600; }
+  .res-next span { display: block; font-size: .84rem; color: var(--text-soft); line-height: 1.55; margin-top: 3px; }
+</style>

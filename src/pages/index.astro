@@ -6,13 +6,19 @@ import ProductFAQ from '../components/ProductFAQ.astro';
 import QuoteForm from '../components/QuoteForm.astro';
 import { products, home } from '../utils/data';
 import { BRAND, SITE_URL } from '../utils/site';
-import { faqSchema } from '../utils/schema';
+import { faqSchema, itemListSchema } from '../utils/schema';
+import { RESOURCES } from '../utils/resources';
+import { stateEntries } from '../utils/locations';
 
 const heroImg = products.find((p) => p.slug === 'perfume-pink-boxes')?.featured
   || products[0].featured;
 
 // Organization and WebSite come from BaseLayout on every route.
-const jsonld = [...(home.faqs.length ? [faqSchema(home.faqs)] : [])];
+const states = stateEntries();
+const jsonld = [
+  ...(home.faqs.length ? [faqSchema(home.faqs)] : []),
+  itemListSchema('Packaging reference guides', RESOURCES.map((r) => ({ name: r.title, url: r.url }))),
+];
 ---
 <BaseLayout
   title={home.seo_title}
@@ -37,6 +43,7 @@ const jsonld = [...(home.faqs.length ? [faqSchema(home.faqs)] : [])];
                srcset={`${heroImg.src.replace('.webp', '-760.webp')} 760w, ${heroImg.src} 900w`}
                sizes="380px"
                alt="Custom luxury perfume box with fragrance bottle"
+               title="Custom luxury perfume packaging"
                loading="eager" fetchpriority="high" decoding="async" />
         )}
       </div>
@@ -69,6 +76,44 @@ const jsonld = [...(home.faqs.length ? [faqSchema(home.faqs)] : [])];
 
   <!-- FAQ -->
   {home.faqs.length > 0 && (
+    <section class="section explore">
+      <div class="container">
+        <h2 class="section-h">Work it out before you commit</h2>
+        <p class="explore-lede">
+          Packaging goes wrong in a small number of predictable places: a bottle
+          measured without clearance, a color that does not exist in CMYK, a
+          foil laid straight onto soft-touch film. These are the three places to
+          start if you would rather understand the decisions than delegate them.
+        </p>
+        <div class="explore-grid">
+          <article class="explore-card">
+            <h3><a href="/design-your-box/">Build a full box specification</a></h3>
+            <p>
+              Seven steps from structure to quantity, with a live preview that
+              changes as you decide. It produces a written specification rather
+              than a price, because we quote each job individually.
+            </p>
+          </article>
+          <article class="explore-card">
+            <h3><a href="/resources/">Read the reference guides</a></h3>
+            <p>
+              {RESOURCES.length} guides covering bottle measurement, board and
+              substrate choice, print finishes, artwork setup and realistic lead
+              times. Written to be useful whether or not you buy from us.
+            </p>
+          </article>
+          <article class="explore-card">
+            <h3><a href="/perfume-boxes/">See what changes by location</a></h3>
+            <p>
+              Climate, freight and retail practice genuinely change what we
+              specify across {states.length} states. Humid storage softens
+              creases; desert air makes them crack.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <section class="section faq-section">
       <div class="container">
         <h2 class="text-center section-h">Frequently Asked Questions</h2>
@@ -107,6 +152,15 @@ const jsonld = [...(home.faqs.length ? [faqSchema(home.faqs)] : [])];
 </BaseLayout>
 
 <style>
+  .explore { padding-top: 0; }
+  .explore-lede { max-width: 76ch; line-height: 1.72; color: var(--text-soft); margin: 0 0 24px; }
+  .explore-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+  .explore-card { border: 1px solid var(--border); border-radius: 12px; padding: 20px; background: #fff; }
+  .explore-card h3 { font-size: 1.04rem; margin: 0 0 8px; }
+  .explore-card p { font-size: .88rem; line-height: 1.62; color: var(--text-soft); margin: 0; }
+  @media (max-width: 900px) { .explore-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 560px) { .explore-grid { grid-template-columns: minmax(0, 1fr); } }
+
   .hero { background: linear-gradient(180deg, var(--hero-top) 0%, var(--pink) 100%); }
   .hero-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: center; padding: 40px 20px; }
   .hero-eyebrow { color: #7a1540; }

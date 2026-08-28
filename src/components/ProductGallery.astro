@@ -8,15 +8,15 @@ const images = [featured, ...gallery].filter(Boolean) as ImageRec[];
   <div class="gallery">
     <div class="gallery-main">
       <img id="gallery-main-img" src={images[0].src} width={images[0].width}
-           height={images[0].height} alt={images[0].alt} loading="eager"
-           fetchpriority="high" decoding="async" />
+           height={images[0].height} alt={images[0].alt} title={images[0].title}
+           loading="eager" fetchpriority="high" decoding="async" />
     </div>
     {images.length > 1 && (
       <ul class="gallery-thumbs" role="list">
         {images.map((im, i) => (
           <li>
             <button type="button" class={`thumb ${i === 0 ? 'active' : ''}`}
-                    data-src={im.src} data-alt={im.alt}
+                    data-src={im.src} data-alt={im.alt} data-title={im.title}
                     aria-label={`View image ${i + 1}: ${im.alt}`}>
               <img src={im.src} width={im.width} height={im.height} alt="" loading="lazy" decoding="async" />
             </button>
@@ -50,6 +50,8 @@ const images = [featured, ...gallery].filter(Boolean) as ImageRec[];
       if (!main) return;
       main.src = t.dataset.src || main.src;
       main.alt = t.dataset.alt || main.alt;
+      // Keep the tooltip in step with the image the gallery just swapped in.
+      if (t.dataset.title) main.title = t.dataset.title;
       thumbs.forEach((x) => x.classList.remove('active'));
       t.classList.add('active');
     });

@@ -13,6 +13,8 @@ export interface BlogPostModule {
     imageAlt: string;
     imageWidth: number;
     imageHeight: number;
+    /** Rendered on the post and emitted as FAQPage schema; every post has them. */
+    faqs: { q: string; a: string }[];
   };
   Content: any;
 }
