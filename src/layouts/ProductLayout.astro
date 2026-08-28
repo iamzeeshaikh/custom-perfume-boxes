@@ -11,7 +11,7 @@ import HowOrderingWorks from '../components/HowOrderingWorks.astro';
 import { primaryCategory, relatedProducts } from '../utils/data';
 import { SITE_URL } from '../utils/site';
 import { productSchema, faqSchema, breadcrumbSchema } from '../utils/schema';
-import { unitPrice } from '../utils/price';
+import { unitPrice, MOQ } from '../utils/price';
 import type { Product } from '../utils/data';
 
 export interface Props { product: Product; }
@@ -58,10 +58,11 @@ const jsonld = [
             <span class="price-amount">${price.amount}</span>
             <span class="price-unit">per box</span>
           </p>
+          <p class="price-moq">Minimum order <strong>{MOQ} boxes</strong> per design</p>
           <p class="price-note">
             Wholesale unit price. Your final price depends on size, board stock,
-            finish and order quantity &mdash; we quote every job individually and
-            accept both small and large orders.
+            finish and order quantity &mdash; wholesale price breaks apply as the
+            quantity increases, and we quote every job individually.
           </p>
         </div>
         <a href="#quote" class="btn buy-now">Get My Exact Price</a>
@@ -112,6 +113,8 @@ const jsonld = [
   .price-from { font-size: .85rem; color: var(--text-soft); text-transform: uppercase; letter-spacing: .06em; }
   .price-amount { font-size: 1.7rem; font-weight: 700; line-height: 1; }
   .price-unit { font-size: .95rem; color: var(--text-soft); }
+  .price-moq { margin: 0 0 8px; font-size: .88rem; }
+  .price-moq strong { font-weight: 700; }
   .price-note { margin: 0; font-size: .82rem; line-height: 1.5; color: var(--text-soft); }
   .quote-wrap { margin-top: 8px; }
   .quote-h { font-size: 1.15rem; margin: 0 0 12px; }

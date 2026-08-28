@@ -10,6 +10,14 @@ import merchantRaw from '../data/merchant.json';
 
 const merchant = merchantRaw as Record<string, { price: string }>;
 
+/**
+ * Minimum order quantity, per design. Stated next to every price because a
+ * "$0.30" listing with an unstated 100-unit minimum is the same kind of gap
+ * Google flagged in the first place. Keep this in step with the MOQ rows in
+ * products.json and the MOQ answer in the product/home FAQs.
+ */
+export const MOQ = 100;
+
 // Feed format is "0.30 USD".
 const FALLBACK = '0.30 USD';
 
