@@ -1,0 +1,75 @@
+---
+/**
+ * Ordering transparency strip.
+ *
+ * Google's Misrepresentation policy asks for transparency about the business
+ * model and how customers can interact with you. This site quotes and invoices
+ * rather than taking card payment at a checkout, so it has to say so on the
+ * page a shopper lands on from a Shopping listing.
+ *
+ * Every step below is taken from the published Shipping Policy, Refund and
+ * Returns Policy and site FAQ. Keep them in sync.
+ */
+const STEPS = [
+  {
+    n: '1',
+    title: 'Request a price',
+    body: 'Send your size, quantity, stock and finish. We reply with a firm written quote within 10 hours.',
+  },
+  {
+    n: '2',
+    title: 'Approve a free proof',
+    body: 'Our design team prepares a digital proof at no charge. Nothing is printed until you approve it, and you can cancel free of charge up to that point.',
+  },
+  {
+    n: '3',
+    title: 'Pay your invoice',
+    body: 'We invoice you directly. Payment is accepted by all major credit cards and PayPal — there is no card checkout on this website.',
+  },
+  {
+    n: '4',
+    title: 'Production and free delivery',
+    body: 'Printing and finishing takes 2–3 business days, then 3–6 business days in transit. Shipping is free to the US, UK, Canada, Australia and New Zealand.',
+  },
+];
+---
+<section class="section how-order">
+  <div class="container">
+    <h2 class="how-h">How ordering works</h2>
+    <p class="how-lead">
+      Custom Perfume Boxes is a made-to-order printer, not a stocked shop. Prices
+      shown are wholesale per-unit rates; every order is quoted, proofed and
+      invoiced individually.
+    </p>
+    <ol class="how-grid">
+      {STEPS.map((s) => (
+        <li class="how-step">
+          <span class="how-n">{s.n}</span>
+          <h3 class="how-t">{s.title}</h3>
+          <p class="how-b">{s.body}</p>
+        </li>
+      ))}
+    </ol>
+    <p class="how-foot">
+      Made-to-order boxes cannot be returned for a change of mind. If an order
+      arrives defective, misprinted or different from the proof you approved, we
+      reprint or refund it in full — see our
+      <a href="/refund_returns/">Refund and Returns Policy</a> and
+      <a href="/shipping-policy/">Shipping Policy</a>.
+    </p>
+  </div>
+</section>
+
+<style>
+  .how-order { background: #fafafa; border-top: 1px solid var(--line, #e5e5e5); border-bottom: 1px solid var(--line, #e5e5e5); }
+  .how-h { margin: 0 0 8px; font-size: 1.5rem; }
+  .how-lead { margin: 0 0 24px; color: var(--text-soft); max-width: 68ch; }
+  .how-grid { list-style: none; margin: 0 0 20px; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+  .how-step { background: #fff; border: 1px solid var(--line, #e5e5e5); border-radius: 10px; padding: 18px 16px; }
+  .how-n { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 50%; background: var(--black, #111); color: #fff; font-size: .8rem; font-weight: 700; margin-bottom: 10px; }
+  .how-t { margin: 0 0 6px; font-size: 1rem; }
+  .how-b { margin: 0; font-size: .85rem; line-height: 1.55; color: var(--text-soft); }
+  .how-foot { margin: 0; font-size: .85rem; line-height: 1.6; color: var(--text-soft); max-width: 78ch; }
+  @media (max-width: 900px) { .how-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 560px) { .how-grid { grid-template-columns: minmax(0, 1fr); } }
+</style>

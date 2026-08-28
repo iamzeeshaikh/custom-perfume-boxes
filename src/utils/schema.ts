@@ -2,6 +2,7 @@
 import { SITE_URL, BRAND } from './site';
 import type { Product, FAQ } from './data';
 import merchantRaw from '../data/merchant.json';
+import { unitPrice } from './price';
 
 const merchant = merchantRaw as Record<string, {
   gla_id: string; price: string; availability: string;
@@ -60,14 +61,17 @@ export function breadcrumbSchema(items: { name: string; url: string }[]) {
 const SHIPS_TO = ['US', 'GB', 'CA', 'AU', 'NZ'];
 
 /**
- * Shipping and returns terms, both lifted straight from the published policy
- * pages. Shipping Policy: free shipping on all orders with no minimum, 2-3
- * business days handling, 3-6 business days transit. Refund and Returns
- * Policy: returns accepted by mail within 10 days of delivery, return label
- * included, no restocking fee.
+ * Shipping terms, lifted straight from the published Shipping Policy: free
+ * shipping on all orders with no minimum, 2-3 business days handling, 3-6
+ * business days transit.
  *
- * Google will not show a merchant listing without these two, which is why
- * every product carries them rather than only the ones in the feed.
+ * Returns are a different matter. Everything sold here is printed to the
+ * customer's own artwork, so the Refund and Returns Policy permits no
+ * change-of-mind return; defects, misprints and wrong items are remedied by
+ * reprint or refund instead. schema.org has no field for a defect remedy, so
+ * the honest encoding is MerchantReturnNotPermitted. Claiming a free 10-day
+ * return here while the policy page excludes custom orders is precisely the
+ * mismatch Google flags as misrepresentation.
  */
 const SHIPPING_DETAILS = SHIPS_TO.map((country) => ({
   '@type': 'OfferShippingDetails',
@@ -93,10 +97,7 @@ const SHIPPING_DETAILS = SHIPS_TO.map((country) => ({
 const RETURN_POLICY = {
   '@type': 'MerchantReturnPolicy',
   applicableCountry: SHIPS_TO,
-  returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
-  merchantReturnDays: 10,
-  returnMethod: 'https://schema.org/ReturnByMail',
-  returnFees: 'https://schema.org/FreeReturn',
+  returnPolicyCategory: 'https://schema.org/MerchantReturnNotPermitted',
 };
 
 // Product schema with a real Offer (per-unit wholesale price from the live
@@ -105,14 +106,14 @@ export function productSchema(p: Product) {
   const img = p.featured ? SITE_URL + p.featured.src : undefined;
   const url = `${SITE_URL}/product/${p.slug}/`;
   const m = merchant[p.slug];
-  // "0.30 USD" from the feed; the fallback keeps every product offer-bearing
-  // even if a slug is ever missing from merchant.json.
-  const [priceVal, currency] = (m?.price ?? '0.30 USD').split(/\s+/);
+  // Same helper the product page prints from, so the offer and the visible
+  // price can never disagree.
+  const { amount: priceVal, currency } = unitPrice(p.slug);
   const offers = {
     '@type': 'Offer',
     url,
-    priceCurrency: currency || 'USD',
-    price: priceVal || '0.30',
+    priceCurrency: currency,
+    price: priceVal,
     availability:
       AVAIL[(m?.availability ?? 'in stock').toLowerCase()] || 'https://schema.org/InStock',
     itemCondition: 'https://schema.org/NewCondition',

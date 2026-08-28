@@ -7,9 +7,11 @@ import ProductSpecifications from '../components/ProductSpecifications.astro';
 import ProductFAQ from '../components/ProductFAQ.astro';
 import RelatedProducts from '../components/RelatedProducts.astro';
 import TrustBadges from '../components/TrustBadges.astro';
+import HowOrderingWorks from '../components/HowOrderingWorks.astro';
 import { primaryCategory, relatedProducts } from '../utils/data';
 import { SITE_URL } from '../utils/site';
 import { productSchema, faqSchema, breadcrumbSchema } from '../utils/schema';
+import { unitPrice } from '../utils/price';
 import type { Product } from '../utils/data';
 
 export interface Props { product: Product; }
@@ -17,6 +19,7 @@ const { product } = Astro.props;
 const cat = primaryCategory(product);
 const url = `/product/${product.slug}/`;
 const related = relatedProducts(product, 4);
+const price = unitPrice(product.slug);
 
 const crumbs = [
   { name: 'Home', url: '/' },
@@ -49,7 +52,19 @@ const jsonld = [
       <div class="product-info">
         <h1>{product.title}</h1>
         {product.excerpt && <p class="product-lead">{product.excerpt}</p>}
-        <a href="#quote" class="btn buy-now">Buy Now</a>
+        <div class="price-box">
+          <p class="price-line">
+            <span class="price-from">From</span>
+            <span class="price-amount">${price.amount}</span>
+            <span class="price-unit">per box</span>
+          </p>
+          <p class="price-note">
+            Wholesale unit price. Your final price depends on size, board stock,
+            finish and order quantity &mdash; we quote every job individually and
+            accept both small and large orders.
+          </p>
+        </div>
+        <a href="#quote" class="btn buy-now">Get My Exact Price</a>
         <div id="quote" class="quote-wrap">
           <h2 class="quote-h">Request a Quote</h2>
           <QuoteForm productName={product.title} productUrl={`${SITE_URL}${url}`} compact />
@@ -57,6 +72,8 @@ const jsonld = [
       </div>
     </div>
   </section>
+
+  <HowOrderingWorks />
 
   <section class="section product-detail">
     <div class="container">
@@ -90,6 +107,12 @@ const jsonld = [
   .product-info h1 { margin: 0 0 14px; }
   .product-lead { color: var(--text-soft); font-size: 1rem; margin: 0 0 20px; }
   .buy-now { margin-bottom: 22px; }
+  .price-box { margin: 0 0 18px; padding: 14px 16px; border: 1px solid var(--line, #e5e5e5); border-radius: 10px; background: #fafafa; }
+  .price-line { margin: 0 0 6px; display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; }
+  .price-from { font-size: .85rem; color: var(--text-soft); text-transform: uppercase; letter-spacing: .06em; }
+  .price-amount { font-size: 1.7rem; font-weight: 700; line-height: 1; }
+  .price-unit { font-size: .95rem; color: var(--text-soft); }
+  .price-note { margin: 0; font-size: .82rem; line-height: 1.5; color: var(--text-soft); }
   .quote-wrap { margin-top: 8px; }
   .quote-h { font-size: 1.15rem; margin: 0 0 12px; }
 

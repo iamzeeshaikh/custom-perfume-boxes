@@ -1,9 +1,11 @@
 ---
 import type { Product } from '../utils/data';
+import { unitPrice } from '../utils/price';
 export interface Props { product: Product; eager?: boolean; }
 const { product, eager = false } = Astro.props;
 const img = product.card || product.featured;
 const href = `/product/${product.slug}/`;
+const price = unitPrice(product.slug);
 ---
 <article class="card">
   <a href={href} class="card-img" tabindex="-1" aria-hidden="true">
@@ -14,9 +16,10 @@ const href = `/product/${product.slug}/`;
   </a>
   <div class="card-body">
     <h3 class="card-title"><a href={href}>{product.title}</a></h3>
+    <p class="card-price">From <strong>${price.amount}</strong> per box</p>
     <a href={href} class="btn card-btn">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6h15l-1.5 9h-12z" stroke="currentColor" stroke-width="1.7"/><circle cx="9" cy="20" r="1.4" fill="currentColor"/><circle cx="18" cy="20" r="1.4" fill="currentColor"/><path d="M6 6L5 3H2" stroke="currentColor" stroke-width="1.7"/></svg>
-      Buy Now
+      Get Price
     </a>
   </div>
 </article>
@@ -31,7 +34,9 @@ const href = `/product/${product.slug}/`;
   .card-img { display: block; aspect-ratio: 1 / 1; background: #fafafa; padding: 18px; }
   .card-img img { width: 100%; height: 100%; object-fit: contain; }
   .card-body { padding: 8px 16px 18px; text-align: center; margin-top: auto; }
-  .card-title { font-size: 1rem; margin: 4px 0 12px; }
+  .card-title { font-size: 1rem; margin: 4px 0 6px; }
+  .card-price { font-size: .82rem; color: var(--text-soft, #666); margin: 0 0 12px; }
+  .card-price strong { color: var(--black); font-size: .95rem; }
   .card-title a { color: var(--black); }
   .card-title a:hover { color: var(--pink); text-decoration: none; }
   .card-btn { width: 100%; font-size: .82rem; padding: 10px; }
