@@ -47,6 +47,7 @@ const graphs = [organizationSchema(), websiteSchema(), ...jsonld];
 <!doctype html>
 <html lang="en">
 <head>
+  <link rel="preconnect" href="https://chat.zeeops.dev" crossorigin />
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{title}</title>
@@ -130,5 +131,7 @@ const graphs = [organizationSchema(), websiteSchema(), ...jsonld];
   <Footer />
   <QuotePopup />
     <WhatsAppButton />
+    <!-- ZeeOps live chat (bottom-right; the WhatsApp button keeps bottom-left) -->
+    <script is:inline src="https://chat.zeeops.dev/widget.js?siteId=customperfumeboxes" defer></script>
   </body>
 </html>

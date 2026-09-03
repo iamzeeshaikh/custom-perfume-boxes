@@ -15,14 +15,17 @@ cfg.routes = cfg.routes || [];
 // Zendesk Chat (zopim) needs several hosts; Astro emits small hydration
 // scripts inline, so 'unsafe-inline' is required for on-page interactivity.
 const ZD = 'https://*.zopim.com https://v2.zopim.com https://*.zdassets.com https://*.zendesk.com';
+// The ZeeOps live-chat widget loads its script from chat.zeeops.dev, polls it
+// over fetch, and shows the site logo + uploaded files from it.
+const ZEE = 'https://chat.zeeops.dev';
 const CSP = [
   "default-src 'self'",
   "img-src 'self' data: https:",
   // Fonts are self-hosted now, so no Google Fonts origins are needed.
   "style-src 'self' 'unsafe-inline'",
   "font-src 'self' data: " + ZD,
-  "script-src 'self' 'unsafe-inline' " + ZD,
-  "connect-src 'self' " + ZD + " wss://*.zopim.com wss://*.zendesk.com",
+  "script-src 'self' 'unsafe-inline' " + ZD + ' ' + ZEE,
+  "connect-src 'self' " + ZD + ' ' + ZEE + " wss://*.zopim.com wss://*.zendesk.com",
   "frame-src " + ZD,
   "media-src 'self' " + ZD,
   "form-action 'self'",
